@@ -90,7 +90,6 @@ require 'citypay_api_client'
 
 # Setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
   config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: "YourClientId", licence_key: "YourLicenceKey").generate
 end
 

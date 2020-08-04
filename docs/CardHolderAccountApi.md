@@ -31,10 +31,7 @@ Deletes a card from the account. The card will be marked for deletion before a s
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -87,10 +84,7 @@ Allows for a card to be registered for the account. The card will be added for f
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -143,10 +137,7 @@ Updates the status of a card for processing. The following values are available 
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -201,10 +192,7 @@ Allows for the ability to change the contact details for an account.
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -257,10 +245,7 @@ Creates a new card holder account and initialises the account ready for adding c
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -311,10 +296,7 @@ Allows for the deletion of an account. The account will marked for deletion and 
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -365,10 +347,7 @@ Allows for the retrieval of a card holder account for the given `id`. Should dup
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -419,10 +398,7 @@ Updates the status of an account. An account can have the following statuses app
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -475,10 +451,7 @@ A charge process obtains an authorisation using a tokenised value which represen
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new

@@ -24,10 +24,7 @@ An operational request to list current merchants for a client.  ### Sorting  Sor
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::OperationalApi.new
@@ -78,10 +75,7 @@ A ping request which performs a connection and authentication test to the CityPa
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::OperationalApi.new

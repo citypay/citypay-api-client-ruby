@@ -28,10 +28,7 @@ An authorisation process performs a standard transaction authorisation based on 
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::PaymentProcessingApi.new
@@ -82,10 +79,7 @@ The CRes request performs authorisation processing once a challenge request has 
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::PaymentProcessingApi.new
@@ -136,10 +130,7 @@ _The capture process only applies to transactions which have been pre-authorised
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::PaymentProcessingApi.new
@@ -190,10 +181,7 @@ The Payer Authentication Response (PaRes) is an operation after the result of au
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::PaymentProcessingApi.new
@@ -244,10 +232,7 @@ A retrieval request which allows an integration to obtain the result of a transa
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::PaymentProcessingApi.new
@@ -298,10 +283,7 @@ _The void process generally applies to transactions which have been pre-authoris
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  #config.api_key_prefix['cp-api-key'] = 'Bearer'
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::PaymentProcessingApi.new
