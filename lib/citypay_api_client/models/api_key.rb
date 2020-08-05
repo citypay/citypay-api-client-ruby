@@ -7,8 +7,8 @@ module CityPayApiClient
 
     def initialize(client_id:, licence_key:)
       @client_id, @licence_key = client_id, licence_key
-      @nonce = Random.new(16)
-      @datetime = DateTime.now
+      @nonce = Random.new().bytes(16).bytes
+      @datetime = DateTime.now.new_offset(0)
     end
 
     def client_id
