@@ -16,7 +16,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "citypay_api_client/version"
 
 Gem::Specification.new do |s|
-  s.name        = "citypay_api"
+  s.name        = "citypay_api_client"
   s.version     = CityPayApiClient::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["citypay"]
