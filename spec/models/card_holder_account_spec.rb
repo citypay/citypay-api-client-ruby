@@ -21,10 +21,57 @@ describe 'CardHolderAccount' do
   before do
     # run before each test
     @instance = CityPayApiClient::CardHolderAccount.new
+    json = '{"CardHolderAccount": {
+        "account_id": "abc123",
+        "cards": [{
+                      "bin_commercial": false,
+                      "bin_corporate": false,
+                      "bin_country_issued": "GBR",
+                      "bin_currency": "GBP",
+                      "bin_description": "Visa Classic",
+                      "bin_eu": false,
+                      "card_id": "2U1XV3PJSeUXFNzXidACn2TyCzAK",
+                      "card_status": "ACTIVE",
+                      "default": true,
+                      "expmonth": 7,
+                      "expyear": 2022,
+                      "label": "TestVisa/0002",
+                      "label2": "TestVisa/0002,Exp:7/2022",
+                      "scheme": "TestVisa",
+                      "token": "ctPCzxq4WxEwWbkG7whRPLRCG27vYFNzsEDNihYmDwqsBc5QEXnFRvq2j5oRyb56ErRVEQaBN7PFMEDtjQQXDQpfxKkp3AxbyeGo61RhKBjFTFegaP4LBZUxFZimsXW8Deae9VyhWSgS2o8AXzTJU9UP3bo8kRcpataxuH3fJj3JHDnyeZt"
+                  }],
+        "contact": {
+            "address1": "7 Esplanade",
+            "address2": "",
+            "address3": "",
+            "area": "St Helier",
+            "company": "CityPay Ltd",
+            "country": "JE",
+            "email": "support@citypay.com",
+            "firstname": "Joe",
+            "lastname": "Wicks",
+            "mobile_no": "077112123456",
+            "postcode": "JE2 3QA",
+            "telephone_no": "+4415341234567",
+            "title": "Mr"},
+        "date_created": "2020-08-01T09:15:24Z",
+        "default_card_id": "2U1XV3PJSeUXFNzXidACn2TyCzAK",
+        "default_card_index": 0,
+        "status": "ACTIVE",
+        "unique_id": "Ew3BKeWNdL3qKQU7XK7Sbt2eAL5WFW4AfoASDSA"
+    }}'
+    data = JSON.parse(json, :symbolize_names => true)
+    @account = CityPayApiClient::CardHolderAccount.build_from_hash(data)
   end
 
   after do
     # run after each test
+  end
+
+  describe 'JSON parser' do
+    it 'should parse an account' do
+      expect(@account).to be_instance_of(CityPayApiClient::CardHolderAccount)
+    end
   end
 
   describe 'test an instance of CardHolderAccount' do
@@ -34,49 +81,78 @@ describe 'CardHolderAccount' do
   end
   describe 'test attribute "account_id"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.account_id).to eq("abc123")
     end
   end
 
   describe 'test attribute "cards"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.cards.length).to eq(1)
+      @c = @account.cards[0]
+      expect(@c.bin_commercial).to eq(false)
+      expect(@c.bin_corporate).to eq(false)
+      expect(@c.bin_country_issued).to eq("GBR")
+      expect(@c.bin_currency).to eq("GBP")
+      expect(@c.bin_description).to eq("Visa Classic")
+      expect(@c.bin_eu).to eq(false)
+      expect(@c.card_id).to eq("2U1XV3PJSeUXFNzXidACn2TyCzAK")
+      expect(@c.card_status).to eq("ACTIVE")
+      expect(@c.default).to eq(true)
+      expect(@c.expmonth).to eq(7)
+      expect(@c.expyear).to eq(2022)
+      expect(@c.label).to eq("TestVisa/0002")
+      expect(@c.label2).to eq("TestVisa/0002,Exp:7/2022")
+      expect(@c.scheme).to eq("TestVisa")
+      expect(@c.token).to eq("ctPCzxq4WxEwWbkG7whRPLRCG27vYFNzsEDNihYmDwqsBc5QEXnFRvq2j5oRyb56ErRVEQaBN7PFMEDtjQQXDQpfxKkp3AxbyeGo61RhKBjFTFegaP4LBZUxFZimsXW8Deae9VyhWSgS2o8AXzTJU9UP3bo8kRcpataxuH3fJj3JHDnyeZt")
     end
   end
 
   describe 'test attribute "contact"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      @c = @account.contact
+      expect(@c.address1).to eq("7 Esplanade")
+      expect(@c.address2).to eq("")
+      expect(@c.address3).to eq("")
+      expect(@c.area).to eq("St Helier")
+      expect(@c.company).to eq("CityPay Ltd")
+      expect(@c.country).to eq("JE")
+      expect(@c.email).to eq("support@citypay.com")
+      expect(@c.firstname).to eq("Joe")
+      expect(@c.lastname).to eq("Wicks")
+      expect(@c.mobile_no).to eq("077112123456")
+      expect(@c.postcode).to eq("JE2 3QA")
+      expect(@c.telephone_no).to eq("+4415341234567")
+      expect(@c.title).to eq("Mr")
     end
   end
 
   describe 'test attribute "date_created"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.date_created).to eq(DateTime.parse("2020-08-01T09:15:24Z"))
     end
   end
 
   describe 'test attribute "default_card_id"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.default_card_id).to eq("2U1XV3PJSeUXFNzXidACn2TyCzAK")
     end
   end
 
   describe 'test attribute "default_card_index"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.default_card_index).to eq("0")
     end
   end
 
   describe 'test attribute "status"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.status).to eq("ACTIVE")
     end
   end
 
   describe 'test attribute "unique_id"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@account.unique_id).to eq("Ew3BKeWNdL3qKQU7XK7Sbt2eAL5WFW4AfoASDSA")
     end
   end
 
