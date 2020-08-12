@@ -202,11 +202,7 @@ module CityPayApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
-      if !attributes[:CardHolderAccount].nil?
-        new.build_from_hash(attributes[:CardHolderAccount])
-      else
         new.build_from_hash(attributes)
-      end
     end
 
     # Builds the object from hash

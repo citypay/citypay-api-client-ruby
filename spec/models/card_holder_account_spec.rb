@@ -61,7 +61,7 @@ describe 'CardHolderAccount' do
         "unique_id": "Ew3BKeWNdL3qKQU7XK7Sbt2eAL5WFW4AfoASDSA"
     }}'
     data = JSON.parse(json, :symbolize_names => true)
-    @account = CityPayApiClient::CardHolderAccount.build_from_hash(data)
+    @account = CityPayApiClient::ApiClient.new.convert_to_type(data, "CardHolderAccount")
   end
 
   after do
