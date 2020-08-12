@@ -2,6 +2,7 @@
 
 CityPayApiClient - the Ruby gem for the CityPay Payment API
 
+[![Build Status](https://travis-ci.org/citypay/citypay-api-client-ruby.svg?branch=master)](https://travis-ci.org/citypay/citypay-api-client-ruby)
 
 This CityPay API is a HTTP RESTful payment API used for direct server to server transactional processing. It
 provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing,
