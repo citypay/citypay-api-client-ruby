@@ -20,7 +20,41 @@ require 'date'
 describe 'AuthResponse' do
   before do
     # run before each test
-    @instance = CityPayApiClient::AuthResponse.new
+    json = '
+{
+    "AuthResponse": {
+        "amount": 5500,
+        "atrn": "atrn1",
+        "atsd": "a",
+        "authcode": "12345",
+        "authen_result": "R",
+        "authorised": true,
+        "avs_result": "G",
+        "bin_commercial": false,
+        "bin_debit": false,
+        "bin_description": "bin_desc",
+        "cavv": "cavvvvvvvvvvvvv",
+        "context": "20200812075906AAAGV4",
+        "csc_result": "C",
+        "currency": "GBP",
+        "datetime": "2020-08-12T07:59:11Z",
+        "eci": "0",
+        "identifier": "ident1",
+        "live": true,
+        "maskedpan": "400000******0002",
+        "merchantid": 12345,
+        "result": 1,
+        "result_code": "000",
+        "result_message": "System: Accepted Transaction",
+        "scheme": "VISA_BUSINESS",
+        "sha256": "abcdefg",
+        "trans_status": "P",
+        "transno": 74875
+    }
+}
+'
+    data = JSON.parse(json, :symbolize_names => true)
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "AuthResponse")
   end
 
   after do
@@ -34,163 +68,163 @@ describe 'AuthResponse' do
   end
   describe 'test attribute "amount"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.amount).to eq(5500)
     end
   end
 
   describe 'test attribute "atrn"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+          expect(@instance.atrn).to eq("atrn1")
     end
   end
 
   describe 'test attribute "atsd"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.atsd).to eq("a")
     end
   end
 
   describe 'test attribute "authcode"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.authcode).to eq("12345")
     end
   end
 
   describe 'test attribute "authen_result"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.authen_result).to eq("R")
     end
   end
 
   describe 'test attribute "authorised"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.authorised).to eq(true)
     end
   end
 
   describe 'test attribute "avs_result"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.avs_result).to eq("G")
     end
   end
 
   describe 'test attribute "bin_commercial"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.bin_commercial).to eq(false)
     end
   end
 
   describe 'test attribute "bin_debit"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.bin_debit).to eq(false)
     end
   end
 
   describe 'test attribute "bin_description"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.bin_description).to eq("bin_desc")
     end
   end
 
   describe 'test attribute "cavv"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.cavv).to eq("cavvvvvvvvvvvvv")
     end
   end
 
   describe 'test attribute "context"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.context).to eq("20200812075906AAAGV4")
     end
   end
 
   describe 'test attribute "csc_result"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.csc_result).to eq("C")
     end
   end
 
   describe 'test attribute "currency"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.currency).to eq("GBP")
     end
   end
 
   describe 'test attribute "datetime"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.datetime).to eq(DateTime.parse("2020-08-12T07:59:11Z"))
     end
   end
 
   describe 'test attribute "eci"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.eci).to eq("0")
     end
   end
 
   describe 'test attribute "identifier"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.identifier).to eq("ident1")
     end
   end
 
   describe 'test attribute "live"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.live).to eq(true)
     end
   end
 
   describe 'test attribute "maskedpan"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.maskedpan).to eq("400000******0002")
     end
   end
 
   describe 'test attribute "merchantid"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.merchantid).to eq(12345)
     end
   end
 
   describe 'test attribute "result"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.result).to eq(1)
     end
   end
 
   describe 'test attribute "result_code"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.result_code).to eq("000")
     end
   end
 
   describe 'test attribute "result_message"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.result_message).to eq("System: Accepted Transaction")
     end
   end
 
   describe 'test attribute "scheme"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.scheme).to eq("VISA_BUSINESS")
     end
   end
 
   describe 'test attribute "sha256"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.sha256).to eq("abcdefg")
     end
   end
 
   describe 'test attribute "trans_status"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.trans_status).to eq("P")
     end
   end
 
   describe 'test attribute "transno"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.transno).to eq(74875)
     end
   end
 
