@@ -39,10 +39,10 @@ describe 'Decision' do
   end
 
 
-  describe 'test attribute "authentication"' do
+  describe 'test attribute "authen_required"' do
     it 'should work' do
 
-      decision = convert_decision'{
+      decision = convert_decision '{
     "AuthenRequired": {
         "acs_url": "https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B",
         "md": "0000000000000000000022",
@@ -50,17 +50,13 @@ describe 'Decision' do
     }
 }'
 
-      # decision = CityPayApiClient::Decision.new
+      expect(decision.auth_response).to be_nil
+      expect(decision.request_challenged).to be_nil
+      expect(decision.authen_required).to be_truthy
 
-      expect(decision.authentication).to be_nil
-      expect(decision.challenge).to be_nil
-      expect(decision.authentication).to be_truthy
-
-      expect(decision.authentication.acs_url).to eq("https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B")
-      expect(decision.authentication.md).to eq("0000000000000000000022")
-      expect(decision.authentication.acs_url).to eq("eJxVUm1v2yAQ/itWv8dg/B5dmJyfw==")
-
-
+      expect(decision.authen_required.acs_url).to eq("https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B")
+      expect(decision.authen_required.md).to eq("0000000000000000000022")
+      expect(decision.authen_required.pareq).to eq("eJxVUm1v2yAQ/itWv8dg/B5dmJyfw==")
 
 
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -75,7 +71,73 @@ describe 'Decision' do
 
   describe 'test attribute "result"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      decision = convert_decision '
+{
+    "AuthResponse": {
+        "amount": 5500,
+        "atrn": "atrn1",
+        "atsd": "a",
+        "authcode": "12345",
+        "authen_result": "R",
+        "authorised": true,
+        "avs_result": "G",
+        "bin_commercial": false,
+        "bin_debit": false,
+        "bin_description": "bin_desc",
+        "cavv": "cavvvvvvvvvvvvv",
+        "context": "20200812075906AAAGV4",
+        "csc_result": "C",
+        "currency": "GBP",
+        "datetime": "2020-08-12T07:59:11Z",
+        "eci": "0",
+        "identifier": "ident1",
+        "live": true,
+        "maskedpan": "400000******0002",
+        "merchantid": 12345,
+        "result": 1,
+        "result_code": "000",
+        "result_message": "System: Accepted Transaction",
+        "scheme": "VISA_BUSINESS",
+        "sha256": "abcdefg",
+        "trans_status": "P",
+        "transno": 74875
+    }
+}
+'
+      expect(decision.auth_response).to be_truthy
+      expect(decision.request_challenged).to be_nil
+      expect(decision.authen_required).to be_nil
+
+      response = decision.auth_response
+
+      expect(response).to be_instance_of(CityPayApiClient::AuthResponse)
+      expect(response.amount).to eq(5500)
+      expect(response.atrn).to eq("atrn1")
+      expect(response.atsd).to eq("a")
+      expect(response.authcode).to eq("12345")
+      expect(response.authen_result).to eq("R")
+      expect(response.authorised).to eq(true)
+      expect(response.avs_result).to eq("G")
+      expect(response.bin_commercial).to eq(false)
+      expect(response.bin_debit).to eq(false)
+      expect(response.bin_description).to eq("bin_desc")
+      expect(response.cavv).to eq("cavvvvvvvvvvvvv")
+      expect(response.context).to eq("20200812075906AAAGV4")
+      expect(response.csc_result).to eq("C")
+      expect(response.currency).to eq("GBP")
+      expect(response.datetime).to eq(DateTime.parse("2020-08-12T07:59:11Z"))
+      expect(response.eci).to eq("0")
+      expect(response.identifier).to eq("ident1")
+      expect(response.live).to eq(true)
+      expect(response.maskedpan).to eq("400000******0002")
+      expect(response.merchantid).to eq(12345)
+      expect(response.result).to eq(1)
+      expect(response.result_code).to eq("000")
+      expect(response.result_message).to eq("System: Accepted Transaction")
+      expect(response.scheme).to eq("VISA_BUSINESS")
+      expect(response.sha256).to eq("abcdefg")
+      expect(response.trans_status).to eq("P")
+      expect(response.transno).to eq(74875)
     end
   end
 
