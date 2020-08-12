@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authentication** | [**AuthenRequired**](AuthenRequired.md) |  | [optional] 
-**challenge** | [**RequestChallenged**](RequestChallenged.md) |  | [optional] 
-**result** | [**AuthResponse**](AuthResponse.md) |  | [optional] 
+**authen_required** | [**AuthenRequired**](AuthenRequired.md) |  | [optional] 
+**auth_response** | [**AuthResponse**](AuthResponse.md) |  | [optional] 
+**request_challenged** | [**RequestChallenged**](RequestChallenged.md) |  | [optional] 
 
 ## Code Sample
 
 ```ruby
 require 'CityPayApiClient'
 
-instance = CityPayApiClient::Decision.new(authentication: null,
-                                 challenge: null,
-                                 result: null)
+instance = CityPayApiClient::Decision.new(authen_required: null,
+                                 auth_response: null,
+                                 request_challenged: null)
 ```
 
 
