@@ -27,13 +27,43 @@ describe 'Decision' do
     # run after each test
   end
 
+  def convert_decision(json)
+    data = JSON.parse(json, :symbolize_names => true)
+    CityPayApiClient::ApiClient.new.convert_to_type(data, "Decision")
+
+  end
+
   describe 'test an instance of Decision' do
     it 'should create an instance of Decision' do
       expect(@instance).to be_instance_of(CityPayApiClient::Decision)
     end
   end
+
+
   describe 'test attribute "authentication"' do
     it 'should work' do
+
+      decision = convert_decision'{
+    "AuthenRequired": {
+        "acs_url": "https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B",
+        "md": "0000000000000000000022",
+        "pareq": "eJxVUm1v2yAQ/itWv8dg/B5dmJyfw=="
+    }
+}'
+
+      # decision = CityPayApiClient::Decision.new
+
+      expect(decision.authentication).to be_nil
+      expect(decision.challenge).to be_nil
+      expect(decision.authentication).to be_truthy
+
+      expect(decision.authentication.acs_url).to eq("https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B")
+      expect(decision.authentication.md).to eq("0000000000000000000022")
+      expect(decision.authentication.acs_url).to eq("eJxVUm1v2yAQ/itWv8dg/B5dmJyfw==")
+
+
+
+
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
