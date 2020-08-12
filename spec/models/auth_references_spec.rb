@@ -19,7 +19,32 @@ require 'date'
 describe 'AuthReferences' do
   before do
     # run before each test
-    @instance = CityPayApiClient::AuthReferences.new
+
+    json ='
+    {
+    "AuthReferences": {
+        "auths": [
+            {
+                "amount": 12,
+                "amount_value": "0.12",
+                "atrn": null,
+                "authcode": "A12345",
+                "batchno": null,
+                "currency": "GBP",
+                "datetime": "2020-07-21T15:55:04Z",
+                "identifier": "TestingAPI",
+                "maskedpan": "400000******0000",
+                "merchantid": 12345678,
+                "result": "Accepted",
+                "trans_status": "O",
+                "trans_type": "S",
+                "transno": 88
+            }
+        ]
+    }
+}'
+    data = JSON.parse(json, :symbolize_names => true)
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "AuthReferences")
   end
 
   after do
@@ -33,7 +58,22 @@ describe 'AuthReferences' do
   end
   describe 'test attribute "auths"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.auths.length).to eq(1)
+      i = @instance.auths[0]
+      expect(i.amount).to eq(12)
+      expect(i.amount_value).to eq("0.12")
+      expect(i.atrn).to eq(nil)
+      expect(i.authcode).to eq("A12345")
+      expect(i.batchno).to eq(nil)
+      expect(i.currency).to eq("GBP")
+      expect(i.datetime).to eq(DateTime.parse("2020-07-21T15:55:04Z"))
+      expect(i.identifier).to eq("TestingAPI")
+      expect(i.maskedpan).to eq("400000******0000")
+      expect(i.merchantid).to eq(12345678)
+      expect(i.result).to eq("Accepted")
+      expect(i.trans_status).to eq("O")
+      expect(i.trans_type).to eq("S")
+      expect(i.transno).to eq(88)
     end
   end
 

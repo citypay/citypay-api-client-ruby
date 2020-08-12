@@ -19,7 +19,18 @@ require 'date'
 describe 'Acknowledgement' do
   before do
     # run before each test
-    @instance = CityPayApiClient::Acknowledgement.new
+    json = '
+    {
+    "Acknowledgement": {
+        "code": "000",
+        "context": "1B12WmDZB3EYSbb",
+        "identifier": "testIdentifier",
+        "message": "System: Accepted Transaction"
+    }
+}
+'
+    data = JSON.parse(json, :symbolize_names => true)
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "Acknowledgement")
   end
 
   after do
@@ -33,25 +44,25 @@ describe 'Acknowledgement' do
   end
   describe 'test attribute "code"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.code).to eq("000")
     end
   end
 
   describe 'test attribute "context"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.context).to eq("1B12WmDZB3EYSbb")
     end
   end
 
   describe 'test attribute "identifier"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.identifier).to eq("testIdentifier")
     end
   end
 
   describe 'test attribute "message"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.message).to eq("System: Accepted Transaction")
     end
   end
 
