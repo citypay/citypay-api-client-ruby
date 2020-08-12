@@ -20,7 +20,31 @@ require 'date'
 describe 'ListMerchantsResponse' do
   before do
     # run before each test
-    @instance = CityPayApiClient::ListMerchantsResponse.new
+    json = '
+{
+    "ListMerchantsResponse": {
+        "client_name": "CityPay Demo",
+        "clientid": "PC123456",
+        "merchants": [
+            {
+                "currency": "GBP",
+                "merchantid": 12345678,
+                "name": "CityPay One",
+                "status": "T",
+                "status_label": "Test"
+            },
+            {
+                "currency": "GBP",
+                "merchantid": 87654321,
+                "name": "CityPay Two",
+                "status": "T",
+                "status_label": "Test"
+            }
+        ]
+    }
+}'
+    data = JSON.parse(json, :symbolize_names => true)
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "ListMerchantsResponse")
   end
 
   after do
@@ -34,19 +58,31 @@ describe 'ListMerchantsResponse' do
   end
   describe 'test attribute "client_name"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.client_name).to eq("CityPay Demo")
     end
   end
 
   describe 'test attribute "clientid"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.clientid).to eq("PC123456")
     end
   end
 
   describe 'test attribute "merchants"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.merchants.length).to eq(2)
+      i = @instance.merchants[0]
+      expect(i.currency).to eq('GBP')
+      expect(i.merchantid).to eq(12345678)
+      expect(i.name).to eq("CityPay One")
+      expect(i.status).to eq("T")
+      expect(i.status_label).to eq("Test")
+      ii = @instance.merchants[1]
+      expect(ii.currency).to eq('GBP')
+      expect(ii.merchantid).to eq(87654321)
+      expect(ii.name).to eq("CityPay Two")
+      expect(ii.status).to eq("T")
+      expect(ii.status_label).to eq("Test")
     end
   end
 
