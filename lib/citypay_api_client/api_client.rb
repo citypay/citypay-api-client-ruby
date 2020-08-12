@@ -237,7 +237,13 @@ module CityPayApiClient
         end
       else
         # models, e.g. Pet
-        CityPayApiClient.const_get(return_type).build_from_hash(data)
+        # for models which present the model name with nested data
+        if !data[return_type.to_sym].nil?
+          CityPayApiClient.const_get(return_type).build_from_hash(data[return_type.to_sym])
+        else
+          CityPayApiClient.const_get(return_type).build_from_hash(data)
+        end
+
       end
     end
 
