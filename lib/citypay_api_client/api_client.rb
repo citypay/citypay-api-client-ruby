@@ -242,7 +242,6 @@ module CityPayApiClient
         else
           CityPayApiClient.const_get(return_type).build_from_hash(data)
         end
-
       end
     end
 

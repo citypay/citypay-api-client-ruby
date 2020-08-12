@@ -13,27 +13,27 @@ require 'date'
 
 module CityPayApiClient
   class Decision
-    attr_accessor :authentication
+    attr_accessor :authen_required
 
-    attr_accessor :challenge
+    attr_accessor :auth_response
 
-    attr_accessor :result
+    attr_accessor :request_challenged
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'authentication' => :'authentication',
-        :'challenge' => :'challenge',
-        :'result' => :'result'
+        :'authen_required' => :'AuthenRequired',
+        :'auth_response' => :'AuthResponse',
+        :'request_challenged' => :'RequestChallenged'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'authentication' => :'AuthenRequired',
-        :'challenge' => :'RequestChallenged',
-        :'result' => :'AuthResponse'
+        :'authen_required' => :'AuthenRequired',
+        :'auth_response' => :'AuthResponse',
+        :'request_challenged' => :'RequestChallenged'
       }
     end
 
@@ -58,16 +58,16 @@ module CityPayApiClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'authentication')
-        self.authentication = attributes[:'authentication']
+      if attributes.key?(:'authen_required')
+        self.authen_required = attributes[:'authen_required']
       end
 
-      if attributes.key?(:'challenge')
-        self.challenge = attributes[:'challenge']
+      if attributes.key?(:'auth_response')
+        self.auth_response = attributes[:'auth_response']
       end
 
-      if attributes.key?(:'result')
-        self.result = attributes[:'result']
+      if attributes.key?(:'request_challenged')
+        self.request_challenged = attributes[:'request_challenged']
       end
     end
 
@@ -89,9 +89,9 @@ module CityPayApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          authentication == o.authentication &&
-          challenge == o.challenge &&
-          result == o.result
+          authen_required == o.authen_required &&
+          auth_response == o.auth_response &&
+          request_challenged == o.request_challenged
     end
 
     # @see the `==` method
@@ -103,7 +103,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [authentication, challenge, result].hash
+      [authen_required, auth_response, request_challenged].hash
     end
 
     # Builds the object from hash
