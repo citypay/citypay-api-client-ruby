@@ -19,7 +19,7 @@ require 'date'
 describe 'ListMerchantsResponse' do
   before do
     # run before each test
-    json = '
+    json1 = '
 {
     "ListMerchantsResponse": {
         "client_name": "CityPay Demo",
@@ -42,8 +42,33 @@ describe 'ListMerchantsResponse' do
         ]
     }
 }'
-    data = JSON.parse(json, :symbolize_names => true)
-    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "ListMerchantsResponse")
+
+    json2 = '
+{
+        "client_name": "CityPay Demo",
+        "clientid": "PC123456",
+        "merchants": [
+            {
+                "currency": "GBP",
+                "merchantid": 12345678,
+                "name": "CityPay One",
+                "status": "T",
+                "status_label": "Test"
+            },
+            {
+                "currency": "GBP",
+                "merchantid": 87654321,
+                "name": "CityPay Two",
+                "status": "T",
+                "status_label": "Test"
+            }
+        ]
+}'
+
+    data1 = JSON.parse(json1, :symbolize_names => true)
+    data2 = JSON.parse(json2, :symbolize_names => true)
+    @instance1 = CityPayApiClient::ApiClient.new.convert_to_type(data1, "ListMerchantsResponse")
+    @instance2 = CityPayApiClient::ApiClient.new.convert_to_type(data2, "ListMerchantsResponse")
   end
 
   after do
@@ -52,36 +77,52 @@ describe 'ListMerchantsResponse' do
 
   describe 'test an instance of ListMerchantsResponse' do
     it 'should create an instance of ListMerchantsResponse' do
-      expect(@instance).to be_instance_of(CityPayApiClient::ListMerchantsResponse)
+      expect(@instance1).to be_instance_of(CityPayApiClient::ListMerchantsResponse)
+      expect(@instance2).to be_instance_of(CityPayApiClient::ListMerchantsResponse)
     end
   end
   describe 'test attribute "client_name"' do
     it 'should work' do
-      expect(@instance.client_name).to eq("CityPay Demo")
+      expect(@instance1.client_name).to eq("CityPay Demo")
+      expect(@instance2.client_name).to eq("CityPay Demo")
     end
   end
 
   describe 'test attribute "clientid"' do
     it 'should work' do
-      expect(@instance.clientid).to eq("PC123456")
+      expect(@instance1.clientid).to eq("PC123456")
+      expect(@instance2.clientid).to eq("PC123456")
     end
   end
 
   describe 'test attribute "merchants"' do
     it 'should work' do
-      expect(@instance.merchants.length).to eq(2)
-      i = @instance.merchants[0]
-      expect(i.currency).to eq('GBP')
-      expect(i.merchantid).to eq(12345678)
-      expect(i.name).to eq("CityPay One")
-      expect(i.status).to eq("T")
-      expect(i.status_label).to eq("Test")
-      ii = @instance.merchants[1]
-      expect(ii.currency).to eq('GBP')
-      expect(ii.merchantid).to eq(87654321)
-      expect(ii.name).to eq("CityPay Two")
-      expect(ii.status).to eq("T")
-      expect(ii.status_label).to eq("Test")
+      expect(@instance1.merchants.length).to eq(2)
+      i1 = @instance1.merchants[0]
+      expect(i1.currency).to eq('GBP')
+      expect(i1.merchantid).to eq(12345678)
+      expect(i1.name).to eq("CityPay One")
+      expect(i1.status).to eq("T")
+      expect(i1.status_label).to eq("Test")
+      ii1 = @instance1.merchants[1]
+      expect(ii1.currency).to eq('GBP')
+      expect(ii1.merchantid).to eq(87654321)
+      expect(ii1.name).to eq("CityPay Two")
+      expect(ii1.status).to eq("T")
+      expect(ii1.status_label).to eq("Test")
+      expect(@instance2.merchants.length).to eq(2)
+      i2 = @instance2.merchants[0]
+      expect(i2.currency).to eq('GBP')
+      expect(i2.merchantid).to eq(12345678)
+      expect(i2.name).to eq("CityPay One")
+      expect(i2.status).to eq("T")
+      expect(i2.status_label).to eq("Test")
+      ii2 = @instance2.merchants[1]
+      expect(ii2.currency).to eq('GBP')
+      expect(ii2.merchantid).to eq(87654321)
+      expect(ii2.name).to eq("CityPay Two")
+      expect(ii2.status).to eq("T")
+      expect(ii2.status_label).to eq("Test")
     end
   end
 
