@@ -1,11 +1,10 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.3
   - 2.4
   - 2.5
 script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build citypay_api_client.gemspec
-  - gem install ./citypay_api_client-1.0.0.gem
+  - gem install ./citypay_api_client-1.0.2.gem

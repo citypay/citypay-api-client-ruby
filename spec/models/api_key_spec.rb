@@ -15,6 +15,15 @@ describe 'ApiKey' do
     end
   end
 
+
+  describe 'generate from initialize' do
+
+    it 'should generate a new key' do
+      @instance.generate
+    end
+
+  end
+
   describe('standard generation validation') do
 
     #noinspection RubyLiteralArrayInspection
