@@ -10,5 +10,6 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 =end
 
 module CityPayApiClient
-  VERSION = '1.0.2'
+  VERSION = '1.0.3'
+  FULL_VERSION = "CP_RUBY_#{RbConfig::CONFIG['MAJOR']}.#{RbConfig::CONFIG['MINOR']}/#{VERSION}"
 end
