@@ -220,6 +220,8 @@ module CityPayApiClient
 
       if attributes.key?(:'sdk')
         self.sdk = attributes[:'sdk']
+      else
+        self.sdk = CityPayApiClient::FULL_VERSION
       end
 
       if attributes.key?(:'ship_to')

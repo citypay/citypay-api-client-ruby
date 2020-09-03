@@ -34,6 +34,22 @@ module CityPayApiClient
 
     def generate
 
+      if @client_id.nil?
+        raise 'ClientId is not defined'
+      end
+
+      if @licence_key.nil?
+        raise 'LicenceKey is not defined'
+      end
+
+      if @datetime.nil?
+        raise 'Datetime is not defined'
+      end
+
+      if @nonce.nil?
+        raise 'Nonce is not defined'
+      end
+
       ds = @datetime.strftime("%Y%m%d%H%M")
       message = []
       message.push(*@client_id.bytes)
