@@ -29,7 +29,7 @@ module CityPayApiClient
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
-      @user_agent = "OpenAPI-Ruby/#{VERSION}"
+      @user_agent = "CP-Ruby-SDK/#{VERSION}"
       @default_headers = {
         'Content-Type' => 'application/json',
         'User-Agent' => @user_agent
