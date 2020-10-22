@@ -168,20 +168,20 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@address1.nil? && @address1.to_s.length > 40
-        invalid_properties.push('invalid value for "address1", the character length must be smaller than or equal to 40.')
+      if !@address1.nil? && @address1.to_s.length > 50
+        invalid_properties.push('invalid value for "address1", the character length must be smaller than or equal to 50.')
       end
 
-      if !@address2.nil? && @address2.to_s.length > 30
-        invalid_properties.push('invalid value for "address2", the character length must be smaller than or equal to 30.')
+      if !@address2.nil? && @address2.to_s.length > 50
+        invalid_properties.push('invalid value for "address2", the character length must be smaller than or equal to 50.')
       end
 
-      if !@address3.nil? && @address3.to_s.length > 20
-        invalid_properties.push('invalid value for "address3", the character length must be smaller than or equal to 20.')
+      if !@address3.nil? && @address3.to_s.length > 50
+        invalid_properties.push('invalid value for "address3", the character length must be smaller than or equal to 50.')
       end
 
-      if !@area.nil? && @area.to_s.length > 20
-        invalid_properties.push('invalid value for "area", the character length must be smaller than or equal to 20.')
+      if !@area.nil? && @area.to_s.length > 50
+        invalid_properties.push('invalid value for "area", the character length must be smaller than or equal to 50.')
       end
 
       if !@country.nil? && @country.to_s.length > 2
@@ -210,10 +210,10 @@ module CityPayApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@address1.nil? && @address1.to_s.length > 40
-      return false if !@address2.nil? && @address2.to_s.length > 30
-      return false if !@address3.nil? && @address3.to_s.length > 20
-      return false if !@area.nil? && @area.to_s.length > 20
+      return false if !@address1.nil? && @address1.to_s.length > 50
+      return false if !@address2.nil? && @address2.to_s.length > 50
+      return false if !@address3.nil? && @address3.to_s.length > 50
+      return false if !@area.nil? && @area.to_s.length > 50
       return false if !@country.nil? && @country.to_s.length > 2
       return false if !@country.nil? && @country.to_s.length < 2
       return false if !@mobile_no.nil? && @mobile_no.to_s.length > 20
@@ -225,8 +225,8 @@ module CityPayApiClient
     # Custom attribute writer method with validation
     # @param [Object] address1 Value to be assigned
     def address1=(address1)
-      if !address1.nil? && address1.to_s.length > 40
-        fail ArgumentError, 'invalid value for "address1", the character length must be smaller than or equal to 40.'
+      if !address1.nil? && address1.to_s.length > 50
+        fail ArgumentError, 'invalid value for "address1", the character length must be smaller than or equal to 50.'
       end
 
       @address1 = address1
@@ -235,8 +235,8 @@ module CityPayApiClient
     # Custom attribute writer method with validation
     # @param [Object] address2 Value to be assigned
     def address2=(address2)
-      if !address2.nil? && address2.to_s.length > 30
-        fail ArgumentError, 'invalid value for "address2", the character length must be smaller than or equal to 30.'
+      if !address2.nil? && address2.to_s.length > 50
+        fail ArgumentError, 'invalid value for "address2", the character length must be smaller than or equal to 50.'
       end
 
       @address2 = address2
@@ -245,8 +245,8 @@ module CityPayApiClient
     # Custom attribute writer method with validation
     # @param [Object] address3 Value to be assigned
     def address3=(address3)
-      if !address3.nil? && address3.to_s.length > 20
-        fail ArgumentError, 'invalid value for "address3", the character length must be smaller than or equal to 20.'
+      if !address3.nil? && address3.to_s.length > 50
+        fail ArgumentError, 'invalid value for "address3", the character length must be smaller than or equal to 50.'
       end
 
       @address3 = address3
@@ -255,8 +255,8 @@ module CityPayApiClient
     # Custom attribute writer method with validation
     # @param [Object] area Value to be assigned
     def area=(area)
-      if !area.nil? && area.to_s.length > 20
-        fail ArgumentError, 'invalid value for "area", the character length must be smaller than or equal to 20.'
+      if !area.nil? && area.to_s.length > 50
+        fail ArgumentError, 'invalid value for "area", the character length must be smaller than or equal to 50.'
       end
 
       @area = area

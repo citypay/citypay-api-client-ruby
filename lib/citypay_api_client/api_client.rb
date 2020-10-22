@@ -32,7 +32,8 @@ module CityPayApiClient
       @user_agent = "OpenAPI-Ruby/#{VERSION}"
       @default_headers = {
         'Content-Type' => 'application/json',
-        'User-Agent' => @user_agent
+        'User-Agent' => @user_agent, 
+        'cp-sdk' => "CP-Ruby/#{VERSION}"
       }
     end
 

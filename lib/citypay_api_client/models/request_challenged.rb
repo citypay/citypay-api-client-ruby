@@ -23,7 +23,7 @@ module CityPayApiClient
     attr_accessor :merchantid
 
     # The 3DSv2 trans id reference for the challenge process.
-    attr_accessor :three_d_server_trans_id
+    attr_accessor :threedserver_trans_id
 
     # The transaction number for the challenge, ordered incrementally from 1 for every merchant_id. 
     attr_accessor :transno
@@ -34,7 +34,7 @@ module CityPayApiClient
         :'acs_url' => :'acs_url',
         :'creq' => :'creq',
         :'merchantid' => :'merchantid',
-        :'three_d_server_trans_id' => :'ThreeDServerTransId',
+        :'threedserver_trans_id' => :'threedserver_trans_id',
         :'transno' => :'transno'
       }
     end
@@ -45,7 +45,7 @@ module CityPayApiClient
         :'acs_url' => :'String',
         :'creq' => :'String',
         :'merchantid' => :'Integer',
-        :'three_d_server_trans_id' => :'String',
+        :'threedserver_trans_id' => :'String',
         :'transno' => :'Integer'
       }
     end
@@ -83,8 +83,8 @@ module CityPayApiClient
         self.merchantid = attributes[:'merchantid']
       end
 
-      if attributes.key?(:'three_d_server_trans_id')
-        self.three_d_server_trans_id = attributes[:'three_d_server_trans_id']
+      if attributes.key?(:'threedserver_trans_id')
+        self.threedserver_trans_id = attributes[:'threedserver_trans_id']
       end
 
       if attributes.key?(:'transno')
@@ -113,7 +113,7 @@ module CityPayApiClient
           acs_url == o.acs_url &&
           creq == o.creq &&
           merchantid == o.merchantid &&
-          three_d_server_trans_id == o.three_d_server_trans_id &&
+          threedserver_trans_id == o.threedserver_trans_id &&
           transno == o.transno
     end
 
@@ -126,7 +126,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [acs_url, creq, merchantid, three_d_server_trans_id, transno].hash
+      [acs_url, creq, merchantid, threedserver_trans_id, transno].hash
     end
 
     # Builds the object from hash
