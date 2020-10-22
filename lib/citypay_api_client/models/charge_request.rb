@@ -31,7 +31,7 @@ module CityPayApiClient
     # A policy value which determines whether a duplication policy is enforced or bypassed. A duplication check has a window of time set against your account within which it can action. If a previous transaction with matching values occurred within the window, any subsequent transaction will result in a T001 result.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.  `1` for an enforced policy. Transactions that are enforced will be checked for duplication within the duplication window.  `2` to bypass. Transactions that are bypassed will not be checked for duplication within the duplication window.  `3` to ignore. Transactions that are ignored will have the same affect as bypass. 
     attr_accessor :duplicate_policy
 
-    # The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 32 to 127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
+    # The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
     attr_accessor :identifier
 
     # A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.   Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.  `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.  `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.  `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
@@ -40,8 +40,7 @@ module CityPayApiClient
     # Identifies the merchant account to perform processing for.
     attr_accessor :merchantid
 
-    # An optional reference value for the calling client such as a version number i.e.
-    attr_accessor :sdk
+    attr_accessor :threedsecure
 
     # A tokenised form of a card that belongs to a card holder's account and that has been previously registered. The token is time based and will only be active for a short duration. The value is therefore designed not to be stored remotely for future  use.  Tokens will start with ct and are resiliently tamper proof using HMacSHA-256. No sensitive card data is stored internally within the token.  Each card will contain a different token and the value may be different on any retrieval call.  The value can be presented for payment as a selection value to an end user in a web application. 
     attr_accessor :token
@@ -64,7 +63,7 @@ module CityPayApiClient
         :'identifier' => :'identifier',
         :'match_avsa' => :'match_avsa',
         :'merchantid' => :'merchantid',
-        :'sdk' => :'sdk',
+        :'threedsecure' => :'threedsecure',
         :'token' => :'token',
         :'trans_info' => :'trans_info',
         :'trans_type' => :'trans_type'
@@ -83,7 +82,7 @@ module CityPayApiClient
         :'identifier' => :'String',
         :'match_avsa' => :'String',
         :'merchantid' => :'Integer',
-        :'sdk' => :'String',
+        :'threedsecure' => :'ThreeDSecure',
         :'token' => :'String',
         :'trans_info' => :'String',
         :'trans_type' => :'String'
@@ -147,10 +146,8 @@ module CityPayApiClient
         self.merchantid = attributes[:'merchantid']
       end
 
-      if attributes.key?(:'sdk')
-        self.sdk = attributes[:'sdk']
-      else
-        self.sdk = CityPayApiClient::FULL_VERSION
+      if attributes.key?(:'threedsecure')
+        self.threedsecure = attributes[:'threedsecure']
       end
 
       if attributes.key?(:'token')
@@ -319,7 +316,7 @@ module CityPayApiClient
           identifier == o.identifier &&
           match_avsa == o.match_avsa &&
           merchantid == o.merchantid &&
-          sdk == o.sdk &&
+          threedsecure == o.threedsecure &&
           token == o.token &&
           trans_info == o.trans_info &&
           trans_type == o.trans_type
@@ -334,7 +331,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [amount, avs_postcode_policy, csc, csc_policy, currency, duplicate_policy, identifier, match_avsa, merchantid, sdk, token, trans_info, trans_type].hash
+      [amount, avs_postcode_policy, csc, csc_policy, currency, duplicate_policy, identifier, match_avsa, merchantid, threedsecure, token, trans_info, trans_type].hash
     end
 
     # Builds the object from hash

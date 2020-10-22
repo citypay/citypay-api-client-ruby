@@ -12,40 +12,31 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module CityPayApiClient
-  class CaptureRequest
-    attr_accessor :airline_data
+  class Exists
+    # Boolean value whether the entity is active.
+    attr_accessor :active
 
-    # The completion amount provided in the lowest unit of currency for the specific currency of the merchant, with a variable length to a maximum of 12 digits. No decimal points to be included. For example with GBP 75.45 use the value 7545. Please check that you do not supply divisional characters such as 1,024 in the request which may be caused by some number formatters. If no amount is supplied, the original processing amount is used. 
-    attr_accessor :amount
+    # Boolean value whether the entity exists.
+    attr_accessor :exists
 
-    # The identifier of the transaction to capture. If an empty value is supplied then a `trans_no` value must be supplied.
-    attr_accessor :identifier
-
-    # Identifies the merchant account to perform the capture for.
-    attr_accessor :merchantid
-
-    # The transaction number of the transaction to look up and capture. If an empty value is supplied then an identifier value must be supplied.
-    attr_accessor :transno
+    # The last modified date of the entity.
+    attr_accessor :last_modified
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'airline_data' => :'airline_data',
-        :'amount' => :'amount',
-        :'identifier' => :'identifier',
-        :'merchantid' => :'merchantid',
-        :'transno' => :'transno'
+        :'active' => :'active',
+        :'exists' => :'exists',
+        :'last_modified' => :'last_modified'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'airline_data' => :'AirlineAdvice',
-        :'amount' => :'Integer',
-        :'identifier' => :'String',
-        :'merchantid' => :'Integer',
-        :'transno' => :'Integer'
+        :'active' => :'Boolean',
+        :'exists' => :'Boolean',
+        :'last_modified' => :'DateTime'
       }
     end
 
@@ -59,35 +50,27 @@ module CityPayApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::CaptureRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::Exists` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::CaptureRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::Exists`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'airline_data')
-        self.airline_data = attributes[:'airline_data']
+      if attributes.key?(:'active')
+        self.active = attributes[:'active']
       end
 
-      if attributes.key?(:'amount')
-        self.amount = attributes[:'amount']
+      if attributes.key?(:'exists')
+        self.exists = attributes[:'exists']
       end
 
-      if attributes.key?(:'identifier')
-        self.identifier = attributes[:'identifier']
-      end
-
-      if attributes.key?(:'merchantid')
-        self.merchantid = attributes[:'merchantid']
-      end
-
-      if attributes.key?(:'transno')
-        self.transno = attributes[:'transno']
+      if attributes.key?(:'last_modified')
+        self.last_modified = attributes[:'last_modified']
       end
     end
 
@@ -95,16 +78,8 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@identifier.nil? && @identifier.to_s.length > 50
-        invalid_properties.push('invalid value for "identifier", the character length must be smaller than or equal to 50.')
-      end
-
-      if !@identifier.nil? && @identifier.to_s.length < 4
-        invalid_properties.push('invalid value for "identifier", the character length must be great than or equal to 4.')
-      end
-
-      if @merchantid.nil?
-        invalid_properties.push('invalid value for "merchantid", merchantid cannot be nil.')
+      if @exists.nil?
+        invalid_properties.push('invalid value for "exists", exists cannot be nil.')
       end
 
       invalid_properties
@@ -113,24 +88,8 @@ module CityPayApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@identifier.nil? && @identifier.to_s.length > 50
-      return false if !@identifier.nil? && @identifier.to_s.length < 4
-      return false if @merchantid.nil?
+      return false if @exists.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] identifier Value to be assigned
-    def identifier=(identifier)
-      if !identifier.nil? && identifier.to_s.length > 50
-        fail ArgumentError, 'invalid value for "identifier", the character length must be smaller than or equal to 50.'
-      end
-
-      if !identifier.nil? && identifier.to_s.length < 4
-        fail ArgumentError, 'invalid value for "identifier", the character length must be great than or equal to 4.'
-      end
-
-      @identifier = identifier
     end
 
     # Checks equality by comparing each attribute.
@@ -138,11 +97,9 @@ module CityPayApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          airline_data == o.airline_data &&
-          amount == o.amount &&
-          identifier == o.identifier &&
-          merchantid == o.merchantid &&
-          transno == o.transno
+          active == o.active &&
+          exists == o.exists &&
+          last_modified == o.last_modified
     end
 
     # @see the `==` method
@@ -154,7 +111,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [airline_data, amount, identifier, merchantid, transno].hash
+      [active, exists, last_modified].hash
     end
 
     # Builds the object from hash

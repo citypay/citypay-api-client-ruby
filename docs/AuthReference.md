@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **Integer** | The amount of the transaction in decimal currency format. | [optional] 
-**amount_value** | **String** | The amount of the transaction in integer/request format. | [optional] 
+**amount** | **String** | The amount of the transaction in decimal currency format. | [optional] 
+**amount_value** | **Integer** | The amount of the transaction in integer/request format. | [optional] 
 **atrn** | **String** | A reference number provided by the acquiring services. | [optional] 
 **authcode** | **String** | The authorisation code of the transaction returned by the acquirer or card issuer. | [optional] 
 **batchno** | **String** | A batch number which the transaction has been end of day batched towards. | [optional] 
@@ -24,8 +24,8 @@ Name | Type | Description | Notes
 ```ruby
 require 'CityPayApiClient'
 
-instance = CityPayApiClient::AuthReference.new(amount: 3600,
-                                 amount_value: null,
+instance = CityPayApiClient::AuthReference.new(amount: 20.0,
+                                 amount_value: 3600,
                                  atrn: null,
                                  authcode: 001245A,
                                  batchno: null,

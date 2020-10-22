@@ -43,6 +43,9 @@ module CityPayApiClient
     # The status of the card such, valid values are  - ACTIVE the card is active for processing  - INACTIVE the card is not active for processing  - EXPIRED for cards that have passed their expiry date. 
     attr_accessor :card_status
 
+    # The date time of when the card was created.
+    attr_accessor :date_created
+
     # Determines if the card is the default card for the account and should be regarded as the first option to be used for processing.
     attr_accessor :default
 
@@ -80,6 +83,7 @@ module CityPayApiClient
         :'bin_eu' => :'bin_eu',
         :'card_id' => :'card_id',
         :'card_status' => :'card_status',
+        :'date_created' => :'date_created',
         :'default' => :'default',
         :'expmonth' => :'expmonth',
         :'expyear' => :'expyear',
@@ -104,6 +108,7 @@ module CityPayApiClient
         :'bin_eu' => :'Boolean',
         :'card_id' => :'String',
         :'card_status' => :'String',
+        :'date_created' => :'DateTime',
         :'default' => :'Boolean',
         :'expmonth' => :'Integer',
         :'expyear' => :'Integer',
@@ -174,6 +179,10 @@ module CityPayApiClient
 
       if attributes.key?(:'card_status')
         self.card_status = attributes[:'card_status']
+      end
+
+      if attributes.key?(:'date_created')
+        self.date_created = attributes[:'date_created']
       end
 
       if attributes.key?(:'default')
@@ -285,6 +294,7 @@ module CityPayApiClient
           bin_eu == o.bin_eu &&
           card_id == o.card_id &&
           card_status == o.card_status &&
+          date_created == o.date_created &&
           default == o.default &&
           expmonth == o.expmonth &&
           expyear == o.expyear &&
@@ -304,7 +314,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [bin_commercial, bin_corporate, bin_country_issued, bin_credit, bin_currency, bin_debit, bin_description, bin_eu, card_id, card_status, default, expmonth, expyear, label, label2, last4digits, scheme, token].hash
+      [bin_commercial, bin_corporate, bin_country_issued, bin_credit, bin_currency, bin_debit, bin_description, bin_eu, card_id, card_status, date_created, default, expmonth, expyear, label, label2, last4digits, scheme, token].hash
     end
 
     # Builds the object from hash

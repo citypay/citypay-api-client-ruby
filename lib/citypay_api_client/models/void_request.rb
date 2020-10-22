@@ -19,9 +19,6 @@ module CityPayApiClient
     # Identifies the merchant account to perform the void for.
     attr_accessor :merchantid
 
-    # An optional reference value for the calling client such as a version number i.e.
-    attr_accessor :sdk
-
     # The transaction number of the transaction to look up and void. If an empty value is supplied then an identifier value must be supplied.
     attr_accessor :transno
 
@@ -30,7 +27,6 @@ module CityPayApiClient
       {
         :'identifier' => :'identifier',
         :'merchantid' => :'merchantid',
-        :'sdk' => :'sdk',
         :'transno' => :'transno'
       }
     end
@@ -40,7 +36,6 @@ module CityPayApiClient
       {
         :'identifier' => :'String',
         :'merchantid' => :'Integer',
-        :'sdk' => :'String',
         :'transno' => :'Integer'
       }
     end
@@ -72,12 +67,6 @@ module CityPayApiClient
 
       if attributes.key?(:'merchantid')
         self.merchantid = attributes[:'merchantid']
-      end
-
-      if attributes.key?(:'sdk')
-        self.sdk = attributes[:'sdk']
-      else
-        self.sdk = CityPayApiClient::FULL_VERSION
       end
 
       if attributes.key?(:'transno')
@@ -134,7 +123,6 @@ module CityPayApiClient
       self.class == o.class &&
           identifier == o.identifier &&
           merchantid == o.merchantid &&
-          sdk == o.sdk &&
           transno == o.transno
     end
 
@@ -147,7 +135,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [identifier, merchantid, sdk, transno].hash
+      [identifier, merchantid, transno].hash
     end
 
     # Builds the object from hash

@@ -13,25 +13,29 @@ require 'date'
 
 module CityPayApiClient
   class ThreeDSecure
-    # The content of the HTTP accept header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
+    # Required for 3DSv1. Optional if the `cp_bx` value is provided otherwise required for 3Dv2 processing operating in browser authentication mode.  The `cp_bx` value will override any value supplied to this field.  The content of the HTTP accept header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
     attr_accessor :accept_headers
+
+    # Required for 3DSv2.  Browser extension value produced by the citypay.js `bx` function. See https://sandbox.citypay.com/3dsv2/bx for  details. 
+    attr_accessor :cp_bx
 
     # Where a merchant is configured for 3DSv2, setting this option will attempt to downgrade the transaction to  3DSv1. 
     attr_accessor :downgrade1
 
-    # A controller URL for 3D-Secure processing that any response from an authentication request or challenge request should be sent to.  The controller should forward on the response from the URL back via this API for subsequent processing. Required if 3DSv1 or 3DSv2 is required. 
+    # Required for 3DSv1 and 3Dv2 processing.  A controller URL for 3D-Secure processing that any response from an authentication request or challenge request should be sent to.  The controller should forward on the response from the URL back via this API for subsequent processing. Required if 3DSv1 or 3DSv2 is required. 
     attr_accessor :merchant_termurl
 
     # A policy value which determines whether ThreeDSecure is enforced or bypassed. Note that this will only work for e-commerce transactions and accounts that have 3DSecure enabled and fully registered with Visa, MasterCard or American Express. It is useful when transactions may be wanted to bypass processing rules.  Note that this may affect the liability shift of transactions and may occur a higher fee with the acquiring bank.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.  `1` for an enforced policy. Transactions will be enabled for 3DS processing  `2` to bypass. Transactions that are bypassed will switch off 3DS processing. 
     attr_accessor :tds_policy
 
-    # The content of the HTTP user-agent header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
+    # Required for 3DSv1. Optional if the `cp_bx` value is provided otherwise required 3Dv2 processing operating in browser authentication mode.  The `cp_bx` value will override any value supplied to this field.  The content of the HTTP user-agent header as sent to the merchant from the cardholder's user agent. This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1. 
     attr_accessor :user_agent
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'accept_headers' => :'accept_headers',
+        :'cp_bx' => :'cp_bx',
         :'downgrade1' => :'downgrade1',
         :'merchant_termurl' => :'merchant_termurl',
         :'tds_policy' => :'tds_policy',
@@ -43,6 +47,7 @@ module CityPayApiClient
     def self.openapi_types
       {
         :'accept_headers' => :'String',
+        :'cp_bx' => :'String',
         :'downgrade1' => :'Boolean',
         :'merchant_termurl' => :'String',
         :'tds_policy' => :'String',
@@ -73,6 +78,10 @@ module CityPayApiClient
 
       if attributes.key?(:'accept_headers')
         self.accept_headers = attributes[:'accept_headers']
+      end
+
+      if attributes.key?(:'cp_bx')
+        self.cp_bx = attributes[:'cp_bx']
       end
 
       if attributes.key?(:'downgrade1')
@@ -111,6 +120,7 @@ module CityPayApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           accept_headers == o.accept_headers &&
+          cp_bx == o.cp_bx &&
           downgrade1 == o.downgrade1 &&
           merchant_termurl == o.merchant_termurl &&
           tds_policy == o.tds_policy &&
@@ -126,7 +136,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [accept_headers, downgrade1, merchant_termurl, tds_policy, user_agent].hash
+      [accept_headers, cp_bx, downgrade1, merchant_termurl, tds_policy, user_agent].hash
     end
 
     # Builds the object from hash

@@ -78,8 +78,8 @@ module CityPayApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'amount' => :'Integer',
-        :'amount_value' => :'String',
+        :'amount' => :'String',
+        :'amount_value' => :'Integer',
         :'atrn' => :'String',
         :'authcode' => :'String',
         :'batchno' => :'String',
@@ -177,6 +177,10 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@amount.nil? && @amount.to_s.length > 12
+        invalid_properties.push('invalid value for "amount", the character length must be smaller than or equal to 12.')
+      end
+
       if !@currency.nil? && @currency.to_s.length > 3
         invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
       end
@@ -203,12 +207,23 @@ module CityPayApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@amount.nil? && @amount.to_s.length > 12
       return false if !@currency.nil? && @currency.to_s.length > 3
       return false if !@currency.nil? && @currency.to_s.length < 3
       return false if !@identifier.nil? && @identifier.to_s.length > 50
       return false if !@identifier.nil? && @identifier.to_s.length < 4
       return false if !@trans_type.nil? && @trans_type.to_s.length > 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] amount Value to be assigned
+    def amount=(amount)
+      if !amount.nil? && amount.to_s.length > 12
+        fail ArgumentError, 'invalid value for "amount", the character length must be smaller than or equal to 12.'
+      end
+
+      @amount = amount
     end
 
     # Custom attribute writer method with validation

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **bin_eu** | **Boolean** | Defines whether the card is regulated within the EU. | [optional] 
 **card_id** | **String** | The id of the card that is returned. Should be used for referencing the card when perform any changes. | [optional] 
 **card_status** | **String** | The status of the card such, valid values are  - ACTIVE the card is active for processing  - INACTIVE the card is not active for processing  - EXPIRED for cards that have passed their expiry date.  | [optional] 
+**date_created** | **DateTime** | The date time of when the card was created. | [optional] 
 **default** | **Boolean** | Determines if the card is the default card for the account and should be regarded as the first option to be used for processing. | [optional] 
 **expmonth** | **Integer** | The expiry month of the card. | [optional] 
 **expyear** | **Integer** | The expiry year of the card. | [optional] 
@@ -38,6 +39,7 @@ instance = CityPayApiClient::Card.new(bin_commercial: null,
                                  bin_eu: null,
                                  card_id: null,
                                  card_status: null,
+                                 date_created: 2020-01-02T18:32:28Z,
                                  default: null,
                                  expmonth: 9,
                                  expyear: 2023,

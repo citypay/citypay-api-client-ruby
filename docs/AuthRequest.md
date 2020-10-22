@@ -17,11 +17,10 @@ Name | Type | Description | Notes
 **expmonth** | **Integer** | The month of expiry of the card. The month value should be a numerical value between 1 and 12.  | 
 **expyear** | **Integer** | The year of expiry of the card.  | 
 **external_mpi** | [**ExternalMPI**](ExternalMPI.md) |  | [optional] 
-**identifier** | **String** | The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 32 to 127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different.  | 
+**identifier** | **String** | The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different.  | 
 **match_avsa** | **String** | A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.   Values are  &#x60;0&#x60; for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.  &#x60;1&#x60; for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.  &#x60;2&#x60; to bypass. Transactions that are bypassed will be allowed through even if the address did not match.  &#x60;3&#x60; to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation.  | [optional] 
 **mcc6012** | [**MCC6012**](MCC6012.md) |  | [optional] 
 **merchantid** | **Integer** | Identifies the merchant account to perform processing for. | 
-**sdk** | **String** | An optional reference value for the calling client such as a version number i.e. | [optional] 
 **ship_to** | [**ContactDetails**](ContactDetails.md) |  | [optional] 
 **threedsecure** | [**ThreeDSecure**](ThreeDSecure.md) |  | [optional] 
 **trans_info** | **String** | Further information that can be added to the transaction will display in reporting. Can be used for flexible values such as operator id. | [optional] 
@@ -49,7 +48,6 @@ instance = CityPayApiClient::AuthRequest.new(airline_data: null,
                                  match_avsa: null,
                                  mcc6012: null,
                                  merchantid: 11223344,
-                                 sdk: MyClient 1.3.0,
                                  ship_to: null,
                                  threedsecure: null,
                                  trans_info: null,
