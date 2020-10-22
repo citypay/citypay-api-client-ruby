@@ -49,7 +49,7 @@ module CityPayApiClient
 
     attr_accessor :external_mpi
 
-    # The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 32 to 127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
+    # The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
     attr_accessor :identifier
 
     # A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.   Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.  `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.  `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.  `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
@@ -59,9 +59,6 @@ module CityPayApiClient
 
     # Identifies the merchant account to perform processing for.
     attr_accessor :merchantid
-
-    # An optional reference value for the calling client such as a version number i.e.
-    attr_accessor :sdk
 
     attr_accessor :ship_to
 
@@ -93,7 +90,6 @@ module CityPayApiClient
         :'match_avsa' => :'match_avsa',
         :'mcc6012' => :'mcc6012',
         :'merchantid' => :'merchantid',
-        :'sdk' => :'sdk',
         :'ship_to' => :'ship_to',
         :'threedsecure' => :'threedsecure',
         :'trans_info' => :'trans_info',
@@ -121,7 +117,6 @@ module CityPayApiClient
         :'match_avsa' => :'String',
         :'mcc6012' => :'MCC6012',
         :'merchantid' => :'Integer',
-        :'sdk' => :'String',
         :'ship_to' => :'ContactDetails',
         :'threedsecure' => :'ThreeDSecure',
         :'trans_info' => :'String',
@@ -216,12 +211,6 @@ module CityPayApiClient
 
       if attributes.key?(:'merchantid')
         self.merchantid = attributes[:'merchantid']
-      end
-
-      if attributes.key?(:'sdk')
-        self.sdk = attributes[:'sdk']
-      else
-        self.sdk = CityPayApiClient::FULL_VERSION
       end
 
       if attributes.key?(:'ship_to')
@@ -496,7 +485,6 @@ module CityPayApiClient
           match_avsa == o.match_avsa &&
           mcc6012 == o.mcc6012 &&
           merchantid == o.merchantid &&
-          sdk == o.sdk &&
           ship_to == o.ship_to &&
           threedsecure == o.threedsecure &&
           trans_info == o.trans_info &&
@@ -512,7 +500,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [airline_data, amount, avs_postcode_policy, bill_to, card_holder_name, cardnumber, csc, csc_policy, currency, duplicate_policy, expmonth, expyear, external_mpi, identifier, match_avsa, mcc6012, merchantid, sdk, ship_to, threedsecure, trans_info, trans_type].hash
+      [airline_data, amount, avs_postcode_policy, bill_to, card_holder_name, cardnumber, csc, csc_policy, currency, duplicate_policy, expmonth, expyear, external_mpi, identifier, match_avsa, mcc6012, merchantid, ship_to, threedsecure, trans_info, trans_type].hash
     end
 
     # Builds the object from hash

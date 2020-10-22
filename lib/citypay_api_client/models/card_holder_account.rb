@@ -29,6 +29,9 @@ module CityPayApiClient
     # The index in the array of the default card.
     attr_accessor :default_card_index
 
+    # The date and time the account was last modified.
+    attr_accessor :last_modified
+
     # Defines the status of the account for processing valid values are   - ACTIVE for active accounts that are able to process  - DISABLED for accounts that are currently disabled for processing. 
     attr_accessor :status
 
@@ -44,6 +47,7 @@ module CityPayApiClient
         :'date_created' => :'date_created',
         :'default_card_id' => :'default_card_id',
         :'default_card_index' => :'default_card_index',
+        :'last_modified' => :'last_modified',
         :'status' => :'status',
         :'unique_id' => :'unique_id'
       }
@@ -57,7 +61,8 @@ module CityPayApiClient
         :'contact' => :'ContactDetails',
         :'date_created' => :'DateTime',
         :'default_card_id' => :'String',
-        :'default_card_index' => :'String',
+        :'default_card_index' => :'Integer',
+        :'last_modified' => :'DateTime',
         :'status' => :'String',
         :'unique_id' => :'String'
       }
@@ -108,6 +113,10 @@ module CityPayApiClient
 
       if attributes.key?(:'default_card_index')
         self.default_card_index = attributes[:'default_card_index']
+      end
+
+      if attributes.key?(:'last_modified')
+        self.last_modified = attributes[:'last_modified']
       end
 
       if attributes.key?(:'status')
@@ -181,6 +190,7 @@ module CityPayApiClient
           date_created == o.date_created &&
           default_card_id == o.default_card_id &&
           default_card_index == o.default_card_index &&
+          last_modified == o.last_modified &&
           status == o.status &&
           unique_id == o.unique_id
     end
@@ -194,7 +204,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, cards, contact, date_created, default_card_id, default_card_index, status, unique_id].hash
+      [account_id, cards, contact, date_created, default_card_id, default_card_index, last_modified, status, unique_id].hash
     end
 
     # Builds the object from hash

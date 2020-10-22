@@ -12,40 +12,41 @@ OpenAPI Generator version: 5.0.0-SNAPSHOT
 require 'date'
 
 module CityPayApiClient
-  class CaptureRequest
-    attr_accessor :airline_data
-
-    # The completion amount provided in the lowest unit of currency for the specific currency of the merchant, with a variable length to a maximum of 12 digits. No decimal points to be included. For example with GBP 75.45 use the value 7545. Please check that you do not supply divisional characters such as 1,024 in the request which may be caused by some number formatters. If no amount is supplied, the original processing amount is used. 
+  class RefundRequest
+    # The amount to refund in the lowest unit of currency with a variable length to a maximum of 12 digits. The amount should be the total amount required to refund for the transaction up to the original processed amount. No decimal points are to be included and no divisional characters such as 1,024. For example with GBP £1,021.95 the amount value is 102195. 
     attr_accessor :amount
 
-    # The identifier of the transaction to capture. If an empty value is supplied then a `trans_no` value must be supplied.
+    # The identifier of the refund to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
     attr_accessor :identifier
 
-    # Identifies the merchant account to perform the capture for.
+    # Identifies the merchant account to perform the refund for.
     attr_accessor :merchantid
 
-    # The transaction number of the transaction to look up and capture. If an empty value is supplied then an identifier value must be supplied.
-    attr_accessor :transno
+    # A reference to the original transaction number that is wanting to be refunded. The original  transaction must be on the same merchant id, previously authorised. 
+    attr_accessor :refund_ref
+
+    # Further information that can be added to the transaction will display in reporting. Can be used for flexible values such as operator id.
+    attr_accessor :trans_info
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'airline_data' => :'airline_data',
         :'amount' => :'amount',
         :'identifier' => :'identifier',
         :'merchantid' => :'merchantid',
-        :'transno' => :'transno'
+        :'refund_ref' => :'refund_ref',
+        :'trans_info' => :'trans_info'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'airline_data' => :'AirlineAdvice',
         :'amount' => :'Integer',
         :'identifier' => :'String',
         :'merchantid' => :'Integer',
-        :'transno' => :'Integer'
+        :'refund_ref' => :'Integer',
+        :'trans_info' => :'String'
       }
     end
 
@@ -59,20 +60,16 @@ module CityPayApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::CaptureRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::RefundRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::CaptureRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::RefundRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'airline_data')
-        self.airline_data = attributes[:'airline_data']
-      end
 
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
@@ -86,8 +83,12 @@ module CityPayApiClient
         self.merchantid = attributes[:'merchantid']
       end
 
-      if attributes.key?(:'transno')
-        self.transno = attributes[:'transno']
+      if attributes.key?(:'refund_ref')
+        self.refund_ref = attributes[:'refund_ref']
+      end
+
+      if attributes.key?(:'trans_info')
+        self.trans_info = attributes[:'trans_info']
       end
     end
 
@@ -95,16 +96,32 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@identifier.nil? && @identifier.to_s.length > 50
+      if @amount.nil?
+        invalid_properties.push('invalid value for "amount", amount cannot be nil.')
+      end
+
+      if @identifier.nil?
+        invalid_properties.push('invalid value for "identifier", identifier cannot be nil.')
+      end
+
+      if @identifier.to_s.length > 50
         invalid_properties.push('invalid value for "identifier", the character length must be smaller than or equal to 50.')
       end
 
-      if !@identifier.nil? && @identifier.to_s.length < 4
+      if @identifier.to_s.length < 4
         invalid_properties.push('invalid value for "identifier", the character length must be great than or equal to 4.')
       end
 
       if @merchantid.nil?
         invalid_properties.push('invalid value for "merchantid", merchantid cannot be nil.')
+      end
+
+      if @refund_ref.nil?
+        invalid_properties.push('invalid value for "refund_ref", refund_ref cannot be nil.')
+      end
+
+      if !@trans_info.nil? && @trans_info.to_s.length > 50
+        invalid_properties.push('invalid value for "trans_info", the character length must be smaller than or equal to 50.')
       end
 
       invalid_properties
@@ -113,24 +130,42 @@ module CityPayApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@identifier.nil? && @identifier.to_s.length > 50
-      return false if !@identifier.nil? && @identifier.to_s.length < 4
+      return false if @amount.nil?
+      return false if @identifier.nil?
+      return false if @identifier.to_s.length > 50
+      return false if @identifier.to_s.length < 4
       return false if @merchantid.nil?
+      return false if @refund_ref.nil?
+      return false if !@trans_info.nil? && @trans_info.to_s.length > 50
       true
     end
 
     # Custom attribute writer method with validation
     # @param [Object] identifier Value to be assigned
     def identifier=(identifier)
-      if !identifier.nil? && identifier.to_s.length > 50
+      if identifier.nil?
+        fail ArgumentError, 'identifier cannot be nil'
+      end
+
+      if identifier.to_s.length > 50
         fail ArgumentError, 'invalid value for "identifier", the character length must be smaller than or equal to 50.'
       end
 
-      if !identifier.nil? && identifier.to_s.length < 4
+      if identifier.to_s.length < 4
         fail ArgumentError, 'invalid value for "identifier", the character length must be great than or equal to 4.'
       end
 
       @identifier = identifier
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] trans_info Value to be assigned
+    def trans_info=(trans_info)
+      if !trans_info.nil? && trans_info.to_s.length > 50
+        fail ArgumentError, 'invalid value for "trans_info", the character length must be smaller than or equal to 50.'
+      end
+
+      @trans_info = trans_info
     end
 
     # Checks equality by comparing each attribute.
@@ -138,11 +173,11 @@ module CityPayApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          airline_data == o.airline_data &&
           amount == o.amount &&
           identifier == o.identifier &&
           merchantid == o.merchantid &&
-          transno == o.transno
+          refund_ref == o.refund_ref &&
+          trans_info == o.trans_info
     end
 
     # @see the `==` method
@@ -154,7 +189,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [airline_data, amount, identifier, merchantid, transno].hash
+      [amount, identifier, merchantid, refund_ref, trans_info].hash
     end
 
     # Builds the object from hash

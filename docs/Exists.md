@@ -1,0 +1,21 @@
+# CityPayApiClient::Exists
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**active** | **Boolean** | Boolean value whether the entity is active. | [optional] 
+**exists** | **Boolean** | Boolean value whether the entity exists. | 
+**last_modified** | **DateTime** | The last modified date of the entity. | [optional] 
+
+## Code Sample
+
+```ruby
+require 'CityPayApiClient'
+
+instance = CityPayApiClient::Exists.new(active: true,
+                                 exists: true,
+                                 last_modified: 2020-01-02T18:32:28Z)
+```
+
+

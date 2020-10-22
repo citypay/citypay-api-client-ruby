@@ -428,6 +428,68 @@ module CityPayApiClient
       return data, status_code, headers
     end
 
+    # Account Exists
+    # .
+    # @param accountid [String] The account id that refers to the customer&#39;s account no. This value will have been provided when setting up the card holder account.
+    # @param [Hash] opts the optional parameters
+    # @return [Exists]
+    def account_exists_request(accountid, opts = {})
+      data, _status_code, _headers = account_exists_request_with_http_info(accountid, opts)
+      data
+    end
+
+    # Account Exists
+    # .
+    # @param accountid [String] The account id that refers to the customer&#39;s account no. This value will have been provided when setting up the card holder account.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Exists, Integer, Hash)>] Exists data, response status code and response headers
+    def account_exists_request_with_http_info(accountid, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: CardHolderAccountApi.account_exists_request ...'
+      end
+      # verify the required parameter 'accountid' is set
+      if @api_client.config.client_side_validation && accountid.nil?
+        fail ArgumentError, "Missing the required parameter 'accountid' when calling CardHolderAccountApi.account_exists_request"
+      end
+      # resource path
+      local_var_path = '/account-exists/{accountid}'.sub('{' + 'accountid' + '}', CGI.escape(accountid.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/xml'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:body] 
+
+      # return_type
+      return_type = opts[:return_type] || 'Exists' 
+
+      # auth_names
+      auth_names = opts[:auth_names] || ['cp-api-key']
+
+      new_options = opts.merge(
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: CardHolderAccountApi#account_exists_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Account Retrieval
     # Allows for the retrieval of a card holder account for the given `id`. Should duplicate accounts exist for the same `id`, the first account created with that `id` will be returned.  The account can be used for tokenisation processing by listing all cards assigned to the account. The returned cards will include all `active`, `inactive` and `expired` cards. This can be used to  enable a card holder to view their wallet and make constructive choices on which card to use. 
     # @param accountid [String] The account id that refers to the customer&#39;s account no. This value will have been provided when setting up the card holder account.

@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**account_change_contact_request**](CardHolderAccountApi.md#account_change_contact_request) | **POST** /account/{accountid}/contact | Contact Details Update
 [**account_create**](CardHolderAccountApi.md#account_create) | **POST** /account/create | Account Create
 [**account_delete_request**](CardHolderAccountApi.md#account_delete_request) | **DELETE** /account/{accountid} | Account Deletion
+[**account_exists_request**](CardHolderAccountApi.md#account_exists_request) | **GET** /account-exists/{accountid} | Account Exists
 [**account_retrieve_request**](CardHolderAccountApi.md#account_retrieve_request) | **GET** /account/{accountid} | Account Retrieval
 [**account_status_request**](CardHolderAccountApi.md#account_status_request) | **POST** /account/{accountid}/status | Account Status
 [**charge_request**](CardHolderAccountApi.md#charge_request) | **POST** /charge | Charge
@@ -321,6 +322,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
+## account_exists_request
+
+> Exists account_exists_request(accountid)
+
+Account Exists
+
+.
+
+### Example
+
+```ruby
+# load the gem
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+end
+
+api_instance = CityPayApiClient::CardHolderAccountApi.new
+accountid = 'accountid_example' # String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
+
+begin
+  #Account Exists
+  result = api_instance.account_exists_request(accountid)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Exception when calling CardHolderAccountApi->account_exists_request: #{e}"
+end
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **accountid** | **String**| The account id that refers to the customer&#39;s account no. This value will have been provided when setting up the card holder account. | 
+
+### Return type
+
+[**Exists**](Exists.md)
 
 ### Authorization
 
