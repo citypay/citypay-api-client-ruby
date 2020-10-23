@@ -25,8 +25,8 @@ describe 'AuthReferences' do
     "AuthReferences": {
         "auths": [
             {
-                "amount": 12,
-                "amount_value": "0.12",
+                "amount": "0.12",
+                "amount_value": 12,
                 "atrn": null,
                 "authcode": "A12345",
                 "batchno": null,
@@ -47,8 +47,8 @@ describe 'AuthReferences' do
     {
       "auths": [
           {
-              "amount": 12,
-              "amount_value": "0.12",
+              "amount": "0.12",
+              "amount_value": 12,
               "atrn": null,
               "authcode": "A12345",
               "batchno": null,
@@ -85,8 +85,8 @@ describe 'AuthReferences' do
     it 'should work' do
       expect(@instance1.auths.length).to eq(1)
       i = @instance1.auths[0]
-      expect(i.amount).to eq(12)
-      expect(i.amount_value).to eq("0.12")
+      expect(i.amount).to eq("0.12")
+      expect(i.amount_value).to eq(12)
       expect(i.atrn).to eq(nil)
       expect(i.authcode).to eq("A12345")
       expect(i.batchno).to eq(nil)
@@ -102,8 +102,8 @@ describe 'AuthReferences' do
 
       expect(@instance2.auths.length).to eq(1)
       i = @instance2.auths[0]
-      expect(i.amount).to eq(12)
-      expect(i.amount_value).to eq("0.12")
+      expect(i.amount).to eq("0.12")
+      expect(i.amount_value).to eq(12)
       expect(i.atrn).to eq(nil)
       expect(i.authcode).to eq("A12345")
       expect(i.batchno).to eq(nil)

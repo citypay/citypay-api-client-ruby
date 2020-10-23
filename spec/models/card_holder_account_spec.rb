@@ -217,8 +217,8 @@ describe 'CardHolderAccount' do
 
   describe 'test attribute "default_card_index"' do
     it 'should work' do
-      expect(@account1.default_card_index).to eq("0")
-      expect(@account2.default_card_index).to eq("0")
+      expect(@account1.default_card_index).to eq(0)
+      expect(@account2.default_card_index).to eq(0)
     end
   end
 
