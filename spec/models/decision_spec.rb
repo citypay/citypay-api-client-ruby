@@ -125,7 +125,7 @@ describe 'Decision' do
       expect(response.context).to eq("20200812075906AAAGV4")
       expect(response.csc_result).to eq("C")
       expect(response.currency).to eq("GBP")
-      expect(response.datetime).to eq(DateTime.parse("2020-08-12T07:59:11Z"))
+      expect(response.datetime).to eq(Time.parse("2020-08-12T07:59:11Z"))
       expect(response.eci).to eq("0")
       expect(response.identifier).to eq("ident1")
       expect(response.live).to eq(true)

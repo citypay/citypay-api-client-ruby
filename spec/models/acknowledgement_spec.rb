@@ -19,7 +19,7 @@ require 'date'
 describe 'Acknowledgement' do
   before do
     # run before each test
-    json1 = '
+    json = '
     {
       "code": "000",
       "context": "1B12WmDZB3EYSbb",
@@ -28,17 +28,7 @@ describe 'Acknowledgement' do
     }
 '
 
-    json2 = '
-    { "Acknowledgement": {
-      "code": "000",
-      "context": "1B12WmDZB3EYSbb",
-      "identifier": "testIdentifier",
-      "message": "System: Accepted Transaction"
-    }}
-'
-
-    @instance1 = CityPayApiClient::ApiClient.new.convert_to_type(JSON.parse(json1, :symbolize_names => true), "Acknowledgement")
-    @instance2 = CityPayApiClient::ApiClient.new.convert_to_type(JSON.parse(json2, :symbolize_names => true), "Acknowledgement")
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(JSON.parse(json, :symbolize_names => true), "Acknowledgement")
   end
 
   after do
@@ -47,35 +37,30 @@ describe 'Acknowledgement' do
 
   describe 'test an instance of Acknowledgement' do
     it 'should create an instance of Acknowledgement' do
-      expect(@instance1).to be_instance_of(CityPayApiClient::Acknowledgement)
-      expect(@instance2).to be_instance_of(CityPayApiClient::Acknowledgement)
+      expect(@instance).to be_instance_of(CityPayApiClient::Acknowledgement)
     end
   end
   describe 'test attribute "code"' do
     it 'should work' do
-      expect(@instance1.code).to eq("000")
-      expect(@instance2.code).to eq("000")
+      expect(@instance.code).to eq("000")
     end
   end
 
   describe 'test attribute "context"' do
     it 'should work' do
-      expect(@instance1.context).to eq("1B12WmDZB3EYSbb")
-      expect(@instance2.context).to eq("1B12WmDZB3EYSbb")
+      expect(@instance.context).to eq("1B12WmDZB3EYSbb")
     end
   end
 
   describe 'test attribute "identifier"' do
     it 'should work' do
-      expect(@instance1.identifier).to eq("testIdentifier")
-      expect(@instance2.identifier).to eq("testIdentifier")
+      expect(@instance.identifier).to eq("testIdentifier")
     end
   end
 
   describe 'test attribute "message"' do
     it 'should work' do
-      expect(@instance1.message).to eq("System: Accepted Transaction")
-      expect(@instance2.message).to eq("System: Accepted Transaction")
+      expect(@instance.message).to eq("System: Accepted Transaction")
     end
   end
 

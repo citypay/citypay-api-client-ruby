@@ -2,16 +2,17 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**status** | **String** | The status of the account to set, valid values are ACTIVE or DISABLED. | [optional] 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **status** | **String** | The status of the account to set, valid values are ACTIVE or DISABLED. | [optional] |
 
-## Code Sample
+## Example
 
 ```ruby
-require 'CityPayApiClient'
+require 'citypay_api_client'
 
-instance = CityPayApiClient::AccountStatus.new(status: null)
+instance = CityPayApiClient::AccountStatus.new(
+  status: null
+)
 ```
-
 
