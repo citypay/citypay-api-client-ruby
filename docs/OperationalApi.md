@@ -2,25 +2,24 @@
 
 All URIs are relative to *https://api.citypay.com/v6*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**list_merchants_request**](OperationalApi.md#list_merchants_request) | **GET** /merchants/{clientid} | List Merchants Request
-[**ping_request**](OperationalApi.md#ping_request) | **POST** /ping | Ping Request
-
+| Method | HTTP request | Description |
+| ------ | ------------ | ----------- |
+| [**list_merchants_request**](OperationalApi.md#list_merchants_request) | **GET** /merchants/{clientid} | List Merchants Request |
+| [**ping_request**](OperationalApi.md#ping_request) | **POST** /ping | Ping Request |
 
 
 ## list_merchants_request
 
-> ListMerchantsResponse list_merchants_request(clientid)
+> <ListMerchantsResponse> list_merchants_request(clientid)
 
 List Merchants Request
 
 An operational request to list current merchants for a client.  ### Sorting  Sorting can be performed by include a query parameter i.e. `/merchants/?sort=merchantid`  Fields that can be sorted are `merchantid` or `name`. 
 
-### Example
+### Examples
 
 ```ruby
-# load the gem
+require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
@@ -31,20 +30,37 @@ api_instance = CityPayApiClient::OperationalApi.new
 clientid = 'clientid_example' # String | The client id to return merchants for, specifying \"default\" will use the value in your api key.
 
 begin
-  #List Merchants Request
+  # List Merchants Request
   result = api_instance.list_merchants_request(clientid)
   p result
 rescue CityPayApiClient::ApiError => e
-  puts "Exception when calling OperationalApi->list_merchants_request: #{e}"
+  puts "Error when calling OperationalApi->list_merchants_request: #{e}"
+end
+```
+
+#### Using the list_merchants_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ListMerchantsResponse>, Integer, Hash)> list_merchants_request_with_http_info(clientid)
+
+```ruby
+begin
+  # List Merchants Request
+  data, status_code, headers = api_instance.list_merchants_request_with_http_info(clientid)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ListMerchantsResponse>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling OperationalApi->list_merchants_request_with_http_info: #{e}"
 end
 ```
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **clientid** | **String**| The client id to return merchants for, specifying \&quot;default\&quot; will use the value in your api key. | 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **clientid** | **String** | The client id to return merchants for, specifying \&quot;default\&quot; will use the value in your api key. |  |
 
 ### Return type
 
@@ -62,16 +78,16 @@ Name | Type | Description  | Notes
 
 ## ping_request
 
-> Acknowledgement ping_request(ping)
+> <Acknowledgement> ping_request(ping)
 
 Ping Request
 
 A ping request which performs a connection and authentication test to the CityPay API server. The request will return a standard Acknowledgement with a response code `044` to signify a successful ping.  The ping call is useful to confirm that you will be able to access  the API from behind any firewalls and that the permission model is granting access from your source. 
 
-### Example
+### Examples
 
 ```ruby
-# load the gem
+require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
@@ -82,20 +98,37 @@ api_instance = CityPayApiClient::OperationalApi.new
 ping = CityPayApiClient::Ping.new # Ping | 
 
 begin
-  #Ping Request
+  # Ping Request
   result = api_instance.ping_request(ping)
   p result
 rescue CityPayApiClient::ApiError => e
-  puts "Exception when calling OperationalApi->ping_request: #{e}"
+  puts "Error when calling OperationalApi->ping_request: #{e}"
+end
+```
+
+#### Using the ping_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Acknowledgement>, Integer, Hash)> ping_request_with_http_info(ping)
+
+```ruby
+begin
+  # Ping Request
+  data, status_code, headers = api_instance.ping_request_with_http_info(ping)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Acknowledgement>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling OperationalApi->ping_request_with_http_info: #{e}"
 end
 ```
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **ping** | [**Ping**](Ping.md)|  | 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **ping** | [**Ping**](Ping.md) |  |  |
 
 ### Return type
 

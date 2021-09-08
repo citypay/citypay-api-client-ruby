@@ -2,16 +2,17 @@
 
 ## Properties
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**auths** | [**Array&lt;AuthReference&gt;**](AuthReference.md) |  | [optional] 
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **auths** | [**Array&lt;AuthReference&gt;**](AuthReference.md) |  | [optional] |
 
-## Code Sample
+## Example
 
 ```ruby
-require 'CityPayApiClient'
+require 'citypay_api_client'
 
-instance = CityPayApiClient::AuthReferences.new(auths: null)
+instance = CityPayApiClient::AuthReferences.new(
+  auths: null
+)
 ```
-
 

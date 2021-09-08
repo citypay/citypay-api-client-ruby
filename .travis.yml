@@ -3,8 +3,11 @@ cache: bundler
 rvm:
   - 2.4
   - 2.5
+  - 2.6
+  - 2.7
+  - 3.0
 script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build citypay_api_client.gemspec
-  - gem install ./citypay_api_client-1.0.4.gem
+  - gem install ./citypay_api_client-1.0.6.gem

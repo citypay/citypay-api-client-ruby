@@ -19,41 +19,8 @@ require 'date'
 describe 'AuthResponse' do
   before do
     # run before each test
-    json1 = '
-{
-    "AuthResponse": {
-        "amount": 5500,
-        "atrn": "atrn1",
-        "atsd": "a",
-        "authcode": "12345",
-        "authen_result": "R",
-        "authorised": true,
-        "avs_result": "G",
-        "bin_commercial": false,
-        "bin_debit": false,
-        "bin_description": "bin_desc",
-        "cavv": "cavvvvvvvvvvvvv",
-        "context": "20200812075906AAAGV4",
-        "csc_result": "C",
-        "currency": "GBP",
-        "datetime": "2020-08-12T07:59:11Z",
-        "eci": "0",
-        "identifier": "ident1",
-        "live": true,
-        "maskedpan": "400000******0002",
-        "merchantid": 12345,
-        "result": 1,
-        "result_code": "000",
-        "result_message": "System: Accepted Transaction",
-        "scheme": "VISA_BUSINESS",
-        "sha256": "abcdefg",
-        "trans_status": "P",
-        "transno": 74875
-    }
-}
-'
 
-    json2 = '
+    json = '
 {
       "amount": 5500,
       "atrn": "atrn1",
@@ -84,10 +51,8 @@ describe 'AuthResponse' do
       "transno": 74875
 }
 '
-    data1 = JSON.parse(json1, :symbolize_names => true)
-    data2 = JSON.parse(json2, :symbolize_names => true)
-    @instance1 = CityPayApiClient::ApiClient.new.convert_to_type(data1, "AuthResponse")
-    @instance2 = CityPayApiClient::ApiClient.new.convert_to_type(data2, "AuthResponse")
+    data = JSON.parse(json, :symbolize_names => true)
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "AuthResponse")
   end
 
   after do
@@ -96,196 +61,168 @@ describe 'AuthResponse' do
 
   describe 'test an instance of AuthResponse' do
     it 'should create an instance of AuthResponse' do
-      expect(@instance1).to be_instance_of(CityPayApiClient::AuthResponse)
-      expect(@instance2).to be_instance_of(CityPayApiClient::AuthResponse)
+      expect(@instance).to be_instance_of(CityPayApiClient::AuthResponse)
     end
   end
   describe 'test attribute "amount"' do
     it 'should work' do
-      expect(@instance1.amount).to eq(5500)
-      expect(@instance2.amount).to eq(5500)
+      expect(@instance.amount).to eq(5500)
     end
   end
 
   describe 'test attribute "atrn"' do
     it 'should work' do
-          expect(@instance1.atrn).to eq("atrn1")
-          expect(@instance2.atrn).to eq("atrn1")
+          expect(@instance.atrn).to eq("atrn1")
     end
   end
 
   describe 'test attribute "atsd"' do
     it 'should work' do
-      expect(@instance1.atsd).to eq("a")
-      expect(@instance2.atsd).to eq("a")
+      expect(@instance.atsd).to eq("a")
     end
   end
 
   describe 'test attribute "authcode"' do
     it 'should work' do
-      expect(@instance1.authcode).to eq("12345")
-      expect(@instance2.authcode).to eq("12345")
+      expect(@instance.authcode).to eq("12345")
     end
   end
 
   describe 'test attribute "authen_result"' do
     it 'should work' do
-      expect(@instance1.authen_result).to eq("R")
-      expect(@instance2.authen_result).to eq("R")
+      expect(@instance.authen_result).to eq("R")
     end
   end
 
   describe 'test attribute "authorised"' do
     it 'should work' do
-      expect(@instance1.authorised).to eq(true)
-      expect(@instance2.authorised).to eq(true)
+      expect(@instance.authorised).to eq(true)
     end
   end
 
   describe 'test attribute "avs_result"' do
     it 'should work' do
-      expect(@instance1.avs_result).to eq("G")
-      expect(@instance2.avs_result).to eq("G")
+      expect(@instance.avs_result).to eq("G")
     end
   end
 
   describe 'test attribute "bin_commercial"' do
     it 'should work' do
-      expect(@instance1.bin_commercial).to eq(false)
-      expect(@instance2.bin_commercial).to eq(false)
+      expect(@instance.bin_commercial).to eq(false)
     end
   end
 
   describe 'test attribute "bin_debit"' do
     it 'should work' do
-      expect(@instance1.bin_debit).to eq(false)
-      expect(@instance2.bin_debit).to eq(false)
+      expect(@instance.bin_debit).to eq(false)
     end
   end
 
   describe 'test attribute "bin_description"' do
     it 'should work' do
-      expect(@instance1.bin_description).to eq("bin_desc")
-      expect(@instance2.bin_description).to eq("bin_desc")
+      expect(@instance.bin_description).to eq("bin_desc")
     end
   end
 
   describe 'test attribute "cavv"' do
     it 'should work' do
-      expect(@instance1.cavv).to eq("cavvvvvvvvvvvvv")
-      expect(@instance2.cavv).to eq("cavvvvvvvvvvvvv")
+      expect(@instance.cavv).to eq("cavvvvvvvvvvvvv")
     end
   end
 
   describe 'test attribute "context"' do
     it 'should work' do
-      expect(@instance1.context).to eq("20200812075906AAAGV4")
-      expect(@instance2.context).to eq("20200812075906AAAGV4")
+      expect(@instance.context).to eq("20200812075906AAAGV4")
     end
   end
 
   describe 'test attribute "csc_result"' do
     it 'should work' do
-      expect(@instance1.csc_result).to eq("C")
-      expect(@instance2.csc_result).to eq("C")
+      expect(@instance.csc_result).to eq("C")
     end
   end
 
   describe 'test attribute "currency"' do
     it 'should work' do
-      expect(@instance1.currency).to eq("GBP")
-      expect(@instance2.currency).to eq("GBP")
+      expect(@instance.currency).to eq("GBP")
     end
   end
 
   describe 'test attribute "datetime"' do
     it 'should work' do
-      expect(@instance1.datetime).to eq(DateTime.parse("2020-08-12T07:59:11Z"))
-      expect(@instance2.datetime).to eq(DateTime.parse("2020-08-12T07:59:11Z"))
+      expect(@instance.datetime).to eq(Time.parse("2020-08-12T07:59:11Z"))
     end
   end
 
   describe 'test attribute "eci"' do
     it 'should work' do
-      expect(@instance1.eci).to eq("0")
-      expect(@instance2.eci).to eq("0")
+      expect(@instance.eci).to eq("0")
     end
   end
 
   describe 'test attribute "identifier"' do
     it 'should work' do
-      expect(@instance1.identifier).to eq("ident1")
-      expect(@instance2.identifier).to eq("ident1")
+      expect(@instance.identifier).to eq("ident1")
     end
   end
 
   describe 'test attribute "live"' do
     it 'should work' do
-      expect(@instance1.live).to eq(true)
-      expect(@instance2.live).to eq(true)
+      expect(@instance.live).to eq(true)
     end
   end
 
   describe 'test attribute "maskedpan"' do
     it 'should work' do
-      expect(@instance1.maskedpan).to eq("400000******0002")
-      expect(@instance2.maskedpan).to eq("400000******0002")
+      expect(@instance.maskedpan).to eq("400000******0002")
     end
   end
 
   describe 'test attribute "merchantid"' do
     it 'should work' do
-      expect(@instance1.merchantid).to eq(12345)
-      expect(@instance2.merchantid).to eq(12345)
+      expect(@instance.merchantid).to eq(12345)
     end
   end
 
   describe 'test attribute "result"' do
     it 'should work' do
-      expect(@instance1.result).to eq(1)
-      expect(@instance2.result).to eq(1)
+      expect(@instance.result).to eq(1)
     end
   end
 
   describe 'test attribute "result_code"' do
     it 'should work' do
-      expect(@instance1.result_code).to eq("000")
-      expect(@instance2.result_code).to eq("000")
+      expect(@instance.result_code).to eq("000")
     end
   end
 
   describe 'test attribute "result_message"' do
     it 'should work' do
-      expect(@instance1.result_message).to eq("System: Accepted Transaction")
-      expect(@instance2.result_message).to eq("System: Accepted Transaction")
+      expect(@instance.result_message).to eq("System: Accepted Transaction")
     end
   end
 
   describe 'test attribute "scheme"' do
     it 'should work' do
-      expect(@instance1.scheme).to eq("VISA_BUSINESS")
-      expect(@instance2.scheme).to eq("VISA_BUSINESS")
+      expect(@instance.scheme).to eq("VISA_BUSINESS")
     end
   end
 
   describe 'test attribute "sha256"' do
     it 'should work' do
-      expect(@instance1.sha256).to eq("abcdefg")
-      expect(@instance2.sha256).to eq("abcdefg")
+      expect(@instance.sha256).to eq("abcdefg")
     end
   end
 
   describe 'test attribute "trans_status"' do
     it 'should work' do
-      expect(@instance1.trans_status).to eq("P")
-      expect(@instance2.trans_status).to eq("P")
+      expect(@instance.trans_status).to eq("P")
     end
   end
 
   describe 'test attribute "transno"' do
     it 'should work' do
-      expect(@instance1.transno).to eq(74875)
-      expect(@instance2.transno).to eq(74875)
+      expect(@instance.transno).to eq(74875)
     end
   end
 

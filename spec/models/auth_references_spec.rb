@@ -20,13 +20,12 @@ describe 'AuthReferences' do
   before do
     # run before each test
 
-    json1 = '
+    json = '
     {
-    "AuthReferences": {
         "auths": [
             {
-                "amount": 12,
-                "amount_value": "0.12",
+                "amount": "0.12",
+                "amount_value": 12,
                 "atrn": null,
                 "authcode": "A12345",
                 "batchno": null,
@@ -41,34 +40,10 @@ describe 'AuthReferences' do
                 "transno": 88
             }
         ]
-    }
-}'
-    json2 = '
-    {
-      "auths": [
-          {
-              "amount": 12,
-              "amount_value": "0.12",
-              "atrn": null,
-              "authcode": "A12345",
-              "batchno": null,
-              "currency": "GBP",
-              "datetime": "2020-07-21T15:55:04Z",
-              "identifier": "TestingAPI",
-              "maskedpan": "400000******0000",
-              "merchantid": 12345678,
-              "result": "Accepted",
-              "trans_status": "O",
-              "trans_type": "S",
-              "transno": 88
-          }
-      ]
 }'
 
-    data1 = JSON.parse(json1, :symbolize_names => true)
-    data2 = JSON.parse(json2, :symbolize_names => true)
-    @instance1 = CityPayApiClient::ApiClient.new.convert_to_type(data1, "AuthReferences")
-    @instance2 = CityPayApiClient::ApiClient.new.convert_to_type(data2, "AuthReferences")
+    data = JSON.parse(json, :symbolize_names => true)
+    @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "AuthReferences")
   end
 
   after do
@@ -77,38 +52,20 @@ describe 'AuthReferences' do
 
   describe 'test an instance of AuthReferences' do
     it 'should create an instance of AuthReferences' do
-      expect(@instance1).to be_instance_of(CityPayApiClient::AuthReferences)
-      expect(@instance2).to be_instance_of(CityPayApiClient::AuthReferences)
+      expect(@instance).to be_instance_of(CityPayApiClient::AuthReferences)
     end
   end
   describe 'test attribute "auths"' do
     it 'should work' do
-      expect(@instance1.auths.length).to eq(1)
-      i = @instance1.auths[0]
-      expect(i.amount).to eq(12)
-      expect(i.amount_value).to eq("0.12")
+      expect(@instance.auths.length).to eq(1)
+      i = @instance.auths[0]
+      expect(i.amount).to eq("0.12")
+      expect(i.amount_value).to eq(12)
       expect(i.atrn).to eq(nil)
       expect(i.authcode).to eq("A12345")
       expect(i.batchno).to eq(nil)
       expect(i.currency).to eq("GBP")
-      expect(i.datetime).to eq(DateTime.parse("2020-07-21T15:55:04Z"))
-      expect(i.identifier).to eq("TestingAPI")
-      expect(i.maskedpan).to eq("400000******0000")
-      expect(i.merchantid).to eq(12345678)
-      expect(i.result).to eq("Accepted")
-      expect(i.trans_status).to eq("O")
-      expect(i.trans_type).to eq("S")
-      expect(i.transno).to eq(88)
-
-      expect(@instance2.auths.length).to eq(1)
-      i = @instance2.auths[0]
-      expect(i.amount).to eq(12)
-      expect(i.amount_value).to eq("0.12")
-      expect(i.atrn).to eq(nil)
-      expect(i.authcode).to eq("A12345")
-      expect(i.batchno).to eq(nil)
-      expect(i.currency).to eq("GBP")
-      expect(i.datetime).to eq(DateTime.parse("2020-07-21T15:55:04Z"))
+      expect(i.datetime).to eq(Time.parse("2020-07-21T15:55:04Z"))
       expect(i.identifier).to eq("TestingAPI")
       expect(i.maskedpan).to eq("400000******0000")
       expect(i.merchantid).to eq(12345678)
