@@ -10,5 +10,5 @@ OpenAPI Generator version: 5.3.0-SNAPSHOT
 =end
 
 module CityPayApiClient
-  VERSION = '1.0.5'
+  VERSION = '1.0.6'
 end
