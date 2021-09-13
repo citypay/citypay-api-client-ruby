@@ -36,7 +36,7 @@ instance = CityPayApiClient::Card.new(
   bin_credit: null,
   bin_currency: null,
   bin_debit: null,
-  bin_description: null,
+  bin_description: Platinum Card,
   bin_eu: null,
   card_id: null,
   card_status: null,
