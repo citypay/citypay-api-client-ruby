@@ -140,7 +140,7 @@ module CityPayApiClient
       @scheme = 'https'
       @host = 'api.citypay.com'
       @base_path = '/v6'
-      @server_index = 0
+      @server_index = 1
       @server_operation_index = {}
       @server_variables = {}
       @server_operation_variables = {}
