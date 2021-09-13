@@ -5,6 +5,7 @@ All URIs are relative to *https://api.citypay.com/v6*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**authorisation_request**](PaymentProcessingApi.md#authorisation_request) | **POST** /authorise | Authorisation |
+| [**bin_range_lookup_request**](PaymentProcessingApi.md#bin_range_lookup_request) | **POST** /bin | Bin Lookup |
 | [**c_res_request**](PaymentProcessingApi.md#c_res_request) | **POST** /cres | CRes |
 | [**capture_request**](PaymentProcessingApi.md#capture_request) | **POST** /capture | Capture |
 | [**pa_res_request**](PaymentProcessingApi.md#pa_res_request) | **POST** /pares | PaRes |
@@ -70,6 +71,74 @@ end
 ### Return type
 
 [**Decision**](Decision.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
+
+
+## bin_range_lookup_request
+
+> <Bin> bin_range_lookup_request(bin_lookup)
+
+Bin Lookup
+
+A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it's country of origin 3. it's currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+end
+
+api_instance = CityPayApiClient::PaymentProcessingApi.new
+bin_lookup = CityPayApiClient::BinLookup.new({bin: 543712}) # BinLookup | 
+
+begin
+  # Bin Lookup
+  result = api_instance.bin_range_lookup_request(bin_lookup)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaymentProcessingApi->bin_range_lookup_request: #{e}"
+end
+```
+
+#### Using the bin_range_lookup_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Bin>, Integer, Hash)> bin_range_lookup_request_with_http_info(bin_lookup)
+
+```ruby
+begin
+  # Bin Lookup
+  data, status_code, headers = api_instance.bin_range_lookup_request_with_http_info(bin_lookup)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Bin>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaymentProcessingApi->bin_range_lookup_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **bin_lookup** | [**BinLookup**](BinLookup.md) |  |  |
+
+### Return type
+
+[**Bin**](Bin.md)
 
 ### Authorization
 

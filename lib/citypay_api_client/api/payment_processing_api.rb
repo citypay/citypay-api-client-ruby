@@ -24,7 +24,7 @@ module CityPayApiClient
     # @param [Hash] opts the optional parameters
     # @return [Decision]
     def authorisation_request(auth_request, opts = {})
-       data, _status_code, _headers = authorisation_request_with_http_info(auth_request, opts)
+      data, _status_code, _headers = authorisation_request_with_http_info(auth_request, opts)
       data
     end
 
@@ -79,6 +79,71 @@ module CityPayApiClient
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaymentProcessingApi#authorisation_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Bin Lookup
+    # A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it's country of origin 3. it's currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+    # @param bin_lookup [BinLookup] 
+    # @param [Hash] opts the optional parameters
+    # @return [Bin]
+    def bin_range_lookup_request(bin_lookup, opts = {})
+      data, _status_code, _headers = bin_range_lookup_request_with_http_info(bin_lookup, opts)
+      data
+    end
+
+    # Bin Lookup
+    # A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number&#39;s  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it&#39;s country of origin 3. it&#39;s currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
+    # @param bin_lookup [BinLookup] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Bin, Integer, Hash)>] Bin data, response status code and response headers
+    def bin_range_lookup_request_with_http_info(bin_lookup, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaymentProcessingApi.bin_range_lookup_request ...'
+      end
+      # verify the required parameter 'bin_lookup' is set
+      if @api_client.config.client_side_validation && bin_lookup.nil?
+        fail ArgumentError, "Missing the required parameter 'bin_lookup' when calling PaymentProcessingApi.bin_range_lookup_request"
+      end
+      # resource path
+      local_var_path = '/bin'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/xml'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'text/xml'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(bin_lookup)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Bin'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cp-api-key']
+
+      new_options = opts.merge(
+        :operation => :"PaymentProcessingApi.bin_range_lookup_request",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaymentProcessingApi#bin_range_lookup_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -47,7 +47,7 @@ instance = CityPayApiClient::AuthResponse.new(
   avs_result: null,
   bin_commercial: null,
   bin_debit: null,
-  bin_description: null,
+  bin_description: Platinum Card,
   cavv: null,
   context: aspiu352908ns47n343598bads,
   csc_result: null,
