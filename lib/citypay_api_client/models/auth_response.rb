@@ -300,36 +300,20 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@avs_result.nil? && @avs_result.to_s.length > 1
-        invalid_properties.push('invalid value for "avs_result", the character length must be smaller than or equal to 1.')
+      if @merchantid.nil?
+        invalid_properties.push('invalid value for "merchantid", merchantid cannot be nil.')
       end
 
-      if !@avs_result.nil? && @avs_result.to_s.length < 1
-        invalid_properties.push('invalid value for "avs_result", the character length must be great than or equal to 1.')
+      if @result.nil?
+        invalid_properties.push('invalid value for "result", result cannot be nil.')
       end
 
-      if !@csc_result.nil? && @csc_result.to_s.length > 1
-        invalid_properties.push('invalid value for "csc_result", the character length must be smaller than or equal to 1.')
+      if @result_code.nil?
+        invalid_properties.push('invalid value for "result_code", result_code cannot be nil.')
       end
 
-      if !@csc_result.nil? && @csc_result.to_s.length < 1
-        invalid_properties.push('invalid value for "csc_result", the character length must be great than or equal to 1.')
-      end
-
-      if !@currency.nil? && @currency.to_s.length > 3
-        invalid_properties.push('invalid value for "currency", the character length must be smaller than or equal to 3.')
-      end
-
-      if !@currency.nil? && @currency.to_s.length < 3
-        invalid_properties.push('invalid value for "currency", the character length must be great than or equal to 3.')
-      end
-
-      if !@identifier.nil? && @identifier.to_s.length > 50
-        invalid_properties.push('invalid value for "identifier", the character length must be smaller than or equal to 50.')
-      end
-
-      if !@identifier.nil? && @identifier.to_s.length < 4
-        invalid_properties.push('invalid value for "identifier", the character length must be great than or equal to 4.')
+      if @result_message.nil?
+        invalid_properties.push('invalid value for "result_message", result_message cannot be nil.')
       end
 
       invalid_properties
@@ -338,77 +322,11 @@ module CityPayApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@avs_result.nil? && @avs_result.to_s.length > 1
-      return false if !@avs_result.nil? && @avs_result.to_s.length < 1
-      return false if !@csc_result.nil? && @csc_result.to_s.length > 1
-      return false if !@csc_result.nil? && @csc_result.to_s.length < 1
-      return false if !@currency.nil? && @currency.to_s.length > 3
-      return false if !@currency.nil? && @currency.to_s.length < 3
-      return false if !@identifier.nil? && @identifier.to_s.length > 50
-      return false if !@identifier.nil? && @identifier.to_s.length < 4
+      return false if @merchantid.nil?
+      return false if @result.nil?
+      return false if @result_code.nil?
+      return false if @result_message.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] amount Value to be assigned
-    def amount=(amount)
-      @amount = amount
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] avs_result Value to be assigned
-    def avs_result=(avs_result)
-      if !avs_result.nil? && avs_result.to_s.length > 1
-        fail ArgumentError, 'invalid value for "avs_result", the character length must be smaller than or equal to 1.'
-      end
-
-      if !avs_result.nil? && avs_result.to_s.length < 1
-        fail ArgumentError, 'invalid value for "avs_result", the character length must be great than or equal to 1.'
-      end
-
-      @avs_result = avs_result
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] csc_result Value to be assigned
-    def csc_result=(csc_result)
-      if !csc_result.nil? && csc_result.to_s.length > 1
-        fail ArgumentError, 'invalid value for "csc_result", the character length must be smaller than or equal to 1.'
-      end
-
-      if !csc_result.nil? && csc_result.to_s.length < 1
-        fail ArgumentError, 'invalid value for "csc_result", the character length must be great than or equal to 1.'
-      end
-
-      @csc_result = csc_result
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] currency Value to be assigned
-    def currency=(currency)
-      if !currency.nil? && currency.to_s.length > 3
-        fail ArgumentError, 'invalid value for "currency", the character length must be smaller than or equal to 3.'
-      end
-
-      if !currency.nil? && currency.to_s.length < 3
-        fail ArgumentError, 'invalid value for "currency", the character length must be great than or equal to 3.'
-      end
-
-      @currency = currency
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] identifier Value to be assigned
-    def identifier=(identifier)
-      if !identifier.nil? && identifier.to_s.length > 50
-        fail ArgumentError, 'invalid value for "identifier", the character length must be smaller than or equal to 50.'
-      end
-
-      if !identifier.nil? && identifier.to_s.length < 4
-        fail ArgumentError, 'invalid value for "identifier", the character length must be great than or equal to 4.'
-      end
-
-      @identifier = identifier
     end
 
     # Checks equality by comparing each attribute.

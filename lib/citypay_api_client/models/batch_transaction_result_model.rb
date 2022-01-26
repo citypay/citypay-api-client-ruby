@@ -23,9 +23,6 @@ module CityPayApiClient
     # The authorisation code of a successful transaction.
     attr_accessor :authcode
 
-    # A boolean definition that indicates that the transaction was authorised. It will return false if the transaction  was declined, rejected or cancelled due to CSC matching failures.  Attention should be referenced to the AuthResult and Response code for accurate determination of the result. 
-    attr_accessor :authorised
-
     # The identifier of the transaction.
     attr_accessor :identifier
 
@@ -50,7 +47,6 @@ module CityPayApiClient
         :'account_id' => :'account_id',
         :'amount' => :'amount',
         :'authcode' => :'authcode',
-        :'authorised' => :'authorised',
         :'identifier' => :'identifier',
         :'maskedpan' => :'maskedpan',
         :'merchantid' => :'merchantid',
@@ -71,7 +67,6 @@ module CityPayApiClient
         :'account_id' => :'String',
         :'amount' => :'Integer',
         :'authcode' => :'String',
-        :'authorised' => :'Boolean',
         :'identifier' => :'String',
         :'maskedpan' => :'String',
         :'merchantid' => :'Integer',
@@ -112,10 +107,6 @@ module CityPayApiClient
 
       if attributes.key?(:'authcode')
         self.authcode = attributes[:'authcode']
-      end
-
-      if attributes.key?(:'authorised')
-        self.authorised = attributes[:'authorised']
       end
 
       if attributes.key?(:'identifier')
@@ -179,6 +170,10 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "message", message cannot be nil.')
       end
 
+      if @result.nil?
+        invalid_properties.push('invalid value for "result", result cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -193,6 +188,7 @@ module CityPayApiClient
       return false if @identifier.to_s.length < 4
       return false if @merchantid.nil?
       return false if @message.nil?
+      return false if @result.nil?
       true
     end
 
@@ -246,7 +242,6 @@ module CityPayApiClient
           account_id == o.account_id &&
           amount == o.amount &&
           authcode == o.authcode &&
-          authorised == o.authorised &&
           identifier == o.identifier &&
           maskedpan == o.maskedpan &&
           merchantid == o.merchantid &&
@@ -264,7 +259,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, amount, authcode, authorised, identifier, maskedpan, merchantid, message, result, scheme].hash
+      [account_id, amount, authcode, identifier, maskedpan, merchantid, message, result, scheme].hash
     end
 
     # Builds the object from hash

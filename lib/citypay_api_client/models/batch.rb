@@ -13,24 +13,21 @@ require 'date'
 require 'time'
 
 module CityPayApiClient
-  class ProcessBatchRequest
-    # The date and time that the file was created in ISO-8601 format.
+  class Batch
+    # The date that the file was created in ISO-8601 format.
     attr_accessor :batch_date
 
     attr_accessor :batch_id
 
-    # The batch account id to process the batch for. Defaults to your client id if not provided.
-    attr_accessor :client_account_id
-
-    attr_accessor :transactions
+    # The status of the batch. Possible values are - CANCELLED. The file has been cancelled by an administrator or server process.  - COMPLETE. The file has passed through the processing cycle and is determined as being complete further information should be obtained on the results of the processing - ERROR_IN_PROCESSING. Errors have occurred in the processing that has deemed that processing can not continue. - INITIALISED. The file has been initialised and no action has yet been performed - LOCKED. The file has been locked for processing - QUEUED. The file has been queued for processing yet no processing has yet been performed - UNKNOWN. The file is of an unknown status, that is the file can either not be determined by the information requested of the file has not yet been received. 
+    attr_accessor :batch_status
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'batch_date' => :'batch_date',
         :'batch_id' => :'batch_id',
-        :'client_account_id' => :'client_account_id',
-        :'transactions' => :'transactions'
+        :'batch_status' => :'batch_status'
       }
     end
 
@@ -44,8 +41,7 @@ module CityPayApiClient
       {
         :'batch_date' => :'Date',
         :'batch_id' => :'Array<Integer>',
-        :'client_account_id' => :'String',
-        :'transactions' => :'Array<BatchTransaction>'
+        :'batch_status' => :'String'
       }
     end
 
@@ -59,13 +55,13 @@ module CityPayApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::ProcessBatchRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::Batch` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::ProcessBatchRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::Batch`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
@@ -80,14 +76,8 @@ module CityPayApiClient
         end
       end
 
-      if attributes.key?(:'client_account_id')
-        self.client_account_id = attributes[:'client_account_id']
-      end
-
-      if attributes.key?(:'transactions')
-        if (value = attributes[:'transactions']).is_a?(Array)
-          self.transactions = value
-        end
+      if attributes.key?(:'batch_status')
+        self.batch_status = attributes[:'batch_status']
       end
     end
 
@@ -99,20 +89,8 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "batch_date", batch_date cannot be nil.')
       end
 
-      if @batch_id.nil?
-        invalid_properties.push('invalid value for "batch_id", batch_id cannot be nil.')
-      end
-
-      if !@client_account_id.nil? && @client_account_id.to_s.length > 20
-        invalid_properties.push('invalid value for "client_account_id", the character length must be smaller than or equal to 20.')
-      end
-
-      if !@client_account_id.nil? && @client_account_id.to_s.length < 3
-        invalid_properties.push('invalid value for "client_account_id", the character length must be great than or equal to 3.')
-      end
-
-      if @transactions.nil?
-        invalid_properties.push('invalid value for "transactions", transactions cannot be nil.')
+      if @batch_status.nil?
+        invalid_properties.push('invalid value for "batch_status", batch_status cannot be nil.')
       end
 
       invalid_properties
@@ -122,25 +100,8 @@ module CityPayApiClient
     # @return true if the model is valid
     def valid?
       return false if @batch_date.nil?
-      return false if @batch_id.nil?
-      return false if !@client_account_id.nil? && @client_account_id.to_s.length > 20
-      return false if !@client_account_id.nil? && @client_account_id.to_s.length < 3
-      return false if @transactions.nil?
+      return false if @batch_status.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] client_account_id Value to be assigned
-    def client_account_id=(client_account_id)
-      if !client_account_id.nil? && client_account_id.to_s.length > 20
-        fail ArgumentError, 'invalid value for "client_account_id", the character length must be smaller than or equal to 20.'
-      end
-
-      if !client_account_id.nil? && client_account_id.to_s.length < 3
-        fail ArgumentError, 'invalid value for "client_account_id", the character length must be great than or equal to 3.'
-      end
-
-      @client_account_id = client_account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -150,8 +111,7 @@ module CityPayApiClient
       self.class == o.class &&
           batch_date == o.batch_date &&
           batch_id == o.batch_id &&
-          client_account_id == o.client_account_id &&
-          transactions == o.transactions
+          batch_status == o.batch_status
     end
 
     # @see the `==` method
@@ -163,7 +123,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [batch_date, batch_id, client_account_id, transactions].hash
+      [batch_date, batch_id, batch_status].hash
     end
 
     # Builds the object from hash
