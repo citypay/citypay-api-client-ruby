@@ -13,24 +13,26 @@ require 'date'
 require 'time'
 
 module CityPayApiClient
-  class ProcessBatchRequest
-    # The date and time that the file was created in ISO-8601 format.
-    attr_accessor :batch_date
+  class AclCheckResponseModel
+    # The name or value of the acl which was found to match the ip address.
+    attr_accessor :acl
 
-    attr_accessor :batch_id
+    # Whether the ACL was returned via a cached instance.
+    attr_accessor :cache
 
-    # The batch account id to process the batch for. Defaults to your client id if not provided.
-    attr_accessor :client_account_id
+    # The IP address used in the lookup.
+    attr_accessor :ip
 
-    attr_accessor :transactions
+    # The source provider of the ACL.
+    attr_accessor :provider
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'batch_date' => :'batch_date',
-        :'batch_id' => :'batch_id',
-        :'client_account_id' => :'client_account_id',
-        :'transactions' => :'transactions'
+        :'acl' => :'acl',
+        :'cache' => :'cache',
+        :'ip' => :'ip',
+        :'provider' => :'provider'
       }
     end
 
@@ -42,10 +44,10 @@ module CityPayApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'batch_date' => :'Date',
-        :'batch_id' => :'Array<Integer>',
-        :'client_account_id' => :'String',
-        :'transactions' => :'Array<BatchTransaction>'
+        :'acl' => :'String',
+        :'cache' => :'Boolean',
+        :'ip' => :'String',
+        :'provider' => :'String'
       }
     end
 
@@ -59,35 +61,31 @@ module CityPayApiClient
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::ProcessBatchRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `CityPayApiClient::AclCheckResponseModel` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::ProcessBatchRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `CityPayApiClient::AclCheckResponseModel`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'batch_date')
-        self.batch_date = attributes[:'batch_date']
+      if attributes.key?(:'acl')
+        self.acl = attributes[:'acl']
       end
 
-      if attributes.key?(:'batch_id')
-        if (value = attributes[:'batch_id']).is_a?(Array)
-          self.batch_id = value
-        end
+      if attributes.key?(:'cache')
+        self.cache = attributes[:'cache']
       end
 
-      if attributes.key?(:'client_account_id')
-        self.client_account_id = attributes[:'client_account_id']
+      if attributes.key?(:'ip')
+        self.ip = attributes[:'ip']
       end
 
-      if attributes.key?(:'transactions')
-        if (value = attributes[:'transactions']).is_a?(Array)
-          self.transactions = value
-        end
+      if attributes.key?(:'provider')
+        self.provider = attributes[:'provider']
       end
     end
 
@@ -95,52 +93,13 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @batch_date.nil?
-        invalid_properties.push('invalid value for "batch_date", batch_date cannot be nil.')
-      end
-
-      if @batch_id.nil?
-        invalid_properties.push('invalid value for "batch_id", batch_id cannot be nil.')
-      end
-
-      if !@client_account_id.nil? && @client_account_id.to_s.length > 20
-        invalid_properties.push('invalid value for "client_account_id", the character length must be smaller than or equal to 20.')
-      end
-
-      if !@client_account_id.nil? && @client_account_id.to_s.length < 3
-        invalid_properties.push('invalid value for "client_account_id", the character length must be great than or equal to 3.')
-      end
-
-      if @transactions.nil?
-        invalid_properties.push('invalid value for "transactions", transactions cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @batch_date.nil?
-      return false if @batch_id.nil?
-      return false if !@client_account_id.nil? && @client_account_id.to_s.length > 20
-      return false if !@client_account_id.nil? && @client_account_id.to_s.length < 3
-      return false if @transactions.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] client_account_id Value to be assigned
-    def client_account_id=(client_account_id)
-      if !client_account_id.nil? && client_account_id.to_s.length > 20
-        fail ArgumentError, 'invalid value for "client_account_id", the character length must be smaller than or equal to 20.'
-      end
-
-      if !client_account_id.nil? && client_account_id.to_s.length < 3
-        fail ArgumentError, 'invalid value for "client_account_id", the character length must be great than or equal to 3.'
-      end
-
-      @client_account_id = client_account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -148,10 +107,10 @@ module CityPayApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          batch_date == o.batch_date &&
-          batch_id == o.batch_id &&
-          client_account_id == o.client_account_id &&
-          transactions == o.transactions
+          acl == o.acl &&
+          cache == o.cache &&
+          ip == o.ip &&
+          provider == o.provider
     end
 
     # @see the `==` method
@@ -163,7 +122,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [batch_date, batch_id, client_account_id, transactions].hash
+      [acl, cache, ip, provider].hash
     end
 
     # Builds the object from hash

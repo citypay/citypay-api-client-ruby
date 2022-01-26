@@ -18,6 +18,71 @@ module CityPayApiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # ACL Check Request
+    # Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+    # @param acl_check_request [AclCheckRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [AclCheckResponseModel]
+    def acl_check_request(acl_check_request, opts = {})
+      data, _status_code, _headers = acl_check_request_with_http_info(acl_check_request, opts)
+      data
+    end
+
+    # ACL Check Request
+    # Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+    # @param acl_check_request [AclCheckRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AclCheckResponseModel, Integer, Hash)>] AclCheckResponseModel data, response status code and response headers
+    def acl_check_request_with_http_info(acl_check_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: OperationalApi.acl_check_request ...'
+      end
+      # verify the required parameter 'acl_check_request' is set
+      if @api_client.config.client_side_validation && acl_check_request.nil?
+        fail ArgumentError, "Missing the required parameter 'acl_check_request' when calling OperationalApi.acl_check_request"
+      end
+      # resource path
+      local_var_path = '/acl/check'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/xml'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'text/xml'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(acl_check_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AclCheckResponseModel'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cp-api-key']
+
+      new_options = opts.merge(
+        :operation => :"OperationalApi.acl_check_request",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: OperationalApi#acl_check_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # List Merchants Request
     # An operational request to list current merchants for a client.  ### Sorting  Sorting can be performed by include a query parameter i.e. `/merchants/?sort=merchantid`  Fields that can be sorted are `merchantid` or `name`. 
     # @param clientid [String] The client id to return merchants for, specifying \&quot;default\&quot; will use the value in your api key.

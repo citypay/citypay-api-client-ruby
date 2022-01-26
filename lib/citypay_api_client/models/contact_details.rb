@@ -190,6 +190,10 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "area", the character length must be smaller than or equal to 50.')
       end
 
+      if !@company.nil? && @company.to_s.length > 50
+        invalid_properties.push('invalid value for "company", the character length must be smaller than or equal to 50.')
+      end
+
       if !@country.nil? && @country.to_s.length > 2
         invalid_properties.push('invalid value for "country", the character length must be smaller than or equal to 2.')
       end
@@ -198,12 +202,16 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "country", the character length must be great than or equal to 2.')
       end
 
+      if !@email.nil? && @email.to_s.length > 254
+        invalid_properties.push('invalid value for "email", the character length must be smaller than or equal to 254.')
+      end
+
       if !@mobile_no.nil? && @mobile_no.to_s.length > 20
         invalid_properties.push('invalid value for "mobile_no", the character length must be smaller than or equal to 20.')
       end
 
-      if !@postcode.nil? && @postcode.to_s.length > 10
-        invalid_properties.push('invalid value for "postcode", the character length must be smaller than or equal to 10.')
+      if !@postcode.nil? && @postcode.to_s.length > 16
+        invalid_properties.push('invalid value for "postcode", the character length must be smaller than or equal to 16.')
       end
 
       if !@telephone_no.nil? && @telephone_no.to_s.length > 20
@@ -220,10 +228,12 @@ module CityPayApiClient
       return false if !@address2.nil? && @address2.to_s.length > 50
       return false if !@address3.nil? && @address3.to_s.length > 50
       return false if !@area.nil? && @area.to_s.length > 50
+      return false if !@company.nil? && @company.to_s.length > 50
       return false if !@country.nil? && @country.to_s.length > 2
       return false if !@country.nil? && @country.to_s.length < 2
+      return false if !@email.nil? && @email.to_s.length > 254
       return false if !@mobile_no.nil? && @mobile_no.to_s.length > 20
-      return false if !@postcode.nil? && @postcode.to_s.length > 10
+      return false if !@postcode.nil? && @postcode.to_s.length > 16
       return false if !@telephone_no.nil? && @telephone_no.to_s.length > 20
       true
     end
@@ -269,6 +279,16 @@ module CityPayApiClient
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] company Value to be assigned
+    def company=(company)
+      if !company.nil? && company.to_s.length > 50
+        fail ArgumentError, 'invalid value for "company", the character length must be smaller than or equal to 50.'
+      end
+
+      @company = company
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] country Value to be assigned
     def country=(country)
       if !country.nil? && country.to_s.length > 2
@@ -280,6 +300,16 @@ module CityPayApiClient
       end
 
       @country = country
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] email Value to be assigned
+    def email=(email)
+      if !email.nil? && email.to_s.length > 254
+        fail ArgumentError, 'invalid value for "email", the character length must be smaller than or equal to 254.'
+      end
+
+      @email = email
     end
 
     # Custom attribute writer method with validation
@@ -295,8 +325,8 @@ module CityPayApiClient
     # Custom attribute writer method with validation
     # @param [Object] postcode Value to be assigned
     def postcode=(postcode)
-      if !postcode.nil? && postcode.to_s.length > 10
-        fail ArgumentError, 'invalid value for "postcode", the character length must be smaller than or equal to 10.'
+      if !postcode.nil? && postcode.to_s.length > 16
+        fail ArgumentError, 'invalid value for "postcode", the character length must be smaller than or equal to 16.'
       end
 
       @postcode = postcode
