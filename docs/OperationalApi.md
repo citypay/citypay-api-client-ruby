@@ -4,8 +4,77 @@ All URIs are relative to *https://api.citypay.com/v6*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**acl_check_request**](OperationalApi.md#acl_check_request) | **POST** /acl/check | ACL Check Request |
 | [**list_merchants_request**](OperationalApi.md#list_merchants_request) | **GET** /merchants/{clientid} | List Merchants Request |
 | [**ping_request**](OperationalApi.md#ping_request) | **POST** /ping | Ping Request |
+
+
+## acl_check_request
+
+> <AclCheckResponseModel> acl_check_request(acl_check_request)
+
+ACL Check Request
+
+Allows the checking of IP addresses against configured ACLs. Requests can perform a lookup of addresses in subnets and services such as AWS or Azure to check that those addresses are listed in the ACLs. 
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+end
+
+api_instance = CityPayApiClient::OperationalApi.new
+acl_check_request = CityPayApiClient::AclCheckRequest.new # AclCheckRequest | 
+
+begin
+  # ACL Check Request
+  result = api_instance.acl_check_request(acl_check_request)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling OperationalApi->acl_check_request: #{e}"
+end
+```
+
+#### Using the acl_check_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<AclCheckResponseModel>, Integer, Hash)> acl_check_request_with_http_info(acl_check_request)
+
+```ruby
+begin
+  # ACL Check Request
+  data, status_code, headers = api_instance.acl_check_request_with_http_info(acl_check_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <AclCheckResponseModel>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling OperationalApi->acl_check_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **acl_check_request** | [**AclCheckRequest**](AclCheckRequest.md) |  |  |
+
+### Return type
+
+[**AclCheckResponseModel**](AclCheckResponseModel.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
 
 
 ## list_merchants_request

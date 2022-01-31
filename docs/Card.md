@@ -21,6 +21,7 @@
 | **label** | **String** | A label which identifies this card. | [optional] |
 | **label2** | **String** | A label which also provides the expiry date of the card. | [optional] |
 | **last4digits** | **String** | The last 4 digits of the card to aid in identification. | [optional] |
+| **name_on_card** | **String** | The name on the card. | [optional] |
 | **scheme** | **String** | The scheme that issued the card. | [optional] |
 | **token** | **String** | A token that can be used to process against the card. | [optional] |
 
@@ -43,10 +44,11 @@ instance = CityPayApiClient::Card.new(
   date_created: 2020-01-02T18:32:28Z,
   default: null,
   expmonth: 9,
-  expyear: 2024,
+  expyear: 2025,
   label: Visa/0002,
   label2: Visa/0002,Exp:2304,
   last4digits: 2,
+  name_on_card: MR NE BODY,
   scheme: Visa,
   token: ctPCAPyNyCkx3Ry8wGyv8khC3ch2hUSB3Db..Qzr
 )

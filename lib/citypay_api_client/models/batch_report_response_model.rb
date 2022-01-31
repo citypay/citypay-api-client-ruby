@@ -14,31 +14,30 @@ require 'time'
 
 module CityPayApiClient
   class BatchReportResponseModel
-    # The batch account id that the batch was processed with.
-    attr_accessor :account_id
-
     # The total amount that the batch contains.
     attr_accessor :amount
 
     # The date and time of the batch in ISO-8601 format.
     attr_accessor :batch_date
 
-    # The batch id specified in the batch processing request.
     attr_accessor :batch_id
 
-    # The status of the batch. Possible values are.
+    # The status of the batch. Possible values are - CANCELLED. The file has been cancelled by an administrator or server process.  - COMPLETE. The file has passed through the processing cycle and is determined as being complete further information should be obtained on the results of the processing - ERROR_IN_PROCESSING. Errors have occurred in the processing that has deemed that processing can not continue. - INITIALISED. The file has been initialised and no action has yet been performed - LOCKED. The file has been locked for processing - QUEUED. The file has been queued for processing yet no processing has yet been performed - UNKNOWN. The file is of an unknown status, that is the file can either not be determined by the information requested of the file has not yet been received. 
     attr_accessor :batch_status
+
+    # The batch account id that the batch was processed with.
+    attr_accessor :client_account_id
 
     attr_accessor :transactions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'account_id',
         :'amount' => :'amount',
         :'batch_date' => :'batch_date',
         :'batch_id' => :'batch_id',
         :'batch_status' => :'batch_status',
+        :'client_account_id' => :'client_account_id',
         :'transactions' => :'transactions'
       }
     end
@@ -51,11 +50,11 @@ module CityPayApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
         :'amount' => :'Integer',
-        :'batch_date' => :'Time',
-        :'batch_id' => :'Integer',
+        :'batch_date' => :'Date',
+        :'batch_id' => :'Array<Integer>',
         :'batch_status' => :'String',
+        :'client_account_id' => :'String',
         :'transactions' => :'Array<BatchTransactionResultModel>'
       }
     end
@@ -81,10 +80,6 @@ module CityPayApiClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
       end
@@ -94,11 +89,17 @@ module CityPayApiClient
       end
 
       if attributes.key?(:'batch_id')
-        self.batch_id = attributes[:'batch_id']
+        if (value = attributes[:'batch_id']).is_a?(Array)
+          self.batch_id = value
+        end
       end
 
       if attributes.key?(:'batch_status')
         self.batch_status = attributes[:'batch_status']
+      end
+
+      if attributes.key?(:'client_account_id')
+        self.client_account_id = attributes[:'client_account_id']
       end
 
       if attributes.key?(:'transactions')
@@ -112,18 +113,6 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
-      if @account_id.to_s.length > 20
-        invalid_properties.push('invalid value for "account_id", the character length must be smaller than or equal to 20.')
-      end
-
-      if @account_id.to_s.length < 3
-        invalid_properties.push('invalid value for "account_id", the character length must be great than or equal to 3.')
-      end
-
       if @amount.nil?
         invalid_properties.push('invalid value for "amount", amount cannot be nil.')
       end
@@ -136,12 +125,20 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "batch_id", batch_id cannot be nil.')
       end
 
-      if @batch_id < 1
-        invalid_properties.push('invalid value for "batch_id", must be greater than or equal to 1.')
-      end
-
       if @batch_status.nil?
         invalid_properties.push('invalid value for "batch_status", batch_status cannot be nil.')
+      end
+
+      if @client_account_id.nil?
+        invalid_properties.push('invalid value for "client_account_id", client_account_id cannot be nil.')
+      end
+
+      if @client_account_id.to_s.length > 20
+        invalid_properties.push('invalid value for "client_account_id", the character length must be smaller than or equal to 20.')
+      end
+
+      if @client_account_id.to_s.length < 3
+        invalid_properties.push('invalid value for "client_account_id", the character length must be great than or equal to 3.')
       end
 
       if @transactions.nil?
@@ -154,34 +151,15 @@ module CityPayApiClient
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_id.nil?
-      return false if @account_id.to_s.length > 20
-      return false if @account_id.to_s.length < 3
       return false if @amount.nil?
       return false if @batch_date.nil?
       return false if @batch_id.nil?
-      return false if @batch_id < 1
       return false if @batch_status.nil?
+      return false if @client_account_id.nil?
+      return false if @client_account_id.to_s.length > 20
+      return false if @client_account_id.to_s.length < 3
       return false if @transactions.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if account_id.nil?
-        fail ArgumentError, 'account_id cannot be nil'
-      end
-
-      if account_id.to_s.length > 20
-        fail ArgumentError, 'invalid value for "account_id", the character length must be smaller than or equal to 20.'
-      end
-
-      if account_id.to_s.length < 3
-        fail ArgumentError, 'invalid value for "account_id", the character length must be great than or equal to 3.'
-      end
-
-      @account_id = account_id
     end
 
     # Custom attribute writer method with validation
@@ -195,17 +173,21 @@ module CityPayApiClient
     end
 
     # Custom attribute writer method with validation
-    # @param [Object] batch_id Value to be assigned
-    def batch_id=(batch_id)
-      if batch_id.nil?
-        fail ArgumentError, 'batch_id cannot be nil'
+    # @param [Object] client_account_id Value to be assigned
+    def client_account_id=(client_account_id)
+      if client_account_id.nil?
+        fail ArgumentError, 'client_account_id cannot be nil'
       end
 
-      if batch_id < 1
-        fail ArgumentError, 'invalid value for "batch_id", must be greater than or equal to 1.'
+      if client_account_id.to_s.length > 20
+        fail ArgumentError, 'invalid value for "client_account_id", the character length must be smaller than or equal to 20.'
       end
 
-      @batch_id = batch_id
+      if client_account_id.to_s.length < 3
+        fail ArgumentError, 'invalid value for "client_account_id", the character length must be great than or equal to 3.'
+      end
+
+      @client_account_id = client_account_id
     end
 
     # Checks equality by comparing each attribute.
@@ -213,11 +195,11 @@ module CityPayApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
           amount == o.amount &&
           batch_date == o.batch_date &&
           batch_id == o.batch_id &&
           batch_status == o.batch_status &&
+          client_account_id == o.client_account_id &&
           transactions == o.transactions
     end
 
@@ -230,7 +212,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, amount, batch_date, batch_id, batch_status, transactions].hash
+      [amount, batch_date, batch_id, batch_status, client_account_id, transactions].hash
     end
 
     # Builds the object from hash
