@@ -14,6 +14,7 @@ require 'time'
 
 module CityPayApiClient
   class BatchReportRequest
+    # The batch id specified in the batch processing request.
     attr_accessor :batch_id
 
     # The batch account id that the batch was processed for. Defaults to your client id if not provided.
@@ -35,7 +36,7 @@ module CityPayApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'batch_id' => :'Array<Integer>',
+        :'batch_id' => :'Integer',
         :'client_account_id' => :'String'
       }
     end
@@ -62,9 +63,7 @@ module CityPayApiClient
       }
 
       if attributes.key?(:'batch_id')
-        if (value = attributes[:'batch_id']).is_a?(Array)
-          self.batch_id = value
-        end
+        self.batch_id = attributes[:'batch_id']
       end
 
       if attributes.key?(:'client_account_id')
@@ -78,6 +77,10 @@ module CityPayApiClient
       invalid_properties = Array.new
       if @batch_id.nil?
         invalid_properties.push('invalid value for "batch_id", batch_id cannot be nil.')
+      end
+
+      if @batch_id < 1
+        invalid_properties.push('invalid value for "batch_id", must be greater than or equal to 1.')
       end
 
       if !@client_account_id.nil? && @client_account_id.to_s.length > 20
@@ -95,9 +98,24 @@ module CityPayApiClient
     # @return true if the model is valid
     def valid?
       return false if @batch_id.nil?
+      return false if @batch_id < 1
       return false if !@client_account_id.nil? && @client_account_id.to_s.length > 20
       return false if !@client_account_id.nil? && @client_account_id.to_s.length < 3
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] batch_id Value to be assigned
+    def batch_id=(batch_id)
+      if batch_id.nil?
+        fail ArgumentError, 'batch_id cannot be nil'
+      end
+
+      if batch_id < 1
+        fail ArgumentError, 'invalid value for "batch_id", must be greater than or equal to 1.'
+      end
+
+      @batch_id = batch_id
     end
 
     # Custom attribute writer method with validation

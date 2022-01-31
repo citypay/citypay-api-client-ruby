@@ -41,6 +41,9 @@ module CityPayApiClient
     # A name of the card scheme of the transaction that processed the transaction such as Visa or MasterCard. 
     attr_accessor :scheme
 
+    # The resulting transaction number, ordered incrementally from 1 for every merchant_id. The value will default to less than 1 for transactions that do not have a transaction number issued. 
+    attr_accessor :transno
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -52,7 +55,8 @@ module CityPayApiClient
         :'merchantid' => :'merchantid',
         :'message' => :'message',
         :'result' => :'result',
-        :'scheme' => :'scheme'
+        :'scheme' => :'scheme',
+        :'transno' => :'transno'
       }
     end
 
@@ -72,7 +76,8 @@ module CityPayApiClient
         :'merchantid' => :'Integer',
         :'message' => :'String',
         :'result' => :'Integer',
-        :'scheme' => :'String'
+        :'scheme' => :'String',
+        :'transno' => :'Integer'
       }
     end
 
@@ -131,6 +136,10 @@ module CityPayApiClient
 
       if attributes.key?(:'scheme')
         self.scheme = attributes[:'scheme']
+      end
+
+      if attributes.key?(:'transno')
+        self.transno = attributes[:'transno']
       end
     end
 
@@ -247,7 +256,8 @@ module CityPayApiClient
           merchantid == o.merchantid &&
           message == o.message &&
           result == o.result &&
-          scheme == o.scheme
+          scheme == o.scheme &&
+          transno == o.transno
     end
 
     # @see the `==` method
@@ -259,7 +269,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, amount, authcode, identifier, maskedpan, merchantid, message, result, scheme].hash
+      [account_id, amount, authcode, identifier, maskedpan, merchantid, message, result, scheme, transno].hash
     end
 
     # Builds the object from hash

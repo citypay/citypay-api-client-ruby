@@ -112,7 +112,4 @@ lib/citypay_api_client/models/void_request.rb
 lib/citypay_api_client/version.rb
 spec/api_client_spec.rb
 spec/configuration_spec.rb
-spec/models/acl_check_request_spec.rb
-spec/models/acl_check_response_model_spec.rb
-spec/models/batch_spec.rb
 spec/spec_helper.rb

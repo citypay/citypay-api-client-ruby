@@ -10,4 +10,4 @@ script:
   - bundle install --path vendor/bundle
   - bundle exec rspec
   - gem build citypay_api_client.gemspec
-  - gem install ./citypay_api_client-1.0.8.gem
+  - gem install ./citypay_api_client-1.0.9.gem

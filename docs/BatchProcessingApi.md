@@ -28,7 +28,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2020'), batch_id: [1975], transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 3600})]}) # ProcessBatchRequest | 
+process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2020'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 3600})]}) # ProcessBatchRequest | 
 
 begin
   # Batch Process Request
@@ -96,7 +96,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-check_batch_status = CityPayApiClient::CheckBatchStatus.new({batch_id: [1975]}) # CheckBatchStatus | 
+check_batch_status = CityPayApiClient::CheckBatchStatus.new({batch_id: [78]}) # CheckBatchStatus | 
 
 begin
   # CheckBatchStatus
@@ -164,7 +164,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-batch_report_request = CityPayApiClient::BatchReportRequest.new({batch_id: [1975]}) # BatchReportRequest | 
+batch_report_request = CityPayApiClient::BatchReportRequest.new({batch_id: 35}) # BatchReportRequest | 
 
 begin
   # BatchReportRequest
