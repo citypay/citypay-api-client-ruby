@@ -18,6 +18,7 @@ describe 'IntegrationTests' do
       config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: client_id, licence_key: licence_key).generate
       config.debugging = true
       config.host = "sandbox.citypay.com"
+      config.server_index = 1
     end
     cha_api = CityPayApiClient::CardHolderAccountApi.new
   end
