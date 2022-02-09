@@ -14,21 +14,12 @@ require 'time'
 
 module CityPayApiClient
   class CheckBatchStatusResponse
-    # The date and time that the file was created in ISO-8601 format.
-    attr_accessor :batch_date
-
-    # The batch id requested.
-    attr_accessor :batch_id
-
-    # The status of the batch. Possible values are.
-    attr_accessor :batch_status
+    attr_accessor :batches
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'batch_date' => :'batch_date',
-        :'batch_id' => :'batch_id',
-        :'batch_status' => :'batch_status'
+        :'batches' => :'batches'
       }
     end
 
@@ -40,9 +31,7 @@ module CityPayApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'batch_date' => :'Time',
-        :'batch_id' => :'Integer',
-        :'batch_status' => :'String'
+        :'batches' => :'Array<Batch>'
       }
     end
 
@@ -67,16 +56,10 @@ module CityPayApiClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'batch_date')
-        self.batch_date = attributes[:'batch_date']
-      end
-
-      if attributes.key?(:'batch_id')
-        self.batch_id = attributes[:'batch_id']
-      end
-
-      if attributes.key?(:'batch_status')
-        self.batch_status = attributes[:'batch_status']
+      if attributes.key?(:'batches')
+        if (value = attributes[:'batches']).is_a?(Array)
+          self.batches = value
+        end
       end
     end
 
@@ -84,38 +67,13 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @batch_date.nil?
-        invalid_properties.push('invalid value for "batch_date", batch_date cannot be nil.')
-      end
-
-      if !@batch_id.nil? && @batch_id < 1
-        invalid_properties.push('invalid value for "batch_id", must be greater than or equal to 1.')
-      end
-
-      if @batch_status.nil?
-        invalid_properties.push('invalid value for "batch_status", batch_status cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @batch_date.nil?
-      return false if !@batch_id.nil? && @batch_id < 1
-      return false if @batch_status.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] batch_id Value to be assigned
-    def batch_id=(batch_id)
-      if !batch_id.nil? && batch_id < 1
-        fail ArgumentError, 'invalid value for "batch_id", must be greater than or equal to 1.'
-      end
-
-      @batch_id = batch_id
     end
 
     # Checks equality by comparing each attribute.
@@ -123,9 +81,7 @@ module CityPayApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          batch_date == o.batch_date &&
-          batch_id == o.batch_id &&
-          batch_status == o.batch_status
+          batches == o.batches
     end
 
     # @see the `==` method
@@ -137,7 +93,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [batch_date, batch_id, batch_status].hash
+      [batches].hash
     end
 
     # Builds the object from hash
