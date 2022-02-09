@@ -24,9 +24,6 @@ module CityPayApiClient
 
     attr_accessor :bill_to
 
-    # The card holder name as appears on the card such as MR N E BODY. Required for some acquirers. 
-    attr_accessor :card_holder_name
-
     # The card number (PAN) with a variable length to a maximum of 21 digits in numerical form. Any non numeric characters will be stripped out of the card number, this includes whitespace or separators internal of the provided value.  The card number must be treated as sensitive data. We only provide an obfuscated value in logging and reporting.  The plaintext value is encrypted in our database using AES 256 GMC bit encryption for settlement or refund purposes.  When providing the card number to our gateway through the authorisation API you will be handling the card data on your application. This will require further PCI controls to be in place and this value must never be stored. 
     attr_accessor :cardnumber
 
@@ -61,6 +58,9 @@ module CityPayApiClient
     # Identifies the merchant account to perform processing for.
     attr_accessor :merchantid
 
+    # The card holder name as appears on the card such as MR N E BODY. Required for some acquirers. 
+    attr_accessor :name_on_card
+
     attr_accessor :ship_to
 
     attr_accessor :threedsecure
@@ -78,7 +78,6 @@ module CityPayApiClient
         :'amount' => :'amount',
         :'avs_postcode_policy' => :'avs_postcode_policy',
         :'bill_to' => :'bill_to',
-        :'card_holder_name' => :'card_holder_name',
         :'cardnumber' => :'cardnumber',
         :'csc' => :'csc',
         :'csc_policy' => :'csc_policy',
@@ -91,6 +90,7 @@ module CityPayApiClient
         :'match_avsa' => :'match_avsa',
         :'mcc6012' => :'mcc6012',
         :'merchantid' => :'merchantid',
+        :'name_on_card' => :'name_on_card',
         :'ship_to' => :'ship_to',
         :'threedsecure' => :'threedsecure',
         :'trans_info' => :'trans_info',
@@ -110,7 +110,6 @@ module CityPayApiClient
         :'amount' => :'Integer',
         :'avs_postcode_policy' => :'String',
         :'bill_to' => :'ContactDetails',
-        :'card_holder_name' => :'String',
         :'cardnumber' => :'String',
         :'csc' => :'String',
         :'csc_policy' => :'String',
@@ -123,6 +122,7 @@ module CityPayApiClient
         :'match_avsa' => :'String',
         :'mcc6012' => :'MCC6012',
         :'merchantid' => :'Integer',
+        :'name_on_card' => :'String',
         :'ship_to' => :'ContactDetails',
         :'threedsecure' => :'ThreeDSecure',
         :'trans_info' => :'String',
@@ -165,10 +165,6 @@ module CityPayApiClient
 
       if attributes.key?(:'bill_to')
         self.bill_to = attributes[:'bill_to']
-      end
-
-      if attributes.key?(:'card_holder_name')
-        self.card_holder_name = attributes[:'card_holder_name']
       end
 
       if attributes.key?(:'cardnumber')
@@ -217,6 +213,10 @@ module CityPayApiClient
 
       if attributes.key?(:'merchantid')
         self.merchantid = attributes[:'merchantid']
+      end
+
+      if attributes.key?(:'name_on_card')
+        self.name_on_card = attributes[:'name_on_card']
       end
 
       if attributes.key?(:'ship_to')
@@ -312,6 +312,14 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "merchantid", merchantid cannot be nil.')
       end
 
+      if !@name_on_card.nil? && @name_on_card.to_s.length > 45
+        invalid_properties.push('invalid value for "name_on_card", the character length must be smaller than or equal to 45.')
+      end
+
+      if !@name_on_card.nil? && @name_on_card.to_s.length < 2
+        invalid_properties.push('invalid value for "name_on_card", the character length must be great than or equal to 2.')
+      end
+
       if !@trans_info.nil? && @trans_info.to_s.length > 50
         invalid_properties.push('invalid value for "trans_info", the character length must be smaller than or equal to 50.')
       end
@@ -344,6 +352,8 @@ module CityPayApiClient
       return false if @identifier.to_s.length > 50
       return false if @identifier.to_s.length < 4
       return false if @merchantid.nil?
+      return false if !@name_on_card.nil? && @name_on_card.to_s.length > 45
+      return false if !@name_on_card.nil? && @name_on_card.to_s.length < 2
       return false if !@trans_info.nil? && @trans_info.to_s.length > 50
       return false if !@trans_type.nil? && @trans_type.to_s.length > 1
       true
@@ -460,6 +470,20 @@ module CityPayApiClient
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] name_on_card Value to be assigned
+    def name_on_card=(name_on_card)
+      if !name_on_card.nil? && name_on_card.to_s.length > 45
+        fail ArgumentError, 'invalid value for "name_on_card", the character length must be smaller than or equal to 45.'
+      end
+
+      if !name_on_card.nil? && name_on_card.to_s.length < 2
+        fail ArgumentError, 'invalid value for "name_on_card", the character length must be great than or equal to 2.'
+      end
+
+      @name_on_card = name_on_card
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] trans_info Value to be assigned
     def trans_info=(trans_info)
       if !trans_info.nil? && trans_info.to_s.length > 50
@@ -488,7 +512,6 @@ module CityPayApiClient
           amount == o.amount &&
           avs_postcode_policy == o.avs_postcode_policy &&
           bill_to == o.bill_to &&
-          card_holder_name == o.card_holder_name &&
           cardnumber == o.cardnumber &&
           csc == o.csc &&
           csc_policy == o.csc_policy &&
@@ -501,6 +524,7 @@ module CityPayApiClient
           match_avsa == o.match_avsa &&
           mcc6012 == o.mcc6012 &&
           merchantid == o.merchantid &&
+          name_on_card == o.name_on_card &&
           ship_to == o.ship_to &&
           threedsecure == o.threedsecure &&
           trans_info == o.trans_info &&
@@ -516,7 +540,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [airline_data, amount, avs_postcode_policy, bill_to, card_holder_name, cardnumber, csc, csc_policy, currency, duplicate_policy, expmonth, expyear, external_mpi, identifier, match_avsa, mcc6012, merchantid, ship_to, threedsecure, trans_info, trans_type].hash
+      [airline_data, amount, avs_postcode_policy, bill_to, cardnumber, csc, csc_policy, currency, duplicate_policy, expmonth, expyear, external_mpi, identifier, match_avsa, mcc6012, merchantid, name_on_card, ship_to, threedsecure, trans_info, trans_type].hash
     end
 
     # Builds the object from hash

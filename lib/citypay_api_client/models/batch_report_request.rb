@@ -14,17 +14,17 @@ require 'time'
 
 module CityPayApiClient
   class BatchReportRequest
-    # The batch account id that the batch was processed for. Defaults to your client id if not provided.
-    attr_accessor :account_id
-
     # The batch id specified in the batch processing request.
     attr_accessor :batch_id
+
+    # The batch account id that the batch was processed for. Defaults to your client id if not provided.
+    attr_accessor :client_account_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'account_id',
-        :'batch_id' => :'batch_id'
+        :'batch_id' => :'batch_id',
+        :'client_account_id' => :'client_account_id'
       }
     end
 
@@ -36,8 +36,8 @@ module CityPayApiClient
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
-        :'batch_id' => :'Integer'
+        :'batch_id' => :'Integer',
+        :'client_account_id' => :'String'
       }
     end
 
@@ -62,12 +62,12 @@ module CityPayApiClient
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
       if attributes.key?(:'batch_id')
         self.batch_id = attributes[:'batch_id']
+      end
+
+      if attributes.key?(:'client_account_id')
+        self.client_account_id = attributes[:'client_account_id']
       end
     end
 
@@ -75,14 +75,6 @@ module CityPayApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@account_id.nil? && @account_id.to_s.length > 20
-        invalid_properties.push('invalid value for "account_id", the character length must be smaller than or equal to 20.')
-      end
-
-      if !@account_id.nil? && @account_id.to_s.length < 3
-        invalid_properties.push('invalid value for "account_id", the character length must be great than or equal to 3.')
-      end
-
       if @batch_id.nil?
         invalid_properties.push('invalid value for "batch_id", batch_id cannot be nil.')
       end
@@ -91,31 +83,25 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "batch_id", must be greater than or equal to 1.')
       end
 
+      if !@client_account_id.nil? && @client_account_id.to_s.length > 20
+        invalid_properties.push('invalid value for "client_account_id", the character length must be smaller than or equal to 20.')
+      end
+
+      if !@client_account_id.nil? && @client_account_id.to_s.length < 3
+        invalid_properties.push('invalid value for "client_account_id", the character length must be great than or equal to 3.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@account_id.nil? && @account_id.to_s.length > 20
-      return false if !@account_id.nil? && @account_id.to_s.length < 3
       return false if @batch_id.nil?
       return false if @batch_id < 1
+      return false if !@client_account_id.nil? && @client_account_id.to_s.length > 20
+      return false if !@client_account_id.nil? && @client_account_id.to_s.length < 3
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] account_id Value to be assigned
-    def account_id=(account_id)
-      if !account_id.nil? && account_id.to_s.length > 20
-        fail ArgumentError, 'invalid value for "account_id", the character length must be smaller than or equal to 20.'
-      end
-
-      if !account_id.nil? && account_id.to_s.length < 3
-        fail ArgumentError, 'invalid value for "account_id", the character length must be great than or equal to 3.'
-      end
-
-      @account_id = account_id
     end
 
     # Custom attribute writer method with validation
@@ -132,13 +118,27 @@ module CityPayApiClient
       @batch_id = batch_id
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] client_account_id Value to be assigned
+    def client_account_id=(client_account_id)
+      if !client_account_id.nil? && client_account_id.to_s.length > 20
+        fail ArgumentError, 'invalid value for "client_account_id", the character length must be smaller than or equal to 20.'
+      end
+
+      if !client_account_id.nil? && client_account_id.to_s.length < 3
+        fail ArgumentError, 'invalid value for "client_account_id", the character length must be great than or equal to 3.'
+      end
+
+      @client_account_id = client_account_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
-          batch_id == o.batch_id
+          batch_id == o.batch_id &&
+          client_account_id == o.client_account_id
     end
 
     # @see the `==` method
@@ -150,7 +150,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, batch_id].hash
+      [batch_id, client_account_id].hash
     end
 
     # Builds the object from hash

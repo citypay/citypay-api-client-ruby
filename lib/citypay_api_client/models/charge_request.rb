@@ -20,6 +20,9 @@ module CityPayApiClient
     # A policy value which determines whether an AVS postcode policy is enforced or bypassed.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS postcode numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the postcode did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send postcode details for authorisation. 
     attr_accessor :avs_postcode_policy
 
+    # Merchant-initiated transactions (MITs) are payments you trigger, where the cardholder has previously consented to you carrying out such payments. These may be scheduled (such as recurring payments and installments) or unscheduled (like account top-ups triggered by balance thresholds and no-show charges).  Scheduled --- These are regular payments using stored card details, like installments or a monthly subscription fee.  - `I` Instalment - A single purchase of goods or services billed to a cardholder in multiple transactions, over a period of time agreed by the cardholder and you.  - `R` Recurring - Transactions processed at fixed, regular intervals not to exceed one year between transactions, representing an agreement between a cardholder and you to purchase goods or services provided over a period of time.  Unscheduled --- These are payments using stored card details that do not occur on a regular schedule, like top-ups for a digital wallet triggered by the balance falling below a certain threshold.  - `A` Reauthorisation - a purchase made after the original purchase. A common scenario is delayed/split shipments.  - `C` Unscheduled Payment - A transaction using a stored credential for a fixed or variable amount that does not occur on a scheduled or regularly occurring transaction date. This includes account top-ups triggered by balance thresholds.  - `D` Delayed Charge - A delayed charge is typically used in hotel, cruise lines and vehicle rental environments to perform a supplemental account charge after original services are rendered.  - `L` Incremental - An incremental authorisation is typically found in hotel and car rental environments, where the cardholder has agreed to pay for any service incurred during the duration of the contract. An incremental authorisation is where you need to seek authorisation of further funds in addition to what you have originally requested. A common scenario is additional services charged to the contract, such as extending a stay in a hotel.  - `S` Resubmission - When the original purchase occurred, but you were not able to get authorisation at the time the goods or services were provided. It should be only used where the goods or services have already been provided, but the authorisation request is declined for insufficient funds.  - `X` No-show - A no-show is a transaction where you are enabled to charge for services which the cardholder entered into an agreement to purchase, but the cardholder did not meet the terms of the agreement. 
+    attr_accessor :cardholder_agreement
+
     # The Card Security Code (CSC) (also known as CV2/CVV2) is normally found on the back of the card (American Express has it on the front). The value helps to identify posession of the card as it is not available within the chip or magnetic swipe.  When forwarding the CSC, please ensure the value is a string as some values start with 0 and this will be stripped out by any integer parsing.  The CSC number aids fraud prevention in Mail Order and Internet payments.  Business rules are available on your account to identify whether to accept or decline transactions based on mismatched results of the CSC.  The Payment Card Industry (PCI) requires that at no stage of a transaction should the CSC be stored.  This applies to all entities handling card data.  It should also not be used in any hashing process.  CityPay do not store the value and have no method of retrieving the value once the transaction has been processed. For this reason, duplicate checking is unable to determine the CSC in its duplication check algorithm. 
     attr_accessor :csc
 
@@ -34,6 +37,9 @@ module CityPayApiClient
 
     # The identifier of the transaction to process. The value should be a valid reference and may be used to perform  post processing actions and to aid in reconciliation of transactions.  The value should be a valid printable string with ASCII character ranges from 0x32 to 0x127.  The identifier is recommended to be distinct for each transaction such as a [random unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier) this will aid in ensuring each transaction is identifiable.  When transactions are processed they are also checked for duplicate requests. Changing the identifier on a subsequent request will ensure that a transaction is considered as different. 
     attr_accessor :identifier
+
+    # Transactions charged using the API are defined as:  **Cardholder Initiated**: A _cardholder initiated transaction_ (CIT) is where the cardholder selects the card for use for a purchase using previously stored details. An example would be a customer buying an item from your website after being present with their saved card details at checkout.  **Merchant Intiated**: A _merchant initiated transaction_ (MIT) is an authorisation initiated where you as the  merchant submit a cardholders previously stored details without the cardholder's participation. An example would  be a subscription to a membership scheme to debit their card monthly.  MITs have different reasons such as reauthorisation, delayed, unscheduled, incremental, recurring, instalment, no-show or resubmission.  The following values apply   - `M` - specifies that the transaction is initiated by the merchant   - `C` - specifies that the transaction is initiated by the cardholder  Where transactions are merchant initiated, a valid cardholder agreement must be defined. 
+    attr_accessor :initiation
 
     # A policy value which determines whether an AVS address policy is enforced, bypassed or ignored.  Values are  `0` for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   `1` for an enforced policy. Transactions that are enforced will be rejected if the AVS address numeric value does not match.   `2` to bypass. Transactions that are bypassed will be allowed through even if the address did not match.   `3` to ignore. Transactions that are ignored will bypass the result and not send address numeric details for authorisation. 
     attr_accessor :match_avsa
@@ -57,11 +63,13 @@ module CityPayApiClient
       {
         :'amount' => :'amount',
         :'avs_postcode_policy' => :'avs_postcode_policy',
+        :'cardholder_agreement' => :'cardholder_agreement',
         :'csc' => :'csc',
         :'csc_policy' => :'csc_policy',
         :'currency' => :'currency',
         :'duplicate_policy' => :'duplicate_policy',
         :'identifier' => :'identifier',
+        :'initiation' => :'initiation',
         :'match_avsa' => :'match_avsa',
         :'merchantid' => :'merchantid',
         :'threedsecure' => :'threedsecure',
@@ -81,11 +89,13 @@ module CityPayApiClient
       {
         :'amount' => :'Integer',
         :'avs_postcode_policy' => :'String',
+        :'cardholder_agreement' => :'String',
         :'csc' => :'String',
         :'csc_policy' => :'String',
         :'currency' => :'String',
         :'duplicate_policy' => :'String',
         :'identifier' => :'String',
+        :'initiation' => :'String',
         :'match_avsa' => :'String',
         :'merchantid' => :'Integer',
         :'threedsecure' => :'ThreeDSecure',
@@ -124,6 +134,10 @@ module CityPayApiClient
         self.avs_postcode_policy = attributes[:'avs_postcode_policy']
       end
 
+      if attributes.key?(:'cardholder_agreement')
+        self.cardholder_agreement = attributes[:'cardholder_agreement']
+      end
+
       if attributes.key?(:'csc')
         self.csc = attributes[:'csc']
       end
@@ -142,6 +156,10 @@ module CityPayApiClient
 
       if attributes.key?(:'identifier')
         self.identifier = attributes[:'identifier']
+      end
+
+      if attributes.key?(:'initiation')
+        self.initiation = attributes[:'initiation']
       end
 
       if attributes.key?(:'match_avsa')
@@ -177,6 +195,10 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "amount", amount cannot be nil.')
       end
 
+      if !@cardholder_agreement.nil? && @cardholder_agreement.to_s.length > 1
+        invalid_properties.push('invalid value for "cardholder_agreement", the character length must be smaller than or equal to 1.')
+      end
+
       if !@csc.nil? && @csc.to_s.length > 4
         invalid_properties.push('invalid value for "csc", the character length must be smaller than or equal to 4.')
       end
@@ -205,6 +227,10 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "identifier", the character length must be great than or equal to 4.')
       end
 
+      if !@initiation.nil? && @initiation.to_s.length > 1
+        invalid_properties.push('invalid value for "initiation", the character length must be smaller than or equal to 1.')
+      end
+
       if @merchantid.nil?
         invalid_properties.push('invalid value for "merchantid", merchantid cannot be nil.')
       end
@@ -228,6 +254,7 @@ module CityPayApiClient
     # @return true if the model is valid
     def valid?
       return false if @amount.nil?
+      return false if !@cardholder_agreement.nil? && @cardholder_agreement.to_s.length > 1
       return false if !@csc.nil? && @csc.to_s.length > 4
       return false if !@csc.nil? && @csc.to_s.length < 3
       return false if !@currency.nil? && @currency.to_s.length > 3
@@ -235,6 +262,7 @@ module CityPayApiClient
       return false if @identifier.nil?
       return false if @identifier.to_s.length > 50
       return false if @identifier.to_s.length < 4
+      return false if !@initiation.nil? && @initiation.to_s.length > 1
       return false if @merchantid.nil?
       return false if @token.nil?
       return false if !@trans_info.nil? && @trans_info.to_s.length > 50
@@ -250,6 +278,16 @@ module CityPayApiClient
       end
 
       @amount = amount
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] cardholder_agreement Value to be assigned
+    def cardholder_agreement=(cardholder_agreement)
+      if !cardholder_agreement.nil? && cardholder_agreement.to_s.length > 1
+        fail ArgumentError, 'invalid value for "cardholder_agreement", the character length must be smaller than or equal to 1.'
+      end
+
+      @cardholder_agreement = cardholder_agreement
     end
 
     # Custom attribute writer method with validation
@@ -299,6 +337,16 @@ module CityPayApiClient
     end
 
     # Custom attribute writer method with validation
+    # @param [Object] initiation Value to be assigned
+    def initiation=(initiation)
+      if !initiation.nil? && initiation.to_s.length > 1
+        fail ArgumentError, 'invalid value for "initiation", the character length must be smaller than or equal to 1.'
+      end
+
+      @initiation = initiation
+    end
+
+    # Custom attribute writer method with validation
     # @param [Object] trans_info Value to be assigned
     def trans_info=(trans_info)
       if !trans_info.nil? && trans_info.to_s.length > 50
@@ -325,11 +373,13 @@ module CityPayApiClient
       self.class == o.class &&
           amount == o.amount &&
           avs_postcode_policy == o.avs_postcode_policy &&
+          cardholder_agreement == o.cardholder_agreement &&
           csc == o.csc &&
           csc_policy == o.csc_policy &&
           currency == o.currency &&
           duplicate_policy == o.duplicate_policy &&
           identifier == o.identifier &&
+          initiation == o.initiation &&
           match_avsa == o.match_avsa &&
           merchantid == o.merchantid &&
           threedsecure == o.threedsecure &&
@@ -347,7 +397,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [amount, avs_postcode_policy, csc, csc_policy, currency, duplicate_policy, identifier, match_avsa, merchantid, threedsecure, token, trans_info, trans_type].hash
+      [amount, avs_postcode_policy, cardholder_agreement, csc, csc_policy, currency, duplicate_policy, identifier, initiation, match_avsa, merchantid, threedsecure, token, trans_info, trans_type].hash
     end
 
     # Builds the object from hash

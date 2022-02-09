@@ -65,6 +65,9 @@ module CityPayApiClient
     # The last 4 digits of the card to aid in identification.
     attr_accessor :last4digits
 
+    # The name on the card.
+    attr_accessor :name_on_card
+
     # The scheme that issued the card.
     attr_accessor :scheme
 
@@ -91,6 +94,7 @@ module CityPayApiClient
         :'label' => :'label',
         :'label2' => :'label2',
         :'last4digits' => :'last4digits',
+        :'name_on_card' => :'name_on_card',
         :'scheme' => :'scheme',
         :'token' => :'token'
       }
@@ -121,6 +125,7 @@ module CityPayApiClient
         :'label' => :'String',
         :'label2' => :'String',
         :'last4digits' => :'String',
+        :'name_on_card' => :'String',
         :'scheme' => :'String',
         :'token' => :'String'
       }
@@ -215,6 +220,10 @@ module CityPayApiClient
         self.last4digits = attributes[:'last4digits']
       end
 
+      if attributes.key?(:'name_on_card')
+        self.name_on_card = attributes[:'name_on_card']
+      end
+
       if attributes.key?(:'scheme')
         self.scheme = attributes[:'scheme']
       end
@@ -244,6 +253,14 @@ module CityPayApiClient
         invalid_properties.push('invalid value for "expyear", must be greater than or equal to 2000.')
       end
 
+      if !@name_on_card.nil? && @name_on_card.to_s.length > 45
+        invalid_properties.push('invalid value for "name_on_card", the character length must be smaller than or equal to 45.')
+      end
+
+      if !@name_on_card.nil? && @name_on_card.to_s.length < 2
+        invalid_properties.push('invalid value for "name_on_card", the character length must be great than or equal to 2.')
+      end
+
       invalid_properties
     end
 
@@ -254,6 +271,8 @@ module CityPayApiClient
       return false if !@expmonth.nil? && @expmonth < 1
       return false if !@expyear.nil? && @expyear > 2100
       return false if !@expyear.nil? && @expyear < 2000
+      return false if !@name_on_card.nil? && @name_on_card.to_s.length > 45
+      return false if !@name_on_card.nil? && @name_on_card.to_s.length < 2
       true
     end
 
@@ -285,6 +304,20 @@ module CityPayApiClient
       @expyear = expyear
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] name_on_card Value to be assigned
+    def name_on_card=(name_on_card)
+      if !name_on_card.nil? && name_on_card.to_s.length > 45
+        fail ArgumentError, 'invalid value for "name_on_card", the character length must be smaller than or equal to 45.'
+      end
+
+      if !name_on_card.nil? && name_on_card.to_s.length < 2
+        fail ArgumentError, 'invalid value for "name_on_card", the character length must be great than or equal to 2.'
+      end
+
+      @name_on_card = name_on_card
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -307,6 +340,7 @@ module CityPayApiClient
           label == o.label &&
           label2 == o.label2 &&
           last4digits == o.last4digits &&
+          name_on_card == o.name_on_card &&
           scheme == o.scheme &&
           token == o.token
     end
@@ -320,7 +354,7 @@ module CityPayApiClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [bin_commercial, bin_corporate, bin_country_issued, bin_credit, bin_currency, bin_debit, bin_description, bin_eu, card_id, card_status, date_created, default, expmonth, expyear, label, label2, last4digits, scheme, token].hash
+      [bin_commercial, bin_corporate, bin_country_issued, bin_credit, bin_currency, bin_debit, bin_description, bin_eu, card_id, card_status, date_created, default, expmonth, expyear, label, label2, last4digits, name_on_card, scheme, token].hash
     end
 
     # Builds the object from hash
