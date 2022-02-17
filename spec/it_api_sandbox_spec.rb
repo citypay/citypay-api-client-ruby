@@ -2,7 +2,8 @@ require 'spec_helper'
 require 'json'
 require 'date'
 require 'securerandom'
-
+require 'typhoeus'
+require "base64"
 
 describe 'IntegrationTests' do
 
@@ -101,6 +102,37 @@ describe 'IntegrationTests' do
 
       expect(response.acs_url).to_not be_nil
       expect(response.creq).to_not be_nil
+      expect(response.threedserver_trans_id).to_not be_nil
+
+      content = {
+        :threeDSSessionData => response.threedserver_trans_id,
+        :creq => response.creq
+      }
+
+      request = Typhoeus::Request.new("https://sandbox.citypay.com/3dsv2/acs",
+                                       method: :post,
+                                       headers: {
+                                         "Content-Type" => "application/json"
+                                       },
+                                       body: content.to_json)
+      res = request.run
+      c_res = res.response_body
+
+      expect(c_res['acsTransID']).to_not be_nil
+      expect(c_res['messageType']).to_not be_nil
+      expect(c_res['messageVersion']).to_not be_nil
+      expect(c_res['threeDSServerTransID']).to_not be_nil
+      expect(c_res['transStatus']).to_not be_nil
+
+      c_res_auth_request = CityPayApiClient::CResAuthRequest.new({:cres => Base64.encode64(c_res)})
+
+      c_res_request_response =  api_instance.c_res_request(c_res_auth_request)
+
+      expect(c_res_request_response.amount).to eq(1396)
+      expect(c_res_request_response.authcode).to eq("A12345")
+      expect(c_res_request_response.authen_result).to eq("Y")
+      expect(c_res_request_response.authorised).to eq(true)
+
     end
 
   end
@@ -140,7 +172,7 @@ describe 'IntegrationTests' do
       expect(result.account_id).to eq(cha_id)
       expect(result.cards.length).to eq(1)
       expect(result.cards[0].expmonth).to eq(12)
-      expect(result.cards[0].expyear). to eq(2030)
+      expect(result.cards[0].expyear).to eq(2030)
 
     end
 
@@ -150,7 +182,7 @@ describe 'IntegrationTests' do
       expect(result.contact.address1).to eq("7 Esplanade")
       expect(result.cards.length).to eq(1)
       expect(result.cards[0].expmonth).to eq(12)
-      expect(result.cards[0].expyear). to eq(2030)
+      expect(result.cards[0].expyear).to eq(2030)
 
       uuid = SecureRandom.uuid
       result2 = api_instance.charge_request(CityPayApiClient::ChargeRequest.new(
@@ -180,10 +212,9 @@ describe 'IntegrationTests' do
     it 'should delete the cha' do
 
       result = api_instance.account_delete_request(cha_id)
-
+      expect(result.code).to eq("001")
     end
 
   end
-
 
 end
