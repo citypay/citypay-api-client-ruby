@@ -3,7 +3,8 @@ require 'json'
 require 'date'
 require 'securerandom'
 require 'typhoeus'
-require "base64"
+require 'base64'
+require_relative '../lib/citypay_api_client/utils/digest_utils'
 
 describe 'IntegrationTests' do
 
@@ -70,6 +71,8 @@ describe 'IntegrationTests' do
       expect(response.authcode).to eq("A12345")
       expect(response.amount).to eq(1395)
       expect(response.result_code).to eq("001")
+
+      expect(DigestUtils.validate_digest(response, licence_key)).to eq(true)
     end
 
   end
@@ -132,7 +135,6 @@ describe 'IntegrationTests' do
       expect(c_res_request_response.authcode).to eq("A12345")
       expect(c_res_request_response.authen_result).to eq("Y")
       expect(c_res_request_response.authorised).to eq(true)
-
     end
 
   end
