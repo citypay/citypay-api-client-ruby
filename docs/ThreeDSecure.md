@@ -5,6 +5,13 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **accept_headers** | **String** | Required for 3DSv1. Optional if the &#x60;cp_bx&#x60; value is provided otherwise required for 3Dv2 processing operating in browser authentication mode.  The &#x60;cp_bx&#x60; value will override any value supplied to this field.  The content of the HTTP accept header as sent to the merchant from the cardholder&#39;s user agent.  This value will be validated by the ACS when the card holder authenticates themselves to verify that no intermediary is performing this action. Required for 3DSv1.  | [optional] |
+| **browser_color_depth** | **String** | BrowserColorDepth field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_ip** | **String** | BrowserIP field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_java_enabled** | **String** | BrowserJavaEnabled field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_language** | **String** | BrowserLanguage field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_screen_height** | **String** | BrowserScreenHeight field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_screen_width** | **String** | BrowserScreenWidth field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_tz** | **String** | BrowserTZ field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
 | **cp_bx** | **String** | Required for 3DSv2.  Browser extension value produced by the citypay.js &#x60;bx&#x60; function. See [https://sandbox.citypay.com/3dsv2/bx](https://sandbox.citypay.com/3dsv2/bx) for  details.  | [optional] |
 | **downgrade1** | **Boolean** | Where a merchant is configured for 3DSv2, setting this option will attempt to downgrade the transaction to  3DSv1.  | [optional] |
 | **merchant_termurl** | **String** | A controller URL for 3D-Secure processing that any response from an authentication request or challenge request should be sent to.  The controller should forward on the response from the URL back via this API for subsequent processing.  | [optional] |
@@ -18,6 +25,13 @@ require 'citypay_api_client'
 
 instance = CityPayApiClient::ThreeDSecure.new(
   accept_headers: text/html,application/xhtml+xml,application/xml;q&#x3D;0.9,image/webp,image/apng,*/*;q&#x3D;0.8,application/signed-exchange;v&#x3D;b3;q&#x3D;0.9,
+  browser_color_depth: null,
+  browser_ip: null,
+  browser_java_enabled: null,
+  browser_language: null,
+  browser_screen_height: null,
+  browser_screen_width: null,
+  browser_tz: null,
   cp_bx: FjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAx...,
   downgrade1: null,
   merchant_termurl: https://mysite.com/acs/return,
