@@ -29,7 +29,7 @@ describe 'IntegrationTests' do
   end
 
   describe 'Can run operational tests' do
-    api_instance = CityPayApiClient::OperationalApi.new
+    api_instance = CityPayApiClient::OperationalFunctionsApi.new
 
     it 'should ping and ack' do
       uuid = SecureRandom.uuid
@@ -46,7 +46,7 @@ describe 'IntegrationTests' do
   end
 
   describe 'Run payment processing tests' do
-    api_instance = CityPayApiClient::PaymentProcessingApi.new
+    api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
 
     it 'should authorise' do
       uuid = SecureRandom.uuid
@@ -78,7 +78,7 @@ describe 'IntegrationTests' do
   end
 
   describe 'Run payment processing tests 3DSv2' do
-    api_instance = CityPayApiClient::PaymentProcessingApi.new
+    api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
 
     it 'should authorise 3DSv2' do
       uuid = SecureRandom.uuid

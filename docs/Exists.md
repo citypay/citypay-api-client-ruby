@@ -6,7 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **active** | **Boolean** | Boolean value whether the entity is active. | [optional] |
 | **exists** | **Boolean** | Boolean value whether the entity exists. |  |
-| **last_modified** | [**Time**](DateTime.md) | The last modified date of the entity. | [optional] |
+| **last_modified** | **Time** | The last modified date of the entity. | [optional] |
 
 ## Example
 

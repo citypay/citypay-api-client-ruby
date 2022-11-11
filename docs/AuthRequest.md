@@ -13,6 +13,7 @@
 | **csc_policy** | **String** | A policy value which determines whether a CSC policy is enforced or bypassed.  Values are  &#x60;0&#x60; for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   &#x60;1&#x60; for an enforced policy. Transactions that are enforced will be rejected if the CSC value does not match.   &#x60;2&#x60; to bypass. Transactions that are bypassed will be allowed through even if the CSC did not match.   &#x60;3&#x60; to ignore. Transactions that are ignored will bypass the result and not send the CSC details for authorisation.  | [optional] |
 | **currency** | **String** | The processing currency for the transaction. Will default to the merchant account currency. | [optional] |
 | **duplicate_policy** | **String** | A policy value which determines whether a duplication policy is enforced or bypassed. A duplication check has a window of time set against your account within which it can action. If a previous transaction with matching values occurred within the window, any subsequent transaction will result in a T001 result.  Values are  &#x60;0&#x60; for the default policy (default value if not supplied). Your default values are determined by your account manager on setup of the account.   &#x60;1&#x60; for an enforced policy. Transactions that are enforced will be checked for duplication within the duplication window.   &#x60;2&#x60; to bypass. Transactions that are bypassed will not be checked for duplication within the duplication window.   &#x60;3&#x60; to ignore. Transactions that are ignored will have the same affect as bypass.  | [optional] |
+| **event_management** | [**EventDataModel**](EventDataModel.md) |  | [optional] |
 | **expmonth** | **Integer** | The month of expiry of the card. The month value should be a numerical value between 1 and 12.  |  |
 | **expyear** | **Integer** | The year of expiry of the card.  |  |
 | **external_mpi** | [**ExternalMPI**](ExternalMPI.md) |  | [optional] |
@@ -41,6 +42,7 @@ instance = CityPayApiClient::AuthRequest.new(
   csc_policy: null,
   currency: GBP,
   duplicate_policy: null,
+  event_management: null,
   expmonth: 9,
   expyear: 2025,
   external_mpi: null,
