@@ -29,7 +29,7 @@ instance = CityPayApiClient::ChargeRequest.new(
   amount: 3600,
   avs_postcode_policy: null,
   cardholder_agreement: null,
-  csc: 12,
+  csc: 10,
   csc_policy: null,
   currency: GBP,
   duplicate_policy: null,
