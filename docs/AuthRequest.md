@@ -38,7 +38,7 @@ instance = CityPayApiClient::AuthRequest.new(
   avs_postcode_policy: null,
   bill_to: null,
   cardnumber: 4000 0000 0000 0002,
-  csc: 12,
+  csc: 10,
   csc_policy: null,
   currency: GBP,
   duplicate_policy: null,
