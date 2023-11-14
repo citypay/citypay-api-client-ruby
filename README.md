@@ -38,61 +38,74 @@ For more information, please visit [https://citypay.com/customer-centre/technica
 
 ## Installation
 
+### From RubyGems (recommended)
+
+Add this to your project's Gemfile:
+
+```ruby
+gem "citypay_api_client", "~> 1.1.1"
+```
+
 ### Build a gem
 
-To build the Ruby code into a gem:
+An alternative to sourcing the gem from RubyGems is to clone this repo and build the gem yourself:
 
-```shell
-gem build citypay_api_client.gemspec
-```
+  $ gem build citypay_api_client.gemspec
 
-Then either install the gem locally:
+You can then install the gem locally or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
 
-```shell
-gem install ./citypay_api_client-1.1.1.gem
-```
+  $ gem install ./citypay_api_client-1.1.1.gem
 
 (for development, run `gem install --dev ./citypay_api_client-1.1.1.gem` to install the development dependencies)
-
-or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
-
-Finally add this to the Gemfile:
-
-    gem 'citypay_api_client', '~> 1.1.1'
 
 ### Install from Git
 
 If the Ruby gem is hosted at a git repository: https://github.com/citypay/citypay-api-client-ruby, then add the following in the Gemfile:
 
-    gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client-ruby.git'
-
-### Include the Ruby code directly
-
-Include the Ruby code directly using `-I` as follows:
-
-```shell
-ruby -Ilib script.rb
+```ruby
+gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client-ruby.git'
 ```
 
-## Getting Started
+## Usage
 
-Please follow the [installation](#installation) procedure and then run the following code:
+> Make sure you have your `client_id`, `license_key` and `mid` credentials ready. Store these as environment variables or in your Rails Credentials file. **DO NOT COMMIT YOUR CREDENTIALS TO YOUR REPO IN PLAIN TEXT**
+
+If using Rails, put the following into an initializer. We recommend `config/citypay.rb`. If you use plain Ruby, run this code before trying to use the API.
 
 ```ruby
-# Load the gem
-require 'citypay_api_client'
+require "citypay_api_client"
 
-# Setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(
+    client_id: ENV["CITYPAY_CLIENT_ID"], licence_key: ENV["CITYPAY_LICENCE_KEY"]
+  ).generate
 end
+```
+This gem does not try to read `CITYPAY_CLIENT_ID` or `CITYPAY_LICENCE_KEY` environment variables so you must set these yourself.
 
-api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
+### Instantiate an API object
+
+```ruby
+api = CityPayApiClient::ApiClient.new
+```
+
+### API Requests
+
+Decide on the [type of request](#Documentation-for-API-Endpoints) you need to perform. In this example, we create a PayLink request. The response will then be used to redirect the customer to CityPay's hosted payment form to complete payment.
+
+```ruby
+api_client = CityPayApiClient::ApiClient.new
+```
+
+```ruby
+#TODO speak to CityPay and get details on the build process for this gem. None of these methods seem to work but appear present in Python, Java and PHP sdks.  
+
+api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new # returns `uninitialized constant CityPayApiClient::AuthorisationAndPaymentApi (NameError)`
 auth_request = CityPayApiClient::AuthRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2025, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344}) # AuthRequest | 
 
 begin
   #Authorisation
-  result = api_instance.authorisation_request(auth_request)
+  result = api_instance.authorisation_request(auth_request) # returns `undefined method `authorisation_request for #<CityPayApiClient::ApiClient`
   p result
 rescue CityPayApiClient::ApiError => e
   puts "Exception when calling AuthorisationAndPaymentApi->authorisation_request: #{e}"
