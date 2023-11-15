@@ -102,7 +102,6 @@ paylink_req = CityPayApiClient::PaylinkTokenRequestModel.new({
 })
 
 # Call the CityPay Endpoint to get the Paylink
-
 begin
   paylink_result = api_client.token_create_request(paylink_req)
   redirect_to paylink_result.url, allow_other_hosts: true # handle response e.g. redirect user to citypay url
