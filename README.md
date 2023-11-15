@@ -79,9 +79,11 @@ CityPayApiClient.configure do |config|
   config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(
     client_id: ENV["CITYPAY_CLIENT_ID"], licence_key: ENV["CITYPAY_LICENCE_KEY"]
   ).generate
+
+  config.server_index = 1 # (0 = production, 1 = test)
 end
 ```
-This gem does not try to read `CITYPAY_CLIENT_ID` or `CITYPAY_LICENCE_KEY` environment variables so you must set these yourself.
+This gem does not try to read `CITYPAY_CLIENT_ID` or `CITYPAY_LICENCE_KEY` environment variables so you must set these yourself. If your API calls return `@code="P003", @msg="Merchant ID Is Invalid: Merchant ID is Test, Not Authorised to Process Live Transactions"`, make sure you've set `config.server_index = 1` in `config/citypay.rb`.
 
 ### Instantiate an API object
 
@@ -91,26 +93,27 @@ api = CityPayApiClient::ApiClient.new
 
 ### API Requests
 
-Decide on the [type of request](#Documentation-for-API-Endpoints) you need to perform. In this example, we create a PayLink request. The response will then be used to redirect the customer to CityPay's hosted payment form to complete payment.
+Decide on the [type of request](#Documentation-for-API-Endpoints) you need to perform. In this example, we'll create a PayLink request then redirect the user to make payment.
 
 ```ruby
-api_client = CityPayApiClient::ApiClient.new
-```
+api_client = CityPayApiClient::PaylinkApi.new
 
-```ruby
-#TODO speak to CityPay and get details on the build process for this gem. None of these methods seem to work but appear present in Python, Java and PHP sdks.  
+# Generate a Unique ID for this transaction
+myapp_transaction_id = SecureRandom.uuid
 
-api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new # returns `uninitialized constant CityPayApiClient::AuthorisationAndPaymentApi (NameError)`
-auth_request = CityPayApiClient::AuthRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2025, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344}) # AuthRequest | 
+# Prepare attributes for creating the Paylink
+paylink_req = CityPayApiClient::PaylinkTokenRequestModel.new({
+  amount: 997, identifier: myapp_transaction_id, merchantid: Rails.application.credentials.dig(:citypay, :merchant_id)
+})
+
+# Call the CityPay Endpoint to get the Paylink
 
 begin
-  #Authorisation
-  result = api_instance.authorisation_request(auth_request) # returns `undefined method `authorisation_request for #<CityPayApiClient::ApiClient`
-  p result
+  paylink_result = api_client.token_create_request(paylink_req)
+  redirect_to paylink_result.url, allow_other_hosts: true # handle response e.g. redirect user to citypay url
 rescue CityPayApiClient::ApiError => e
-  puts "Exception when calling AuthorisationAndPaymentApi->authorisation_request: #{e}"
+  Rails.logger.info "Error when calling PaylinkApi->token_create_request: #{e}"
 end
-
 ```
 
 ## Documentation for API Endpoints
