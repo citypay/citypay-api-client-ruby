@@ -80,7 +80,7 @@ CityPayApiClient.configure do |config|
     client_id: ENV["CITYPAY_CLIENT_ID"], licence_key: ENV["CITYPAY_LICENCE_KEY"]
   ).generate
 
-  config.server_index = 1 # (0 = production, 1 = test)
+  config.server_index = Rails.env.production? ? 0 : 1
 end
 ```
 This gem does not try to read `CITYPAY_CLIENT_ID` or `CITYPAY_LICENCE_KEY` environment variables so you must set these yourself. If your API calls return `@code="P003", @msg="Merchant ID Is Invalid: Merchant ID is Test, Not Authorised to Process Live Transactions"`, make sure you've set `config.server_index = 1` in `config/citypay.rb`.
