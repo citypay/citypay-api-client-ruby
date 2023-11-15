@@ -106,8 +106,8 @@ paylink_req = CityPayApiClient::PaylinkTokenRequestModel.new({
     ascMode: "inline",
     expireIn: 30,
     descriptor: "Rocket Rides",
-    redirect_success: "https://www.welloca.com/citypay/redirects/success",
-    redirect_failure: "https://www.welloca.com/citypay/redirects/failure",
+    redirect_success: "https://mycompanywebsite.com/citypay/redirects/success",
+    redirect_failure: "https://mycompanywebsite.com/citypay/redirects/failure",
     options: ["BYPASS_3DSECURE", "BYPASS_AVS_ADDRESS"] # turn these off in production
   },
 })
