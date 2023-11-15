@@ -97,8 +97,19 @@ api_client = CityPayApiClient::PaylinkApi.new
 myapp_transaction_id = SecureRandom.uuid
 
 # Prepare attributes for creating the Paylink
+# see https://citypay.github.io/api-docs/paylink/#config-fields for config options
 paylink_req = CityPayApiClient::PaylinkTokenRequestModel.new({
-  amount: 997, identifier: myapp_transaction_id, merchantid: Rails.application.credentials.dig(:citypay, :merchant_id)
+  amount: 997, # price in cents
+  identifier: myapp_transaction_id,
+  merchantid: Rails.application.credentials.dig(:citypay, :merchant_id),
+  config: {
+    ascMode: "inline",
+    expireIn: 30,
+    descriptor: "Rocket Rides",
+    redirect_success: "https://www.welloca.com/citypay/redirects/success",
+    redirect_failure: "https://www.welloca.com/citypay/redirects/failure",
+    options: ["BYPASS_3DSECURE", "BYPASS_AVS_ADDRESS"] # turn these off in production
+  },
 })
 
 # Call the CityPay Endpoint to get the Paylink
