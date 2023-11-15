@@ -85,17 +85,12 @@ end
 ```
 This gem does not try to read `CITYPAY_CLIENT_ID` or `CITYPAY_LICENCE_KEY` environment variables so you must set these yourself. If your API calls return `@code="P003", @msg="Merchant ID Is Invalid: Merchant ID is Test, Not Authorised to Process Live Transactions"`, make sure you've set `config.server_index = 1` in `config/citypay.rb`.
 
-### Instantiate an API object
-
-```ruby
-api = CityPayApiClient::ApiClient.new
-```
-
 ### API Requests
 
 Decide on the [type of request](#Documentation-for-API-Endpoints) you need to perform. In this example, we'll create a PayLink request then redirect the user to make payment.
 
 ```ruby
+# Instantiate an API object
 api_client = CityPayApiClient::PaylinkApi.new
 
 # Generate a Unique ID for this transaction
