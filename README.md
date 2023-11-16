@@ -68,7 +68,7 @@ gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client
 
 ## Usage
 
-> Make sure you have your `client_id`, `license_key` and `mid` credentials ready. If you are integrating CityPay within a single tenant application, store these as environment variables or in your Rails Credentials file. If you are integrating CityPay into a SaaS platform where clients have their own CityPay account, you will need to store user-provided credentials in your database. Whenever you store CityPay credentials, ensure they are encrypted at rest. In Rails 7.1 and later, you can achieve this via [Active Record Encryption](https://guides.rubyonrails.org/active_record_encryption.html)
+> Make sure you have your `client_id`, `license_key` and `merchant_id` credentials ready. If you are integrating CityPay within a single tenant application, store these as environment variables or in your Rails Credentials file. If you are integrating CityPay into a SaaS platform where clients have their own CityPay account, you will need to store user-provided credentials in your database. Whenever you store CityPay credentials, ensure they are encrypted at rest. In Rails 7.1 and later, you can achieve this via [Active Record Encryption](https://guides.rubyonrails.org/active_record_encryption.html)
 
 ```ruby
 # Example for app/models/account.rb
