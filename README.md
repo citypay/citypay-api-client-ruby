@@ -50,11 +50,11 @@ gem "citypay_api_client", "~> 1.1.1"
 
 An alternative to sourcing the gem from RubyGems is to clone this repo and build the gem yourself:
 
-  $ gem build citypay_api_client.gemspec
+> $ gem build citypay_api_client.gemspec
 
 You can then install the gem locally or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
 
-  $ gem install ./citypay_api_client-1.1.1.gem
+> $ gem install ./citypay_api_client-1.1.1.gem
 
 (for development, run `gem install --dev ./citypay_api_client-1.1.1.gem` to install the development dependencies)
 
