@@ -80,7 +80,7 @@ class Account < ApplicationRecord
   validates :licence_key, length: { maximum: 16, too_long: "%{count} characters is the maximum allowed" }
 
   # Use non-deterministic encryption where possible
-  encrypts :client_id, :licence_key, merchant_id
+  encrypts :client_id, :licence_key, :merchant_id
 
   before_create_commit :validate_citypay_credentials
 
