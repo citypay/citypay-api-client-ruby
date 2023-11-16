@@ -38,66 +38,124 @@ For more information, please visit [https://citypay.com/customer-centre/technica
 
 ## Installation
 
+### From RubyGems (recommended)
+
+Add this to your project's Gemfile:
+
+```ruby
+gem "citypay_api_client", "~> 1.1.1"
+```
+
 ### Build a gem
 
-To build the Ruby code into a gem:
+An alternative to sourcing the gem from RubyGems is to clone this repo and build the gem yourself:
 
-```shell
-gem build citypay_api_client.gemspec
-```
+> $ gem build citypay_api_client.gemspec
 
-Then either install the gem locally:
+You can then install the gem locally or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
 
-```shell
-gem install ./citypay_api_client-1.1.1.gem
-```
+> $ gem install ./citypay_api_client-1.1.1.gem
 
 (for development, run `gem install --dev ./citypay_api_client-1.1.1.gem` to install the development dependencies)
-
-or publish the gem to a gem hosting service, e.g. [RubyGems](https://rubygems.org/).
-
-Finally add this to the Gemfile:
-
-    gem 'citypay_api_client', '~> 1.1.1'
 
 ### Install from Git
 
 If the Ruby gem is hosted at a git repository: https://github.com/citypay/citypay-api-client-ruby, then add the following in the Gemfile:
 
-    gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client-ruby.git'
-
-### Include the Ruby code directly
-
-Include the Ruby code directly using `-I` as follows:
-
-```shell
-ruby -Ilib script.rb
+```ruby
+gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client-ruby.git'
 ```
 
-## Getting Started
+## Usage
 
-Please follow the [installation](#installation) procedure and then run the following code:
+> Make sure you have your `client_id`, `license_key` and `merchant_id` credentials ready. If you are integrating CityPay within a single tenant application, store these as environment variables or in your Rails Credentials file. If you are integrating CityPay into a SaaS platform where clients have their own CityPay account, you will need to store user-provided credentials in your database. Whenever you store CityPay credentials, ensure they are encrypted at rest. In Rails 7.1 and later, you can achieve this via [Active Record Encryption](https://guides.rubyonrails.org/active_record_encryption.html)
 
 ```ruby
-# Load the gem
-require 'citypay_api_client'
+# Example for app/models/account.rb
 
-# Setup authorization
+class Account < ApplicationRecord
+  has_many :users
+
+  validates :client_id, :merchant_id, length: { maximum: 8, too_long: "%{count} characters is the maximum allowed" }
+  validates :licence_key, length: { maximum: 16, too_long: "%{count} characters is the maximum allowed" }
+
+  # Use non-deterministic encryption where possible
+  encrypts :client_id, :licence_key, :merchant_id
+
+  before_create_commit :validate_citypay_credentials
+
+  private
+    def validate_citypay_credentials
+      # Perform an API call to CityPayApiClient::Ping and check credentials work
+
+      CityPayApiClient.configure do |config|
+        config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(
+          client_id: self.client_id, licence_key: self.licence_key
+        ).generate
+      end
+
+      api_instance = CityPayApiClient::OperationalFunctionsApi.new
+      uuid = SecureRandom.uuid
+
+      begin
+        result = api_instance.ping_request(CityPayApiClient::Ping.new(identifier:  uuid))
+        true if result.code = "044"
+      rescue
+        false
+      end
+    end
+end
+```
+
+If using Rails, put the following into a concern and include in your controller. Do not put the following an initializer as API keys are temporal / time based. They typically have a TTL of 5 minutes in production and 20 minutes in Sandbox.
+
+```ruby
+require "citypay_api_client"
+
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(
+    client_id: ENV["CITYPAY_CLIENT_ID"], licence_key: ENV["CITYPAY_LICENCE_KEY"]
+  ).generate
+
+  config.server_index = Rails.env.production? ? 0 : 1
 end
+```
+This gem does not try to read `CITYPAY_CLIENT_ID` or `CITYPAY_LICENCE_KEY` environment variables so you must set these yourself. If your API calls return `@code="P003", @msg="Merchant ID Is Invalid: Merchant ID is Test, Not Authorised to Process Live Transactions"`, make sure you've set `config.server_index = 1` in `config/citypay.rb`.
 
-api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
-auth_request = CityPayApiClient::AuthRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2025, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344}) # AuthRequest | 
+### API Requests
 
+Decide on the [type of request](#Documentation-for-API-Endpoints) you need to perform. In this example, we'll create a PayLink request then redirect the user to make payment.
+
+```ruby
+# Instantiate an API object
+api_client = CityPayApiClient::PaylinkApi.new
+
+# Generate a Unique ID for this transaction
+myapp_transaction_id = SecureRandom.uuid
+
+# Prepare attributes for creating the Paylink
+# see https://citypay.github.io/api-docs/paylink/#config-fields for config options
+paylink_req = CityPayApiClient::PaylinkTokenRequestModel.new({
+  amount: 997, # price in cents
+  identifier: myapp_transaction_id,
+  merchantid: Rails.application.credentials.dig(:citypay, :merchant_id),
+  config: {
+    ascMode: "inline",
+    expireIn: 30,
+    descriptor: "Rocket Rides",
+    redirect_success: "https://mycompanywebsite.com/citypay/redirects/success",
+    redirect_failure: "https://mycompanywebsite.com/citypay/redirects/failure",
+    options: ["BYPASS_3DSECURE", "BYPASS_AVS_ADDRESS"] # turn these off in production
+  },
+})
+
+# Call the CityPay Endpoint to get the Paylink
 begin
-  #Authorisation
-  result = api_instance.authorisation_request(auth_request)
-  p result
+  paylink_result = api_client.token_create_request(paylink_req)
+  redirect_to paylink_result.url, allow_other_hosts: true # handle response e.g. redirect user to citypay url
 rescue CityPayApiClient::ApiError => e
-  puts "Exception when calling AuthorisationAndPaymentApi->authorisation_request: #{e}"
+  Rails.logger.info "Error when calling PaylinkApi->token_create_request: #{e}"
 end
-
 ```
 
 ## Documentation for API Endpoints
