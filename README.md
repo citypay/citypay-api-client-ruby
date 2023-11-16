@@ -70,7 +70,7 @@ gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client
 
 > Make sure you have your `client_id`, `license_key` and `mid` credentials ready. Store these as environment variables or in your Rails Credentials file. **DO NOT COMMIT YOUR CREDENTIALS TO YOUR REPO IN PLAIN TEXT**
 
-If using Rails, put the following into an initializer. We recommend `config/citypay.rb`. If you use plain Ruby, run this code before trying to use the API.
+If using Rails, put the following into a concern and include in your controller. Do not put the following an initializer as API keys are temporal / time based. They typically have a TTL of 5 minutes in production and 20 minutes in Sandbox.
 
 ```ruby
 require "citypay_api_client"
