@@ -68,7 +68,44 @@ gem 'citypay_api_client', :git => 'https://github.com/citypay/citypay-api-client
 
 ## Usage
 
-> Make sure you have your `client_id`, `license_key` and `mid` credentials ready. Store these as environment variables or in your Rails Credentials file. **DO NOT COMMIT YOUR CREDENTIALS TO YOUR REPO IN PLAIN TEXT**
+> Make sure you have your `client_id`, `license_key` and `mid` credentials ready. If you are integrating CityPay within a single tenant application, store these as environment variables or in your Rails Credentials file. If you are integrating CityPay into a SaaS platform where clients have their own CityPay account, you will need to store user-provided credentials in your database. Whenever you store CityPay credentials, ensure they are encrypted at rest. In Rails 7.1 and later, you can achieve this via [Active Record Encryption](https://guides.rubyonrails.org/active_record_encryption.html)
+
+```ruby
+# Example for app/models/account.rb
+
+class Account < ApplicationRecord
+  has_many :users
+
+  validates :client_id, :merchant_id, length: { maximum: 8, too_long: "%{count} characters is the maximum allowed" }
+  validates :licence_key, length: { maximum: 16, too_long: "%{count} characters is the maximum allowed" }
+
+  # Use non-deterministic encryption where possible
+  encrypts :client_id, :licence_key, merchant_id
+
+  before_create_commit :validate_citypay_credentials
+
+  private
+    def validate_citypay_credentials
+      # Perform an API call to CityPayApiClient::Ping and check credentials work
+
+      CityPayApiClient.configure do |config|
+        config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(
+          client_id: self.client_id, licence_key: self.licence_key
+        ).generate
+      end
+
+      api_instance = CityPayApiClient::OperationalFunctionsApi.new
+      uuid = SecureRandom.uuid
+
+      begin
+        result = api_instance.ping_request(CityPayApiClient::Ping.new(identifier:  uuid))
+        true if result.code = "044"
+      rescue
+        false
+      end
+    end
+end
+```
 
 If using Rails, put the following into a concern and include in your controller. Do not put the following an initializer as API keys are temporal / time based. They typically have a TTL of 5 minutes in production and 20 minutes in Sandbox.
 
