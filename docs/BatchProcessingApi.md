@@ -5,7 +5,7 @@ All URIs are relative to *https://api.citypay.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**batch_process_request**](BatchProcessingApi.md#batch_process_request) | **POST** /v6/batch/process | Batch Process Request |
-| [**batch_report_request**](BatchProcessingApi.md#batch_report_request) | **POST** /v6/batch/retrieve | BatchReportRequest |
+| [**batch_retrieve_request**](BatchProcessingApi.md#batch_retrieve_request) | **POST** /v6/batch/retrieve | BatchReportRequest |
 | [**check_batch_status_request**](BatchProcessingApi.md#check_batch_status_request) | **POST** /v6/batch/status | CheckBatchStatus |
 
 
@@ -15,7 +15,11 @@ All URIs are relative to *https://api.citypay.com*
 
 Batch Process Request
 
-A batch process request is used to start the batch process workflow by uploading batch data and initialising a new batch for processing. Once validated the batch will be queued for processing and further updates can be received by a subsequent call to retrieve the batch status. 
+A batch process request is used to start the batch process workflow by uploading batch
+data and initialising a new batch for processing. Once validated the batch will be queued
+for processing and further updates can be received by a subsequent call to retrieve the batch
+status.
+
 
 ### Examples
 
@@ -77,13 +81,13 @@ end
 - **Accept**: application/json, text/xml
 
 
-## batch_report_request
+## batch_retrieve_request
 
-> <BatchReportResponseModel> batch_report_request(batch_report_request)
+> <BatchReportResponseModel> batch_retrieve_request(batch_report_request)
 
 BatchReportRequest
 
-The operation is used to retrieve a report of the result of a batch process.
+The report for a given batch.
 
 ### Examples
 
@@ -100,28 +104,28 @@ batch_report_request = CityPayApiClient::BatchReportRequest.new({batch_id: 35}) 
 
 begin
   # BatchReportRequest
-  result = api_instance.batch_report_request(batch_report_request)
+  result = api_instance.batch_retrieve_request(batch_report_request)
   p result
 rescue CityPayApiClient::ApiError => e
-  puts "Error when calling BatchProcessingApi->batch_report_request: #{e}"
+  puts "Error when calling BatchProcessingApi->batch_retrieve_request: #{e}"
 end
 ```
 
-#### Using the batch_report_request_with_http_info variant
+#### Using the batch_retrieve_request_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<BatchReportResponseModel>, Integer, Hash)> batch_report_request_with_http_info(batch_report_request)
+> <Array(<BatchReportResponseModel>, Integer, Hash)> batch_retrieve_request_with_http_info(batch_report_request)
 
 ```ruby
 begin
   # BatchReportRequest
-  data, status_code, headers = api_instance.batch_report_request_with_http_info(batch_report_request)
+  data, status_code, headers = api_instance.batch_retrieve_request_with_http_info(batch_report_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <BatchReportResponseModel>
 rescue CityPayApiClient::ApiError => e
-  puts "Error when calling BatchProcessingApi->batch_report_request_with_http_info: #{e}"
+  puts "Error when calling BatchProcessingApi->batch_retrieve_request_with_http_info: #{e}"
 end
 ```
 

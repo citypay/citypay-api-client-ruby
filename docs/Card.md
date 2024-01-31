@@ -44,7 +44,7 @@ instance = CityPayApiClient::Card.new(
   date_created: 2020-01-02T18:32:28Z,
   default: null,
   expmonth: 9,
-  expyear: 2025,
+  expyear: 2027,
   label: Visa/0002,
   label2: Visa/0002,Exp:2304,
   last4digits: 2,

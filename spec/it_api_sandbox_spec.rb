@@ -121,13 +121,7 @@ describe 'IntegrationTests' do
       res = request.run
       c_res = res.response_body
 
-      expect(c_res['acsTransID']).to_not be_nil
-      expect(c_res['messageType']).to_not be_nil
-      expect(c_res['messageVersion']).to_not be_nil
-      expect(c_res['threeDSServerTransID']).to_not be_nil
-      expect(c_res['transStatus']).to_not be_nil
-
-      c_res_auth_request = CityPayApiClient::CResAuthRequest.new({:cres => Base64.encode64(c_res)})
+      c_res_auth_request = CityPayApiClient::CResAuthRequest.new({:cres => c_res['cres']})
 
       c_res_request_response =  api_instance.c_res_request(c_res_auth_request)
 

@@ -173,6 +173,4 @@ lib/citypay_api_client/models/three_d_secure.rb
 lib/citypay_api_client/models/tokenisation_response_model.rb
 lib/citypay_api_client/models/void_request.rb
 lib/citypay_api_client/version.rb
-spec/api_client_spec.rb
-spec/configuration_spec.rb
 spec/spec_helper.rb

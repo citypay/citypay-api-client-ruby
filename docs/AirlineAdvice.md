@@ -8,7 +8,7 @@
 | **conjunction_ticket_indicator** | **Boolean** | true if a conjunction ticket (with additional coupons) was issued for an itinerary with more than four segments. Defaults to false.  | [optional] |
 | **eticket_indicator** | **Boolean** | The Electronic Ticket Indicator, a code that indicates if an electronic ticket was issued.  Defaults to true. | [optional] |
 | **no_air_segments** | **Integer** | A value that indicates the number of air travel segments included on this ticket.  Valid entries include the numerals “0” through “4”. Required only if the transaction type is TKT or EXC.  | [optional] |
-| **number_in_party** | **Integer** | The number of people in the party. |  |
+| **number_in_party** | **Integer** | The number of people in the party. | [optional] |
 | **original_ticket_no** | **String** | Required if transaction type is EXC. | [optional] |
 | **passenger_name** | **String** | The name of the passenger when the traveller is not the card member that purchased the ticket. Required only if the transaction type is TKT or EXC. | [optional] |
 | **segment1** | [**AirlineSegment**](AirlineSegment.md) |  |  |
