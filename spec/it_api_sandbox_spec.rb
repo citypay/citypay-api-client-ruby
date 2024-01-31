@@ -120,8 +120,8 @@ describe 'IntegrationTests' do
                                        body: content.to_json)
       res = request.run
       c_res = res.response_body
-
-      c_res_auth_request = CityPayApiClient::CResAuthRequest.new({:cres => c_res['cres']})
+      object = JSON.parse(c_res)
+      c_res_auth_request = CityPayApiClient::CResAuthRequest.new({:cres => object['cres']})
 
       c_res_request_response =  api_instance.c_res_request(c_res_auth_request)
 
