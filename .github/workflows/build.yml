@@ -15,7 +15,7 @@ jobs:
       CP_MERCHANT_ID: ${{ secrets.CP_MERCHANT_ID }}
     strategy:
       matrix:
-        ruby-version: [2.7, 2.9, 3.0, 3.3]
+        ruby-version: [2.7, 3.0, 3.3]
 
     steps:
       - uses: actions/checkout@v3
