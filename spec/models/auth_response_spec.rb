@@ -21,38 +21,71 @@ describe 'AuthResponse' do
     # run before each test
 
     json = '
-{
-      "amount": 5500,
-      "atrn": "atrn1",
-      "atsd": "a",
-      "authcode": "12345",
-      "authen_result": "R",
-      "authorised": true,
-      "avs_result": "G",
-      "bin_commercial": false,
-      "bin_debit": false,
-      "bin_description": "bin_desc",
-      "cavv": "cavvvvvvvvvvvvv",
-      "context": "20200812075906AAAGV4",
-      "csc_result": "C",
-      "currency": "GBP",
-      "datetime": "2020-08-12T07:59:11Z",
-      "eci": "0",
-      "identifier": "ident1",
-      "live": true,
-      "maskedpan": "400000******0002",
-      "merchantid": 12345,
-      "result": 1,
-      "result_code": "000",
-      "result_message": "System: Accepted Transaction",
-      "scheme": "VISA_BUSINESS",
-      "sha256": "abcdefg",
-      "trans_status": "P",
-      "transno": 74875
-}
-'
+        {
+          "amount": 5500,
+          "atrn": "atrn1",
+          "atsd": "a",
+          "authcode": "12345",
+          "authen_result": "R",
+          "authorised": true,
+          "avs_result": "G",
+          "bin_commercial": false,
+          "bin_debit": false,
+          "bin_description": "bin_desc",
+          "cavv": "cavvvvvvvvvvvvv",
+          "context": "20200812075906AAAGV4",
+          "csc_result": "C",
+          "currency": "GBP",
+          "datetime": "2020-08-12T07:59:11Z",
+          "eci": "0",
+          "identifier": "ident1",
+          "live": true,
+          "maskedpan": "400000******0002",
+          "merchantid": 12345,
+          "result": 1,
+          "result_code": "000",
+          "result_message": "System: Accepted Transaction",
+          "scheme": "VISA_BUSINESS",
+          "sha256": "abcdefg",
+          "trans_status": "P",
+          "transno": 74875
+        }'
+
+    json_no_ident = '
+        {
+          "amount": 0,
+          "atrn": "",
+          "atsd": "",
+          "authcode": "",
+          "authen_result": "",
+          "authorised": false,
+          "avs_result": " ",
+          "bin_commercial": false,
+          "bin_debit": false,
+          "bin_description": "",
+          "cavv": "",
+          "context": "PC.0.A5298ef695b",
+          "csc_result": " ",
+          "currency": "---",
+          "datetime": "1969-12-31T23:59:59Z",
+          "eci": "0",
+          "identifier": "",
+          "live": true,
+          "maskedpan": "N/A",
+          "merchantid": 0,
+          "result": 3,
+          "result_code": "P030",
+          "result_message": "Request Error: Authorisation invalid (203: Data element not in the required format or value is invalid as defined in Table A.1. threeDSSessionData)",
+          "scheme": "",
+          "sha256": "",
+          "trans_status": "_",
+          "transno": -1
+        }'
+
     data = JSON.parse(json, :symbolize_names => true)
+    data_not_ident = JSON.parse(json_no_ident, :symbolize_names => true)
     @instance = CityPayApiClient::ApiClient.new.convert_to_type(data, "AuthResponse")
+    @instance_not_ident = CityPayApiClient::ApiClient.new.convert_to_type(data_not_ident, "AuthResponse")
   end
 
   after do
@@ -223,6 +256,18 @@ describe 'AuthResponse' do
   describe 'test attribute "transno"' do
     it 'should work' do
       expect(@instance.transno).to eq(74875)
+    end
+  end
+
+  describe 'test attribute "result_code"' do
+    it 'should work' do
+      expect(@instance_not_ident.result_code).to eq("P030")
+    end
+  end
+
+  describe 'test attribute "result"' do
+    it 'should work' do
+      expect(@instance_not_ident.result).to eq(3)
     end
   end
 
