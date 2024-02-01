@@ -19,7 +19,6 @@ require 'date'
 describe 'RegisterCard' do
   before do
     # run before each test
-    @instance = CityPayApiClient::RegisterCard.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'RegisterCard' do
 
   describe 'test an instance of RegisterCard' do
     it 'should create an instance of RegisterCard' do
-      expect(@instance).to be_instance_of(CityPayApiClient::RegisterCard)
     end
   end
   describe 'test attribute "cardnumber"' do

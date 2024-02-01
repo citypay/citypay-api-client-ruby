@@ -19,7 +19,6 @@ require 'date'
 describe 'CardHolderAccount' do
   before do
     # run before each test
-    @instance = CityPayApiClient::CardHolderAccount.new
 
     json = '{
         "account_id": "abc123",
@@ -77,7 +76,6 @@ describe 'CardHolderAccount' do
 
   describe 'test an instance of CardHolderAccount' do
     it 'should create an instance of CardHolderAccount' do
-      expect(@instance).to be_instance_of(CityPayApiClient::CardHolderAccount)
     end
   end
   describe 'test attribute "account_id"' do

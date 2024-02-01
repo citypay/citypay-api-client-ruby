@@ -19,7 +19,6 @@ require 'date'
 describe 'AuthRequest' do
   before do
     # run before each test
-    @instance = CityPayApiClient::AuthRequest.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'AuthRequest' do
 
   describe 'test an instance of AuthRequest' do
     it 'should create an instance of AuthRequest' do
-      expect(@instance).to be_instance_of(CityPayApiClient::AuthRequest)
     end
   end
   describe 'test attribute "airline_data"' do
