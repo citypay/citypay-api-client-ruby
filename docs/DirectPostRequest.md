@@ -22,6 +22,7 @@
 | **redirect_failure** | **String** | The URL used to redirect back to your site when a transaction has been rejected or declined. Required if a url-encoded request.  | [optional] |
 | **redirect_success** | **String** | The URL used to redirect back to your site when a transaction has been tokenised or authorised. Required if a url-encoded request.  | [optional] |
 | **ship_to** | [**ContactDetails**](ContactDetails.md) |  | [optional] |
+| **tag** | **String** | A \&quot;tag\&quot; is a label that you can attach to a payment authorization. Tags can help you group transactions together based on certain criteria, like a work job or a ticket number. They can also assist in filtering transactions when you&#39;re generating reports.  Multiple Tags You can add more than one tag to a transaction by separating them with commas.  Limitations There is a maximum limit of 3 tags that can be added to a single transaction. Each tag can be no longer than 20 characters and alphanumeric with no spaces.  Example: Let&#39;s say you&#39;re a software company and you have different teams working on various projects. When a team makes a purchase or incurs an expense, they can tag the transaction with the project name, the team name, and the type of expense.  Project Name: Project_X Team Name: Team_A Type of Expense: Hardware So, the tag for a transaction might look like: Project_X,Team_A,Hardware  This way, when you&#39;re looking at your financial reports, you can easily filter transactions based on these tags to see how much each project or team is spending on different types of expenses.  | [optional] |
 | **threedsecure** | [**ThreeDSecure**](ThreeDSecure.md) |  | [optional] |
 | **trans_info** | **String** | Further information that can be added to the transaction will display in reporting. Can be used for flexible values such as operator id. | [optional] |
 | **trans_type** | **String** | The type of transaction being submitted. Normally this value is not required and your account manager may request that you set this field. | [optional] |
@@ -41,7 +42,7 @@ instance = CityPayApiClient::DirectPostRequest.new(
   currency: GBP,
   duplicate_policy: null,
   expmonth: 9,
-  expyear: 2025,
+  expyear: 2027,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   mac: 3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D,
   match_avsa: null,
@@ -50,6 +51,7 @@ instance = CityPayApiClient::DirectPostRequest.new(
   redirect_failure: https://pay.mystore.com/continue_failure,
   redirect_success: https://pay.mystore.com/continue_success,
   ship_to: null,
+  tag: null,
   threedsecure: null,
   trans_info: null,
   trans_type: null

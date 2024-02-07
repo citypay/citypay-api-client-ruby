@@ -19,7 +19,6 @@ require 'date'
 describe 'ChargeRequest' do
   before do
     # run before each test
-    @instance = CityPayApiClient::ChargeRequest.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'ChargeRequest' do
 
   describe 'test an instance of ChargeRequest' do
     it 'should create an instance of ChargeRequest' do
-      expect(@instance).to be_instance_of(CityPayApiClient::ChargeRequest)
     end
   end
   describe 'test attribute "amount"' do

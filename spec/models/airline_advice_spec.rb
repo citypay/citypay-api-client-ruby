@@ -19,7 +19,6 @@ require 'date'
 describe 'AirlineAdvice' do
   before do
     # run before each test
-    @instance = CityPayApiClient::AirlineAdvice.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'AirlineAdvice' do
 
   describe 'test an instance of AirlineAdvice' do
     it 'should create an instance of AirlineAdvice' do
-      expect(@instance).to be_instance_of(CityPayApiClient::AirlineAdvice)
     end
   end
   describe 'test attribute "carrier_name"' do

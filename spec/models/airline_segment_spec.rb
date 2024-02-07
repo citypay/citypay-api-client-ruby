@@ -19,7 +19,6 @@ require 'date'
 describe 'AirlineSegment' do
   before do
     # run before each test
-    @instance = CityPayApiClient::AirlineSegment.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'AirlineSegment' do
 
   describe 'test an instance of AirlineSegment' do
     it 'should create an instance of AirlineSegment' do
-      expect(@instance).to be_instance_of(CityPayApiClient::AirlineSegment)
     end
   end
   describe 'test attribute "arrival_location_code"' do

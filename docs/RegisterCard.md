@@ -19,7 +19,7 @@ instance = CityPayApiClient::RegisterCard.new(
   cardnumber: 4000 0000 0000 0002,
   default: null,
   expmonth: 9,
-  expyear: 2025,
+  expyear: 2027,
   name_on_card: MR NE BODY
 )
 ```

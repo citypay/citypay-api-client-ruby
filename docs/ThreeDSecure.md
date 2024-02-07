@@ -11,7 +11,7 @@
 | **browser_language** | **String** | BrowserLanguage field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
 | **browser_screen_height** | **String** | BrowserScreenHeight field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
 | **browser_screen_width** | **String** | BrowserScreenWidth field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
-| **browser_tz** | **String** | BrowserTZ field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
+| **browser_tz** | **String** | BrowserTZ offset field used for 3DSv2 browser enablement. Recommendation is to use citypay.js and the &#x60;bx&#x60; function to gather this value. | [optional] |
 | **cp_bx** | **String** | Required for 3DSv2.  Browser extension value produced by the citypay.js &#x60;bx&#x60; function. See [https://sandbox.citypay.com/3dsv2/bx](https://sandbox.citypay.com/3dsv2/bx) for  details.  | [optional] |
 | **downgrade1** | **Boolean** | Where a merchant is configured for 3DSv2, setting this option will attempt to downgrade the transaction to  3DSv1.  | [optional] |
 | **merchant_termurl** | **String** | A controller URL for 3D-Secure processing that any response from an authentication request or challenge request should be sent to.  The controller should forward on the response from the URL back via this API for subsequent processing.  | [optional] |

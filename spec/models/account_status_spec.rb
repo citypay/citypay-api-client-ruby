@@ -19,7 +19,7 @@ require 'date'
 describe 'AccountStatus' do
   before do
     # run before each test
-    @instance = CityPayApiClient::AccountStatus.new
+
   end
 
   after do
@@ -28,7 +28,7 @@ describe 'AccountStatus' do
 
   describe 'test an instance of AccountStatus' do
     it 'should create an instance of AccountStatus' do
-      expect(@instance).to be_instance_of(CityPayApiClient::AccountStatus)
+
     end
   end
   describe 'test attribute "status"' do

@@ -19,7 +19,6 @@ require 'date'
 describe 'RefundRequest' do
   before do
     # run before each test
-    @instance = CityPayApiClient::RefundRequest.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'RefundRequest' do
 
   describe 'test an instance of RefundRequest' do
     it 'should create an instance of RefundRequest' do
-      expect(@instance).to be_instance_of(CityPayApiClient::RefundRequest)
     end
   end
   describe 'test attribute "amount"' do

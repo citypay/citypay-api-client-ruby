@@ -23,6 +23,7 @@
 | **merchantid** | **Integer** | Identifies the merchant account to perform processing for. |  |
 | **name_on_card** | **String** | The card holder name as appears on the card such as MR N E BODY. Required for some acquirers.  | [optional] |
 | **ship_to** | [**ContactDetails**](ContactDetails.md) |  | [optional] |
+| **tag** | **String** | A \&quot;tag\&quot; is a label that you can attach to a payment authorization. Tags can help you group transactions together based on certain criteria, like a work job or a ticket number. They can also assist in filtering transactions when you&#39;re generating reports.  Multiple Tags You can add more than one tag to a transaction by separating them with commas.  Limitations There is a maximum limit of 3 tags that can be added to a single transaction. Each tag can be no longer than 20 characters and alphanumeric with no spaces.  Example: Let&#39;s say you&#39;re a software company and you have different teams working on various projects. When a team makes a purchase or incurs an expense, they can tag the transaction with the project name, the team name, and the type of expense.  Project Name: Project_X Team Name: Team_A Type of Expense: Hardware So, the tag for a transaction might look like: Project_X,Team_A,Hardware  This way, when you&#39;re looking at your financial reports, you can easily filter transactions based on these tags to see how much each project or team is spending on different types of expenses.  | [optional] |
 | **threedsecure** | [**ThreeDSecure**](ThreeDSecure.md) |  | [optional] |
 | **trans_info** | **String** | Further information that can be added to the transaction will display in reporting. Can be used for flexible values such as operator id. | [optional] |
 | **trans_type** | **String** | The type of transaction being submitted. Normally this value is not required and your account manager may request that you set this field. | [optional] |
@@ -44,7 +45,7 @@ instance = CityPayApiClient::AuthRequest.new(
   duplicate_policy: null,
   event_management: null,
   expmonth: 9,
-  expyear: 2025,
+  expyear: 2027,
   external_mpi: null,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   match_avsa: null,
@@ -52,6 +53,7 @@ instance = CityPayApiClient::AuthRequest.new(
   merchantid: 11223344,
   name_on_card: MR NE BODY,
   ship_to: null,
+  tag: null,
   threedsecure: null,
   trans_info: null,
   trans_type: null

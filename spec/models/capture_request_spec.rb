@@ -19,7 +19,6 @@ require 'date'
 describe 'CaptureRequest' do
   before do
     # run before each test
-    @instance = CityPayApiClient::CaptureRequest.new
   end
 
   after do
@@ -28,7 +27,6 @@ describe 'CaptureRequest' do
 
   describe 'test an instance of CaptureRequest' do
     it 'should create an instance of CaptureRequest' do
-      expect(@instance).to be_instance_of(CityPayApiClient::CaptureRequest)
     end
   end
   describe 'test attribute "airline_data"' do

@@ -17,7 +17,10 @@ All URIs are relative to *https://api.citypay.com*
 
 Handles a CRes response from ACS, returning back the result of authorisation
 
-Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData` value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a `Direct Post` integration who wish to handle the challenge flow themselves. 
+Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData`
+value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to
+perform a `Direct Post` integration who wish to handle the challenge flow themselves.
+
 
 ### Examples
 
@@ -87,7 +90,10 @@ No authorization required
 
 Handles a CRes response from ACS, returning back a token for future authorisation
 
-Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData` value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a `Direct Post` integration who wish to handle the challenge flow themselves. 
+Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData`
+value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to
+perform a `Direct Post` integration who wish to handle the challenge flow themselves.
+
 
 ### Examples
 
@@ -157,7 +163,15 @@ No authorization required
 
 Direct Post Auth Request
 
-Used to initiate a direct post request transaction flow.  <pre class=\"inline-code language-bash\"> <code> curl https://api.citypay.com/direct/auth?cp-domain-key=n834ytqp84y... \\  -d \"amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW </code> </pre>. 
+Used to initiate a direct post request transaction flow.
+
+<pre class="inline-code language-bash">
+<code>
+curl https://api.citypay.com/direct/auth?cp-domain-key=n834ytqp84y... \
+ -d "amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW
+</code>
+</pre>.
+
 
 ### Examples
 
@@ -166,14 +180,14 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
-
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2025, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Auth Request
@@ -214,7 +228,7 @@ end
 
 ### Authorization
 
-[cp-api-key](../README.md#cp-api-key), [cp-domain-key](../README.md#cp-domain-key)
+[cp-domain-key](../README.md#cp-domain-key), [cp-api-key](../README.md#cp-api-key)
 
 ### HTTP request headers
 
@@ -228,7 +242,15 @@ end
 
 Direct Post Tokenise Request
 
-Used to initiate a direct post request transaction flow.  <pre class=\"inline-code language-bash\"> <code> curl https://api.citypay.com/v6/direct?cp-domain-key=n834ytqp84y... \\  -d \"amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW </code> </pre>. 
+Used to initiate a direct post request transaction flow.
+
+<pre class="inline-code language-bash">
+<code>
+curl https://api.citypay.com/v6/direct?cp-domain-key=n834ytqp84y... \
+ -d "amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW
+</code>
+</pre>.
+
 
 ### Examples
 
@@ -237,14 +259,14 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
-
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2025, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Tokenise Request
@@ -285,7 +307,7 @@ end
 
 ### Authorization
 
-[cp-api-key](../README.md#cp-api-key), [cp-domain-key](../README.md#cp-domain-key)
+[cp-domain-key](../README.md#cp-domain-key), [cp-api-key](../README.md#cp-api-key)
 
 ### HTTP request headers
 
@@ -299,7 +321,9 @@ end
 
 Direct Post Token Request
 
-Perform a request for authorisation for a previously generated token. This flow will return an authorisation response stating that the transaction was approved or declined. 
+Perform a request for authorisation for a previously generated token. This flow will return an authorisation
+response stating that the transaction was approved or declined.
+
 
 ### Examples
 
@@ -308,10 +332,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
-
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
@@ -356,7 +380,7 @@ end
 
 ### Authorization
 
-[cp-api-key](../README.md#cp-api-key), [cp-domain-key](../README.md#cp-domain-key)
+[cp-domain-key](../README.md#cp-domain-key), [cp-api-key](../README.md#cp-api-key)
 
 ### HTTP request headers
 
