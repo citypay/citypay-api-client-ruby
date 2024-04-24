@@ -22,7 +22,7 @@ instance = CityPayApiClient::PaylinkBillPaymentTokenRequest.new(
   addressee: null,
   attachments: null,
   descriptor: null,
-  due: null,
+  due: Mon Apr 22 00:00:00 UTC 2024,
   email_notification_path: null,
   memo: null,
   request: null,

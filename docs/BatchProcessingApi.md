@@ -5,8 +5,8 @@ All URIs are relative to *https://api.citypay.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**batch_process_request**](BatchProcessingApi.md#batch_process_request) | **POST** /v6/batch/process | Batch Process Request |
-| [**batch_retrieve_request**](BatchProcessingApi.md#batch_retrieve_request) | **POST** /v6/batch/retrieve | BatchReportRequest |
-| [**check_batch_status_request**](BatchProcessingApi.md#check_batch_status_request) | **POST** /v6/batch/status | CheckBatchStatus |
+| [**batch_retrieve_request**](BatchProcessingApi.md#batch_retrieve_request) | **POST** /v6/batch/retrieve | Batch Retrieve Request |
+| [**check_batch_status_request**](BatchProcessingApi.md#check_batch_status_request) | **POST** /v6/batch/status | Check Batch Status |
 
 
 ## batch_process_request
@@ -32,7 +32,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2020'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 3600})]}) # ProcessBatchRequest | 
+process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2020'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 19995})]}) # ProcessBatchRequest | 
 
 begin
   # Batch Process Request
@@ -85,9 +85,9 @@ end
 
 > <BatchReportResponseModel> batch_retrieve_request(batch_report_request)
 
-BatchReportRequest
+Batch Retrieve Request
 
-The report for a given batch.
+Obtains a batch and installment (BIS) report for a given batch id.
 
 ### Examples
 
@@ -103,7 +103,7 @@ api_instance = CityPayApiClient::BatchProcessingApi.new
 batch_report_request = CityPayApiClient::BatchReportRequest.new({batch_id: 35}) # BatchReportRequest | 
 
 begin
-  # BatchReportRequest
+  # Batch Retrieve Request
   result = api_instance.batch_retrieve_request(batch_report_request)
   p result
 rescue CityPayApiClient::ApiError => e
@@ -119,7 +119,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # BatchReportRequest
+  # Batch Retrieve Request
   data, status_code, headers = api_instance.batch_retrieve_request_with_http_info(batch_report_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -153,7 +153,7 @@ end
 
 > <CheckBatchStatusResponse> check_batch_status_request(check_batch_status)
 
-CheckBatchStatus
+Check Batch Status
 
 The operation is used to retrieve the status of a batch process.
 
@@ -168,10 +168,10 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-check_batch_status = CityPayApiClient::CheckBatchStatus.new({batch_id: [78]}) # CheckBatchStatus | 
+check_batch_status = CityPayApiClient::CheckBatchStatus.new({batch_id: [37]}) # CheckBatchStatus | 
 
 begin
-  # CheckBatchStatus
+  # Check Batch Status
   result = api_instance.check_batch_status_request(check_batch_status)
   p result
 rescue CityPayApiClient::ApiError => e
@@ -187,7 +187,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # CheckBatchStatus
+  # Check Batch Status
   data, status_code, headers = api_instance.check_batch_status_request_with_http_info(check_batch_status)
   p status_code # => 2xx
   p headers # => { ... }

@@ -165,13 +165,6 @@ Direct Post Auth Request
 
 Used to initiate a direct post request transaction flow.
 
-<pre class="inline-code language-bash">
-<code>
-curl https://api.citypay.com/direct/auth?cp-domain-key=n834ytqp84y... \
- -d "amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW
-</code>
-</pre>.
-
 
 ### Examples
 
@@ -187,7 +180,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Auth Request
@@ -244,13 +237,6 @@ Direct Post Tokenise Request
 
 Used to initiate a direct post request transaction flow.
 
-<pre class="inline-code language-bash">
-<code>
-curl https://api.citypay.com/v6/direct?cp-domain-key=n834ytqp84y... \
- -d "amount=7500&identifier=example_trans&cardnumber=4000000000000002&expmonth=9&expyear=2028&bill_to_postcode=L1+7ZW
-</code>
-</pre>.
-
 
 ### Examples
 
@@ -266,7 +252,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 3600, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Tokenise Request

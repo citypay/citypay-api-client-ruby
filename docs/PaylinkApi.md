@@ -5,6 +5,7 @@ All URIs are relative to *https://api.citypay.com*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**token_adjustment_request**](PaylinkApi.md#token_adjustment_request) | **POST** /paylink/{token}/adjustment | Paylink Token Adjustment |
+| [**token_cancel_request**](PaylinkApi.md#token_cancel_request) | **PUT** /paylink/{token}/cancel | Cancel a Paylink Token |
 | [**token_changes_request**](PaylinkApi.md#token_changes_request) | **POST** /paylink/token/changes | Paylink Token Audit |
 | [**token_close_request**](PaylinkApi.md#token_close_request) | **PUT** /paylink/{token}/close | Close Paylink Token |
 | [**token_create_bill_payment_request**](PaylinkApi.md#token_create_bill_payment_request) | **POST** /paylink/bill-payment | Create Bill Payment Paylink Token |
@@ -12,6 +13,7 @@ All URIs are relative to *https://api.citypay.com*
 | [**token_purge_attachments_request**](PaylinkApi.md#token_purge_attachments_request) | **PUT** /paylink/{token}/purge-attachments | Purges any attachments for a Paylink Token |
 | [**token_reconciled_request**](PaylinkApi.md#token_reconciled_request) | **PUT** /paylink/{token}/reconciled | Reconcile Paylink Token |
 | [**token_reopen_request**](PaylinkApi.md#token_reopen_request) | **PUT** /paylink/{token}/reopen | Reopen Paylink Token |
+| [**token_resend_notification_request**](PaylinkApi.md#token_resend_notification_request) | **POST** /paylink/{token}/resend-notification | Resend a notification for Paylink Token |
 | [**token_status_request**](PaylinkApi.md#token_status_request) | **GET** /paylink/{token}/status | Paylink Token Status |
 
 
@@ -89,6 +91,74 @@ end
 - **Accept**: application/json, text/xml
 
 
+## token_cancel_request
+
+> <Acknowledgement> token_cancel_request(token)
+
+Cancel a Paylink Token
+
+Marks a Paylink Token as cancelled. This cancels the Token for any future request for processing.
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+end
+
+api_instance = CityPayApiClient::PaylinkApi.new
+token = 'token_example' # String | The token returned by the create token process.
+
+begin
+  # Cancel a Paylink Token
+  result = api_instance.token_cancel_request(token)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->token_cancel_request: #{e}"
+end
+```
+
+#### Using the token_cancel_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Acknowledgement>, Integer, Hash)> token_cancel_request_with_http_info(token)
+
+```ruby
+begin
+  # Cancel a Paylink Token
+  data, status_code, headers = api_instance.token_cancel_request_with_http_info(token)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Acknowledgement>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->token_cancel_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **token** | **String** | The token returned by the create token process. |  |
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
 ## token_changes_request
 
 > <PaylinkTokenStatusChangeResponse> token_changes_request(paylink_token_status_change_request)
@@ -108,7 +178,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
-paylink_token_status_change_request = CityPayApiClient::PaylinkTokenStatusChangeRequest.new({after: Time.now, merchantid: 11223344}) # PaylinkTokenStatusChangeRequest | 
+paylink_token_status_change_request = CityPayApiClient::PaylinkTokenStatusChangeRequest.new({after: Time.parse('2024-04-22T13:29:14Z'), merchantid: 11223344}) # PaylinkTokenStatusChangeRequest | 
 
 begin
   # Paylink Token Audit
@@ -734,6 +804,76 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
+## token_resend_notification_request
+
+> <Acknowledgement> token_resend_notification_request(token, paylink_resend_notification_request)
+
+Resend a notification for Paylink Token
+
+Resend a notification for Paylink Token.
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+end
+
+api_instance = CityPayApiClient::PaylinkApi.new
+token = 'token_example' # String | The token returned by the create token process.
+paylink_resend_notification_request = CityPayApiClient::PaylinkResendNotificationRequest.new # PaylinkResendNotificationRequest | 
+
+begin
+  # Resend a notification for Paylink Token
+  result = api_instance.token_resend_notification_request(token, paylink_resend_notification_request)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->token_resend_notification_request: #{e}"
+end
+```
+
+#### Using the token_resend_notification_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Acknowledgement>, Integer, Hash)> token_resend_notification_request_with_http_info(token, paylink_resend_notification_request)
+
+```ruby
+begin
+  # Resend a notification for Paylink Token
+  data, status_code, headers = api_instance.token_resend_notification_request_with_http_info(token, paylink_resend_notification_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Acknowledgement>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->token_resend_notification_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **token** | **String** | The token returned by the create token process. |  |
+| **paylink_resend_notification_request** | [**PaylinkResendNotificationRequest**](PaylinkResendNotificationRequest.md) |  |  |
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
 - **Accept**: application/json, text/xml
 
 

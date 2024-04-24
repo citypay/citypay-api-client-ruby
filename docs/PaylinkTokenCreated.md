@@ -11,7 +11,7 @@
 | **id** | **String** | A unique id of the request. |  |
 | **identifier** | **String** | The identifier as presented in the TokenRequest. | [optional] |
 | **mode** | **String** | Determines whether the token is &#x60;live&#x60; or &#x60;test&#x60;. | [optional] |
-| **qr_code** | **String** | A URL of a qrcode which can be used to refer to the token URL. | [optional] |
+| **qrcode** | **String** | A URL of a qrcode which can be used to refer to the token URL. | [optional] |
 | **result** | **Integer** | The result field contains the result for the Paylink Token Request. 0 - indicates that an error was encountered while creating the token. 1 - which indicates that a Token was successfully created. |  |
 | **server_version** | **String** | the version of the server performing the call. | [optional] |
 | **source** | **String** | The incoming IP address of the call. | [optional] |
@@ -27,17 +27,17 @@ require 'citypay_api_client'
 instance = CityPayApiClient::PaylinkTokenCreated.new(
   attachments: null,
   bps: null,
-  date_created: null,
+  date_created: 2024-04-22T13:29:14Z,
   errors: null,
-  id: null,
-  identifier: null,
-  mode: null,
-  qr_code: null,
-  result: null,
-  server_version: null,
-  source: null,
-  token: null,
-  url: null,
+  id: 00000000-0000-0000-0000-000000000000,
+  identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
+  mode: test,
+  qrcode: https://payments.citypay.com/AAAAAAA/AAAZZZCCCDDDEEE/qrcode,
+  result: 0,
+  server_version: x.x.x,
+  source: x.x.x.x,
+  token: AAAZZZCCCDDDEEE,
+  url: https://payments.citypay.com/AAAAAAA/AAAZZZCCCDDDEEE,
   usc: null
 )
 ```

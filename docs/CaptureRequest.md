@@ -18,7 +18,7 @@ require 'citypay_api_client'
 
 instance = CityPayApiClient::CaptureRequest.new(
   airline_data: null,
-  amount: 3600,
+  amount: 19995,
   event_management: null,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   merchantid: 11223344,

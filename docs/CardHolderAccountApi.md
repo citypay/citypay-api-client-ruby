@@ -18,7 +18,7 @@ All URIs are relative to *https://api.citypay.com*
 
 ## account_card_delete_request
 
-> <Acknowledgement> account_card_delete_request(accountid, card_id)
+> <Acknowledgement> account_card_delete_request(accountid, card_id, opts)
 
 Card Deletion
 
@@ -39,10 +39,13 @@ end
 api_instance = CityPayApiClient::CardHolderAccountApi.new
 accountid = 'accountid_example' # String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
 card_id = 'card_id_example' # String | The id of the card that is presented by a call to retrieve a card holder account.
+opts = {
+  force: true # Boolean | Requests that the item is forced immediately.
+}
 
 begin
   # Card Deletion
-  result = api_instance.account_card_delete_request(accountid, card_id)
+  result = api_instance.account_card_delete_request(accountid, card_id, opts)
   p result
 rescue CityPayApiClient::ApiError => e
   puts "Error when calling CardHolderAccountApi->account_card_delete_request: #{e}"
@@ -53,12 +56,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Acknowledgement>, Integer, Hash)> account_card_delete_request_with_http_info(accountid, card_id)
+> <Array(<Acknowledgement>, Integer, Hash)> account_card_delete_request_with_http_info(accountid, card_id, opts)
 
 ```ruby
 begin
   # Card Deletion
-  data, status_code, headers = api_instance.account_card_delete_request_with_http_info(accountid, card_id)
+  data, status_code, headers = api_instance.account_card_delete_request_with_http_info(accountid, card_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <Acknowledgement>
@@ -73,6 +76,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **accountid** | **String** | The account id that refers to the customer&#39;s account no. This value will have been provided when setting up the card holder account. |  |
 | **card_id** | **String** | The id of the card that is presented by a call to retrieve a card holder account. |  |
+| **force** | **Boolean** | Requests that the item is forced immediately. | [optional] |
 
 ### Return type
 
@@ -714,7 +718,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
-charge_request = CityPayApiClient::ChargeRequest.new({amount: 3600, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344, token: 'ctPCAPyNyCkx3Ry8wGyv8khC3ch2hUSB3Db..Qzr'}) # ChargeRequest | 
+charge_request = CityPayApiClient::ChargeRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344, token: 'ctPCAPyNyCkx3Ry8wGyv8khC3ch2hUSB3Db..Qzr'}) # ChargeRequest | 
 
 begin
   # Charge

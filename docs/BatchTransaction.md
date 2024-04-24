@@ -16,7 +16,7 @@ require 'citypay_api_client'
 
 instance = CityPayApiClient::BatchTransaction.new(
   account_id: aaabbb-cccddd-eee,
-  amount: 3600,
+  amount: 19995,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   merchantid: 11223344
 )

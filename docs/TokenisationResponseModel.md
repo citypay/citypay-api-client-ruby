@@ -25,7 +25,7 @@ instance = CityPayApiClient::TokenisationResponseModel.new(
   bin_commercial: null,
   bin_debit: null,
   bin_description: Platinum Card,
-  eci: null,
+  eci: 5,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   maskedpan: 4***********0002,
   scheme: Visa,

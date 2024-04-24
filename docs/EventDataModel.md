@@ -16,10 +16,10 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::EventDataModel.new(
-  event_end_date: null,
+  event_end_date: Mon Apr 22 00:00:00 UTC 2024,
   event_id: null,
   event_organiser_id: null,
-  event_start_date: null,
+  event_start_date: Mon Apr 22 00:00:00 UTC 2024,
   payment_type: null
 )
 ```

@@ -16,7 +16,7 @@
 | **bin_description** | **String** | A description of the bin range found for the card. | [optional] |
 | **cavv** | **String** | The cardholder authentication verification value which can be returned for verification purposes of the authenticated  transaction for dispute realisation.  | [optional] |
 | **context** | **String** | The context which processed the transaction, can be used for support purposes to trace transactions. | [optional] |
-| **csc_result** | **String** | The CSC rseult codes determine the result of checking the provided CSC value within the Card Security Code fraud system. If a transaction is declined due to the CSC code not matching, this value can help determine the reason for the decline.  &lt;table&gt; &lt;tr&gt; &lt;th&gt;Code&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;/tr&gt; &lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;No information&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;M&lt;/td&gt;&lt;td&gt;Card verification data matches&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;Card verification data was checked but did not match&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;P&lt;/td&gt;&lt;td&gt;Card verification was not processed&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;S&lt;/td&gt;&lt;td&gt;The card verification data should be on the card but the merchant indicates that it is not&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;U&lt;/td&gt;&lt;td&gt;The card issuer is not certified&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;  | [optional] |
+| **csc_result** | **String** | The CSC result codes determine the result of checking the provided CSC value within the Card Security Code fraud system. If a transaction is declined due to the CSC code not matching, this value can help determine the reason for the decline.  &lt;table&gt; &lt;tr&gt; &lt;th&gt;Code&lt;/th&gt; &lt;th&gt;Description&lt;/th&gt; &lt;/tr&gt; &lt;tr&gt;&lt;td&gt; &lt;/td&gt;&lt;td&gt;No information&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;M&lt;/td&gt;&lt;td&gt;Card verification data matches&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;N&lt;/td&gt;&lt;td&gt;Card verification data was checked but did not match&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;P&lt;/td&gt;&lt;td&gt;Card verification was not processed&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;S&lt;/td&gt;&lt;td&gt;The card verification data should be on the card but the merchant indicates that it is not&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;U&lt;/td&gt;&lt;td&gt;The card issuer is not certified&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;  | [optional] |
 | **currency** | **String** | The currency the transaction was processed in. This is an &#x60;ISO4217&#x60; alpha currency value. | [optional] |
 | **datetime** | **Time** | The UTC date time of the transaction in ISO data time format.  | [optional] |
 | **eci** | **String** | An Electronic Commerce Indicator (ECI) used to identify the result of authentication using 3DSecure.  | [optional] |
@@ -40,7 +40,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::AuthResponse.new(
-  amount: 3600,
+  amount: 19995,
   atrn: null,
   atsd: null,
   authcode: 001245A,
@@ -50,12 +50,12 @@ instance = CityPayApiClient::AuthResponse.new(
   bin_commercial: null,
   bin_debit: null,
   bin_description: Platinum Card,
-  cavv: null,
+  cavv: 00000109260000719349,
   context: aspiu352908ns47n343598bads,
   csc_result: null,
   currency: GBP,
   datetime: 2020-01-02T18:32:28Z,
-  eci: null,
+  eci: 5,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   live: true,
   maskedpan: 4***********0002,
