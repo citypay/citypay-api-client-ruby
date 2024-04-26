@@ -2,9 +2,11 @@ name: Ruby RSpec Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ main ]
+    branches: [ '*' ]
+  release:
+    types: [created]
 
 jobs:
   test:
