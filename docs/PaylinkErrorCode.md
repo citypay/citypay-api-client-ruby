@@ -13,8 +13,8 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::PaylinkErrorCode.new(
-  code: null,
-  msg: null
+  code: 1,
+  msg: An example error response
 )
 ```
 

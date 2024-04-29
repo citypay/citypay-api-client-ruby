@@ -38,31 +38,6 @@ describe 'Decision' do
     end
   end
 
-
-  describe 'test attribute "authen_required"' do
-    it 'should work' do
-
-      decision = convert_decision '{
-    "AuthenRequired": {
-        "acs_url": "https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B",
-        "md": "0000000000000000000022",
-        "pareq": "eJxVUm1v2yAQ/itWv8dg/B5dmJyfw=="
-    }
-}'
-
-      expect(decision.auth_response).to be_nil
-      expect(decision.request_challenged).to be_nil
-      expect(decision.authen_required).to be_truthy
-
-      expect(decision.authen_required.acs_url).to eq("https://www.acs.com/tdsecure/opt_in_dispatcher.jsp?partner=debit&VAA=B")
-      expect(decision.authen_required.md).to eq("0000000000000000000022")
-      expect(decision.authen_required.pareq).to eq("eJxVUm1v2yAQ/itWv8dg/B5dmJyfw==")
-
-
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "challenge"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -106,7 +81,6 @@ describe 'Decision' do
 '
       expect(decision.auth_response).to be_truthy
       expect(decision.request_challenged).to be_nil
-      expect(decision.authen_required).to be_nil
 
       response = decision.auth_response
 

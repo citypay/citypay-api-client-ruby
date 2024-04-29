@@ -1,7 +1,7 @@
 =begin
 #CityPay Payment API
 
-# This CityPay API is an HTTP RESTful payment API used for direct server to server transactional processing. It provides a number of payment mechanisms including: Internet, MOTO, Continuous Authority transaction processing, 3-D Secure decision handling using RFA Secure, Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids and Completion processing. The API is also capable of tokenized payments using cardholder Accounts.  ## Compliance and Security Your application will need to adhere to PCI-DSS standards to operate safely and to meet requirements set out by  Visa and MasterCard and the PCI Security Standards Council. These include  * Data must be collected using TLS version 1.2 using [strong cryptography](https://citypay.github.io/api-docs/payment-api/#enabled-tls-ciphers). We will not accept calls to our API at   lower grade encryption levels. We regularly scan our TLS endpoints for vulnerabilities and perform TLS assessments   as part of our compliance program. * The application must not store sensitive cardholder data (CHD) such as the card security code (CSC) or   primary access number (PAN) * The application must not display the full card number on receipts, it is recommended to mask the PAN   and show the last 4 digits. The API will return this for you for ease of receipt creation * If you are developing a website, you will be required to perform regular scans on the network where you host the   application to meet your compliance obligations * You will be required to be PCI Compliant and the application must adhere to the security standard. Further information   is available from [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/) * The API verifies that the request is for a valid account and originates from a trusted source using the remote IP   address. Our application firewalls analyse data that may be an attempt to break a large number of security common   security vulnerabilities. 
+# Welcome to the CityPay API, a robust HTTP API payment solution designed for seamless server-to-server  transactional processing. Our API facilitates a wide array of payment operations, catering to diverse business needs.  Whether you're integrating Internet payments, handling Mail Order/Telephone Order (MOTO) transactions, managing  Subscriptions with Recurring and Continuous Authority payments, or navigating the complexities of 3-D Secure  authentication, our API is equipped to support your requirements. Additionally, we offer functionalities for  Authorisation, Refunding, Pre-Authorisation, Cancellation/Voids, and Completion processing, alongside the capability  for tokenised payments.  ## Compliance and Security Overview <aside class=\"notice\">   Ensuring the security of payment transactions and compliance with industry standards is paramount. Our API is    designed with stringent security measures and compliance protocols to safeguard sensitive information and meet    the rigorous requirements of Visa, MasterCard, and the PCI Security Standards Council. </aside>  ### Key Compliance and Security Measures  * **TLS Encryption**: All data transmissions must utilise TLS version 1.2 or higher, employing [strong cryptography](#enabled-tls-ciphers). Our infrastructure strictly enforces this requirement to maintain the integrity and confidentiality of data in transit. We conduct regular scans and assessments of our TLS endpoints to identify and mitigate vulnerabilities. * **Data Storage Prohibitions**: Storing sensitive cardholder data (CHD), such as the card security code (CSC) or primary account number (PAN), is strictly prohibited. Our API is designed to minimize your exposure to sensitive data, thereby reducing your compliance burden. * **Data Masking**: For consumer protection and compliance, full card numbers must not be displayed on receipts or any customer-facing materials. Our API automatically masks PANs, displaying only the last four digits to facilitate safe receipt generation. * **Network Scans**: If your application is web-based, regular scans of your hosting environment are mandatory to identify and rectify potential vulnerabilities. This proactive measure is crucial for maintaining a secure and compliant online presence. * **PCI Compliance**: Adherence to PCI DSS standards is not optional; it's a requirement for operating securely and legally in the payments ecosystem. For detailed information on compliance requirements and resources, please visit the PCI Security Standards Council website [https://www.pcisecuritystandards.org/](https://www.pcisecuritystandards.org/). * **Request Validation**: Our API includes mechanisms to verify the legitimacy of each request, ensuring it pertains to a valid account and originates from a trusted source. We leverage remote IP address verification alongside sophisticated application firewall technologies to thwart a wide array of common security threats.  ## Getting Started Before integrating with the CityPay API, ensure your application and development practices align with the outlined compliance and security measures. This preparatory step is crucial for a smooth integration process and the long-term success of your payment processing operations.  For further details on API endpoints, request/response formats, and code examples, proceed to the subsequent sections of our documentation. Our aim is to provide you with all the necessary tools and information to integrate our payment processing capabilities seamlessly into your application.  Thank you for choosing CityPay API. We look forward to supporting your payment processing needs with our secure, compliant, and versatile API solution. 
 
 Contact: support@citypay.com
 Generated by: https://openapi-generator.tech
@@ -88,6 +88,69 @@ module CityPayApiClient
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaylinkApi#token_adjustment_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Cancel a Paylink Token
+    # Marks a Paylink Token as cancelled. This cancels the Token for any future request for processing.
+    # @param token [String] The token returned by the create token process.
+    # @param [Hash] opts the optional parameters
+    # @return [Acknowledgement]
+    def token_cancel_request(token, opts = {})
+      data, _status_code, _headers = token_cancel_request_with_http_info(token, opts)
+      data
+    end
+
+    # Cancel a Paylink Token
+    # Marks a Paylink Token as cancelled. This cancels the Token for any future request for processing.
+    # @param token [String] The token returned by the create token process.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Acknowledgement, Integer, Hash)>] Acknowledgement data, response status code and response headers
+    def token_cancel_request_with_http_info(token, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaylinkApi.token_cancel_request ...'
+      end
+      # verify the required parameter 'token' is set
+      if @api_client.config.client_side_validation && token.nil?
+        fail ArgumentError, "Missing the required parameter 'token' when calling PaylinkApi.token_cancel_request"
+      end
+      # resource path
+      local_var_path = '/paylink/{token}/cancel'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/xml'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Acknowledgement'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cp-api-key']
+
+      new_options = opts.merge(
+        :operation => :"PaylinkApi.token_cancel_request",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaylinkApi#token_cancel_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -544,6 +607,80 @@ module CityPayApiClient
       data, status_code, headers = @api_client.call_api(:PUT, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PaylinkApi#token_reopen_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Resend a notification for Paylink Token
+    # Resend a notification for Paylink Token.
+    # @param token [String] The token returned by the create token process.
+    # @param paylink_resend_notification_request [PaylinkResendNotificationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Acknowledgement]
+    def token_resend_notification_request(token, paylink_resend_notification_request, opts = {})
+      data, _status_code, _headers = token_resend_notification_request_with_http_info(token, paylink_resend_notification_request, opts)
+      data
+    end
+
+    # Resend a notification for Paylink Token
+    # Resend a notification for Paylink Token.
+    # @param token [String] The token returned by the create token process.
+    # @param paylink_resend_notification_request [PaylinkResendNotificationRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Acknowledgement, Integer, Hash)>] Acknowledgement data, response status code and response headers
+    def token_resend_notification_request_with_http_info(token, paylink_resend_notification_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PaylinkApi.token_resend_notification_request ...'
+      end
+      # verify the required parameter 'token' is set
+      if @api_client.config.client_side_validation && token.nil?
+        fail ArgumentError, "Missing the required parameter 'token' when calling PaylinkApi.token_resend_notification_request"
+      end
+      # verify the required parameter 'paylink_resend_notification_request' is set
+      if @api_client.config.client_side_validation && paylink_resend_notification_request.nil?
+        fail ArgumentError, "Missing the required parameter 'paylink_resend_notification_request' when calling PaylinkApi.token_resend_notification_request"
+      end
+      # resource path
+      local_var_path = '/paylink/{token}/resend-notification'.sub('{' + 'token' + '}', CGI.escape(token.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/xml'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json', 'text/xml'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(paylink_resend_notification_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'Acknowledgement'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['cp-api-key']
+
+      new_options = opts.merge(
+        :operation => :"PaylinkApi.token_resend_notification_request",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PaylinkApi#token_resend_notification_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

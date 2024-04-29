@@ -16,7 +16,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::RefundRequest.new(
-  amount: 3600,
+  amount: 19995,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   merchantid: 11223344,
   refund_ref: 8322,

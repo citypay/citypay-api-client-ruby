@@ -22,9 +22,9 @@ require 'citypay_api_client'
 instance = CityPayApiClient::Bin.new(
   bin_commercial: null,
   bin_corporate: null,
-  bin_country_issued: null,
+  bin_country_issued: GB,
   bin_credit: null,
-  bin_currency: null,
+  bin_currency: GBP,
   bin_debit: null,
   bin_description: Platinum Card,
   bin_eu: null,

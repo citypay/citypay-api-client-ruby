@@ -15,10 +15,10 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::Acknowledgement.new(
-  code: 0,
+  code: 3,
   context: aspiu352908ns47n343598bads,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
-  message: Approved 044332
+  message: Transaction Cancelled
 )
 ```
 

@@ -27,7 +27,7 @@
 | **is_validated** | **Boolean** | whether the token generation was successfully validated. | [optional] |
 | **last_event_date_time** | **Time** | the date and time that the session last had an event actioned against it. | [optional] |
 | **last_payment_result** | **String** | the result of the last payment if one exists. | [optional] |
-| **mid** | **String** | identifies the merchant account. | [optional] |
+| **mid** | **Integer** | identifies the merchant account. | [optional] |
 | **payment_attempts_count** | **Integer** | the number of attempts made to pay. | [optional] |
 | **state_history** | [**Array&lt;PaylinkStateEvent&gt;**](PaylinkStateEvent.md) |  | [optional] |
 | **token** | **String** | the token value which uniquely identifies the session. | [optional] |
@@ -41,10 +41,10 @@ require 'citypay_api_client'
 instance = CityPayApiClient::PaylinkTokenStatus.new(
   amount_paid: null,
   auth_code: null,
-  card: null,
-  created: null,
-  datetime: null,
-  identifier: null,
+  card: Visa/0002,
+  created: 2024-04-22T13:29:14Z,
+  datetime: 2024-04-22T13:29:14Z,
+  identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   is_attachment: null,
   is_cancelled: null,
   is_closed: null,
@@ -60,9 +60,9 @@ instance = CityPayApiClient::PaylinkTokenStatus.new(
   is_request_challenged: null,
   is_sms_sent: null,
   is_validated: null,
-  last_event_date_time: null,
+  last_event_date_time: 2024-04-22T13:29:14Z,
   last_payment_result: null,
-  mid: null,
+  mid: 11223344,
   payment_attempts_count: null,
   state_history: null,
   token: null,
