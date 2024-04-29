@@ -62,7 +62,6 @@ describe 'IntegrationTests' do
       ))
 
       expect(result.auth_response).to_not be_nil
-      expect(result.authen_required).to be_nil
       expect(result.request_challenged).to be_nil
 
       response = result.auth_response
@@ -98,7 +97,6 @@ describe 'IntegrationTests' do
       ))
 
       expect(result.auth_response).to be_nil
-      expect(result.authen_required).to be_nil
       expect(result.request_challenged).to_not be_nil
 
       response = result.request_challenged
@@ -192,7 +190,6 @@ describe 'IntegrationTests' do
 
       # decision object returned
       expect(result2.auth_response).to_not be_nil
-      expect(result2.authen_required).to be_nil
       expect(result2.request_challenged).to be_nil
 
       response = result2.auth_response
