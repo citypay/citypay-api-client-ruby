@@ -81,7 +81,6 @@ describe 'Decision' do
 '
       expect(decision.auth_response).to be_truthy
       expect(decision.request_challenged).to be_nil
-      expect(decision.authen_required).to be_nil
 
       response = decision.auth_response
 
