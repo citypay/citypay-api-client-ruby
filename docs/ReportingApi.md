@@ -89,10 +89,7 @@ end
 
 Merchant Batch Report Request
 
-Retrieves a report of merchant batches within a specified date range. 
-Batches, which aggregate daily processing activities, are typically generated at `00:00` each day. 
-These batches play a crucial role in the settlement of funds by summarising daily transactions.
-
+Retrieves a report of merchant batches within a specified date range.  Batches, which aggregate daily processing activities, are typically generated at `00:00` each day.  These batches play a crucial role in the settlement of funds by summarising daily transactions. 
 
 ### Examples
 
@@ -230,12 +227,7 @@ end
 
 Remittance Report Request
 
-Fetches remittance reports for financial transactions within a specified date range,
-covering all client-related activities. This report consolidates all batches disbursed to a
-client, with each remittance summarising the aggregation of batches leading up to settlement.
-Additionally, the net remittance amount presented in the final settlement will reflect any
-deductions made by the acquirer.
-
+Fetches remittance reports for financial transactions within a specified date range, covering all client-related activities. This report consolidates all batches disbursed to a client, with each remittance summarising the aggregation of batches leading up to settlement. Additionally, the net remittance amount presented in the final settlement will reflect any deductions made by the acquirer. 
 
 ### Examples
 
@@ -305,15 +297,7 @@ end
 
 Remittance Date Report Request
 
-Fetches remittance reports for financial transactions for a given date, 
-covering all client-related activities. This report consolidates all batches disbursed to a 
-client, with each remittance summarising the aggregation of batches leading up to settlement. 
-Additionally, the net remittance amount presented in the final settlement will reflect any 
-deductions made by the acquirer.
-
-The process also supports the notion of *today* deferring the date to today's date or *latest* reflecting the
-latest remittance date available.
-
+Fetches remittance reports for financial transactions for a given date,  covering all client-related activities. This report consolidates all batches disbursed to a  client, with each remittance summarising the aggregation of batches leading up to settlement.  Additionally, the net remittance amount presented in the final settlement will reflect any  deductions made by the acquirer.  The process also supports the notion of *today* deferring the date to today's date or *latest* reflecting the latest remittance date available. 
 
 ### Examples
 
