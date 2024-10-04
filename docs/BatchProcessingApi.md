@@ -15,11 +15,7 @@ All URIs are relative to *https://api.citypay.com*
 
 Batch Process Request
 
-A batch process request is used to start the batch process workflow by uploading batch
-data and initialising a new batch for processing. Once validated the batch will be queued
-for processing and further updates can be received by a subsequent call to retrieve the batch
-status.
-
+A batch process request is used to start the batch process workflow by uploading batch data and initialising a new batch for processing. Once validated the batch will be queued for processing and further updates can be received by a subsequent call to retrieve the batch status. 
 
 ### Examples
 

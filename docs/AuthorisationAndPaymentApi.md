@@ -89,18 +89,7 @@ end
 
 Bin Lookup
 
-A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's 
-leading digits help to identify who
-
-0. the card scheme is such as Visa, MasterCard or American Express 
-1. the issuer of the card, such as the bank
-2. it's country of origin
-3. it's currency of origin
-
-Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin
-data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate
-result.
-
+A bin range lookup service can be used to check what a card is, as seen by the gateway. Each card number's  leading digits help to identify who  0. the card scheme is such as Visa, MasterCard or American Express  1. the issuer of the card, such as the bank 2. it's country of origin 3. it's currency of origin  Our gateway has 450 thousand possible bin ranges and uses a number of algorithms to determine the likelihood of the bin data. The request requires a bin value of between 6 and 12 digits. The more digits provided may ensure a more accurate result. 
 
 ### Examples
 
@@ -168,14 +157,7 @@ end
 
 CRes
 
-The CRes request performs authorisation processing once a challenge request has been completed
-with an Authentication Server (ACS). This challenge response contains confirmation that will
-allow the API systems to return an authorisation response based on the result. Our systems will 
-know out of band via an `RReq` call by the ACS to notify us if the liability shift has been issued.
-
-Any call to the CRes operation will require a previous authorisation request and cannot be called 
-on its own without a previous [request challenge](#requestchallenged) being obtained.
-
+The CRes request performs authorisation processing once a challenge request has been completed with an Authentication Server (ACS). This challenge response contains confirmation that will allow the API systems to return an authorisation response based on the result. Our systems will  know out of band via an `RReq` call by the ACS to notify us if the liability shift has been issued.  Any call to the CRes operation will require a previous authorisation request and cannot be called  on its own without a previous [request challenge](#requestchallenged) being obtained. 
 
 ### Examples
 
@@ -243,24 +225,7 @@ end
 
 Capture
 
-_The capture process only applies to transactions which have been pre-authorised only._ 
-
-The capture process will ensure
-that a transaction will now settle. It is expected that a capture call will be provided within 3 days or
-a maximum of 7 days.
-
-A capture request is provided to confirm that you wish the transaction to be settled. This request can
-contain a final amount for the transaction which is different to the original authorisation amount. This
-may be useful in a delayed system process such as waiting for stock to be ordered, confirmed, or services
-provided before the final cost is known.
-
-When a transaction is completed, a new authorisation code may be created and a new confirmation
-can be sent online to the acquiring bank.
-
-Once the transaction has been processed. A standard [`Acknowledgement`](#acknowledgement) will be returned,
-outlining the result of the transaction. On a successful completion process, the transaction will
-be available for the settlement and completed at the end of the day.
-
+_The capture process only applies to transactions which have been pre-authorised only._   The capture process will ensure that a transaction will now settle. It is expected that a capture call will be provided within 3 days or a maximum of 7 days.  A capture request is provided to confirm that you wish the transaction to be settled. This request can contain a final amount for the transaction which is different to the original authorisation amount. This may be useful in a delayed system process such as waiting for stock to be ordered, confirmed, or services provided before the final cost is known.  When a transaction is completed, a new authorisation code may be created and a new confirmation can be sent online to the acquiring bank.  Once the transaction has been processed. A standard [`Acknowledgement`](#acknowledgement) will be returned, outlining the result of the transaction. On a successful completion process, the transaction will be available for the settlement and completed at the end of the day. 
 
 ### Examples
 
@@ -328,10 +293,7 @@ end
 
 Create a Payment Intent
 
-This endpoint initiates the creation of a payment intent, which is a precursor to processing a payment. A payment intent
-captures the details of a prospective payment transaction, including the payment amount, currency, and associated
-billing and shipping information.
-
+This endpoint initiates the creation of a payment intent, which is a precursor to processing a payment. A payment intent captures the details of a prospective payment transaction, including the payment amount, currency, and associated billing and shipping information. 
 
 ### Examples
 
@@ -399,14 +361,7 @@ end
 
 PaRes
 
-The Payer Authentication Response (PaRes) is an operation after the result of authentication 
- being performed. The request uses an encoded packet of authentication data to 
-notify us of the completion of the liability shift. Once this value has been unpacked and its
-signature is checked, our systems will proceed to authorisation processing.  
-
-Any call to the PaRes operation will require a previous authorisation request and cannot be called 
-on its own without a previous [authentication required](#authenticationrequired)  being obtained.
-
+The Payer Authentication Response (PaRes) is an operation after the result of authentication   being performed. The request uses an encoded packet of authentication data to  notify us of the completion of the liability shift. Once this value has been unpacked and its signature is checked, our systems will proceed to authorisation processing.    Any call to the PaRes operation will require a previous authorisation request and cannot be called  on its own without a previous [authentication required](#authenticationrequired)  being obtained. 
 
 ### Examples
 
@@ -474,10 +429,7 @@ end
 
 Refund
 
-A refund request which allows for the refunding of a previous transaction up 
-and to the amount of the original sale. A refund will be performed against the 
-original card used to process the transaction.
-
+A refund request which allows for the refunding of a previous transaction up  and to the amount of the original sale. A refund will be performed against the  original card used to process the transaction. 
 
 ### Examples
 
@@ -545,17 +497,7 @@ end
 
 Retrieval
 
-A retrieval request which allows an integration to obtain the result of a transaction processed
-in the last 90 days. The request allows for retrieval based on the identifier or transaction 
-number. 
-
-The process may return multiple results in particular where a transaction was processed multiple
-times against the same identifier. This can happen if errors were first received. The API therefore
-returns up to the first 5 transactions in the latest date time order.
-
-It is not intended for this operation to be a replacement for reporting and only allows for base transaction
-information to be returned.
-
+A retrieval request which allows an integration to obtain the result of a transaction processed in the last 90 days. The request allows for retrieval based on the identifier or transaction  number.   The process may return multiple results in particular where a transaction was processed multiple times against the same identifier. This can happen if errors were first received. The API therefore returns up to the first 5 transactions in the latest date time order.  It is not intended for this operation to be a replacement for reporting and only allows for base transaction information to be returned. 
 
 ### Examples
 
@@ -623,15 +565,7 @@ end
 
 Void
 
-_The void process generally applies to transactions which have been pre-authorised only however voids can occur 
-on the same day if performed before batching and settlement._ 
-
-The void process will ensure that a transaction will now settle. It is expected that a void call will be 
-provided on the same day before batching and settlement or within 3 days or within a maximum of 7 days.
-
-Once the transaction has been processed as a void, an [`Acknowledgement`](#acknowledgement) will be returned,
-outlining the result of the transaction.
-
+_The void process generally applies to transactions which have been pre-authorised only however voids can occur  on the same day if performed before batching and settlement._   The void process will ensure that a transaction will now settle. It is expected that a void call will be  provided on the same day before batching and settlement or within 3 days or within a maximum of 7 days.  Once the transaction has been processed as a void, an [`Acknowledgement`](#acknowledgement) will be returned, outlining the result of the transaction. 
 
 ### Examples
 
