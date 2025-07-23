@@ -17,10 +17,7 @@ All URIs are relative to *https://api.citypay.com*
 
 Handles a CRes response from ACS, returning back the result of authorisation
 
-Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData`
-value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to
-perform a `Direct Post` integration who wish to handle the challenge flow themselves.
-
+Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData` value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a `Direct Post` integration who wish to handle the challenge flow themselves. 
 
 ### Examples
 
@@ -90,10 +87,7 @@ No authorization required
 
 Handles a CRes response from ACS, returning back a token for future authorisation
 
-Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData`
-value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to
-perform a `Direct Post` integration who wish to handle the challenge flow themselves.
-
+Used to post from an ACS during a ThreeDSecure direct flow process. The endpoint requires a valid `threeDSSessionData` value which defines the unique transaction through its workflow. This endpoint may be used by merchants wishing to perform a `Direct Post` integration who wish to handle the challenge flow themselves. 
 
 ### Examples
 
@@ -163,8 +157,7 @@ No authorization required
 
 Direct Post Auth Request
 
-Used to initiate a direct post request transaction flow.
-
+Used to initiate a direct post request transaction flow. 
 
 ### Examples
 
@@ -175,8 +168,13 @@ require 'citypay_api_client'
 CityPayApiClient.configure do |config|
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
 
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
@@ -235,8 +233,7 @@ end
 
 Direct Post Tokenise Request
 
-Used to initiate a direct post request transaction flow.
-
+Used to initiate a direct post request transaction flow. 
 
 ### Examples
 
@@ -247,8 +244,13 @@ require 'citypay_api_client'
 CityPayApiClient.configure do |config|
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
 
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
@@ -307,9 +309,7 @@ end
 
 Direct Post Token Request
 
-Perform a request for authorisation for a previously generated token. This flow will return an authorisation
-response stating that the transaction was approved or declined.
-
+Perform a request for authorisation for a previously generated token. This flow will return an authorisation response stating that the transaction was approved or declined. 
 
 ### Examples
 
@@ -320,8 +320,13 @@ require 'citypay_api_client'
 CityPayApiClient.configure do |config|
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
 
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
