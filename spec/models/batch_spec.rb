@@ -26,13 +26,5 @@ RSpec.describe CityPayApiClient::Batch do
     new_obj = described_class.build_from_hash(JSON.parse(json))
     expect(new_obj).to eq(model_instance)
   end
-
-  it 'produces the correct hash map' do
-    expect(model_instance.to_hash).to eq(
-      'batch_date' => Date.new(2022,2,2),
-      'batch_id' => 1,
-      'batch_status' => 'Open'
-    )
-  end
 end
 

@@ -10,7 +10,7 @@ RSpec.describe CityPayApiClient::AirlineSegment do
       class_service_code: 'E',
       departure_date: Date.new(2021,7,1),
       departure_location_code: 'SFO',
-      flight_number: 'AA100',
+      flight_number: 'AA10',
       segment_fare: 20000,
       stop_over_indicator: 'O'
     }
@@ -18,7 +18,7 @@ RSpec.describe CityPayApiClient::AirlineSegment do
   let(:model_instance) { described_class.new(fake_data) }
 
   it 'creates with provided data' do
-    expect(model_instance.flight_number).to eq('AA100')
+    expect(model_instance.flight_number).to eq('AA10')
   end
 
   it 'updates attributes' do
@@ -27,7 +27,7 @@ RSpec.describe CityPayApiClient::AirlineSegment do
     model_instance.class_service_code = 'B'
     model_instance.departure_date = Date.new(2021,7,2)
     model_instance.departure_location_code = 'LHR'
-    model_instance.flight_number = 'BA200'
+    model_instance.flight_number = 'BA20'
     model_instance.segment_fare = 15000
     model_instance.stop_over_indicator = 'X'
     expect(model_instance.arrival_location_code).to eq('JFK')
@@ -35,7 +35,7 @@ RSpec.describe CityPayApiClient::AirlineSegment do
     expect(model_instance.class_service_code).to eq('B')
     expect(model_instance.departure_date).to eq(Date.new(2021,7,2))
     expect(model_instance.departure_location_code).to eq('LHR')
-    expect(model_instance.flight_number).to eq('BA200')
+    expect(model_instance.flight_number).to eq('BA20')
     expect(model_instance.segment_fare).to eq(15000)
     expect(model_instance.stop_over_indicator).to eq('X')
   end

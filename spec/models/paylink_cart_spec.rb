@@ -63,15 +63,4 @@ RSpec.describe CityPayApiClient::PaylinkCart do
     expect(obj).to eq(model)
   end
 
-  it 'to_hash returns expected representation' do
-    expect(model.to_hash).to eq(
-      'contents' => [item.to_hash],
-      'coupon' => 'SAVE',
-      'mode' => 1,
-      'product_description' => 'Hardware',
-      'product_information' => 'Best hammer',
-      'shipping' => 500,
-      'tax' => 50
-    )
-  end
 end

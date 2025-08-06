@@ -5,7 +5,20 @@ require 'citypay_api_client/models/airline_advice'
 require 'citypay_api_client/models/event_data_model'
 
 RSpec.describe CityPayApiClient::CaptureRequest do
-  let(:air_data) { CityPayApiClient::AirlineAdvice.new(passenger_name: 'John') }
+  let(:air_data) { CityPayApiClient::AirlineAdvice.new(
+    carrier_name: 'TestAir',
+    conjunction_ticket_indicator: true,
+    eticket_indicator: true,
+    no_air_segments: 2,
+    number_in_party: 1,
+    original_ticket_no: '12345678901234',
+    passenger_name: 'John Passenger',
+    ticket_issue_city: 'London',
+    ticket_issue_date: Date.new(2021,6,1),
+    ticket_issue_name: 'Agent',
+    ticket_no: '99999999999999',
+    transaction_type: 'TKT'
+  ) }
   let(:event_data) { CityPayApiClient::EventDataModel.new(event_id: 'EV1') }
   let(:cap_data) do
     {
@@ -29,7 +42,20 @@ RSpec.describe CityPayApiClient::CaptureRequest do
   end
 
   it 'updates fields correctly' do
-    new_air = CityPayApiClient::AirlineAdvice.new(passenger_name: 'Jane')
+    new_air = CityPayApiClient::AirlineAdvice.new(
+      carrier_name: 'TestAir',
+      conjunction_ticket_indicator: true,
+      eticket_indicator: true,
+      no_air_segments: 2,
+      number_in_party: 1,
+      original_ticket_no: '12345678901234',
+      passenger_name: 'John Passenger',
+      ticket_issue_city: 'London',
+      ticket_issue_date: Date.new(2021,6,1),
+      ticket_issue_name: 'Agent',
+      ticket_no: '99999999999999',
+      transaction_type: 'TKT'
+    )
     new_event = CityPayApiClient::EventDataModel.new(event_id: 'EV2')
     cap_instance.airline_data = new_air
     cap_instance.amount = 2000

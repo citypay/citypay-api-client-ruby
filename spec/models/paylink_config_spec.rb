@@ -8,14 +8,14 @@ require 'citypay_api_client/models/paylink_ui'
 RSpec.describe CityPayApiClient::PaylinkConfig do
   let(:custom) { CityPayApiClient::PaylinkCustomParam.new(name: 'field1') }
   let(:guard) { CityPayApiClient::PaylinkFieldGuardModel.new(name: 'field1', field_type: 'text') }
-  let(:parts) { CityPayApiClient::PaylinkPartPayments.new(enabled: true, floor: 100) }
+  let(:parts) { CityPayApiClient::PaylinkPartPayments.new(enabled: "true", floor: "100") }
   let(:ui_cfg) { CityPayApiClient::PaylinkUI.new(address_mandatory: true) }
   let(:fake_data) do
     {
       acs_mode: 'm1',
       custom_params: [custom],
       descriptor: 'desc',
-      expire_in: 5,
+      expire_in: "5",
       field_guard: [guard],
       lock_params: ['coupon'],
       merch_logo: 'logo.png',
@@ -42,7 +42,7 @@ RSpec.describe CityPayApiClient::PaylinkConfig do
     expect(model.acs_mode).to eq('m1')
     expect(model.custom_params).to eq([custom])
     expect(model.descriptor).to eq('desc')
-    expect(model.expire_in).to eq(5)
+    expect(model.expire_in).to eq("5")
     expect(model.field_guard).to eq([guard])
     expect(model.lock_params).to eq(['coupon'])
     expect(model.merch_logo).to eq('logo.png')
@@ -71,7 +71,7 @@ RSpec.describe CityPayApiClient::PaylinkConfig do
     model.acs_mode = 'm2'
     model.custom_params = [new_custom]
     model.descriptor = 'desc2'
-    model.expire_in = 10
+    model.expire_in = "10"
     model.field_guard = [new_guard]
     model.lock_params = ['item']
     model.merch_logo = 'logo2.png'
@@ -94,7 +94,7 @@ RSpec.describe CityPayApiClient::PaylinkConfig do
     expect(model.acs_mode).to eq('m2')
     expect(model.custom_params).to eq([new_custom])
     expect(model.descriptor).to eq('desc2')
-    expect(model.expire_in).to eq(10)
+    expect(model.expire_in).to eq("10")
     expect(model.field_guard).to eq([new_guard])
     expect(model.lock_params).to eq(['item'])
     expect(model.merch_logo).to eq('logo2.png')

@@ -13,15 +13,15 @@ RSpec.describe CityPayApiClient::ChargeRequest do
       csc_policy: '1',
       currency: 'GBP',
       duplicate_policy: '1',
-      identifier: 'ID1',
-      initiation: 'web',
+      identifier: 'IDNT1',
+      initiation: 'C',
       match_avsa: '1',
       merchantid: 1000,
       tag: ['t1'],
       threedsecure: fake_3ds,
       token: 'tok',
       trans_info: 'info',
-      trans_type: 'SALE'
+      trans_type: '1'
     }
   end
   let(:model_instance) { described_class.new(fake_data) }
@@ -40,15 +40,15 @@ RSpec.describe CityPayApiClient::ChargeRequest do
     model_instance.csc_policy = '2'
     model_instance.currency = 'USD'
     model_instance.duplicate_policy = '2'
-    model_instance.identifier = 'ID2'
-    model_instance.initiation = 'phone'
+    model_instance.identifier = 'IDNT2'
+    model_instance.initiation = 'M'
     model_instance.match_avsa = '2'
     model_instance.merchantid = 2000
     model_instance.tag = ['t2']
     model_instance.threedsecure = new_3ds
     model_instance.token = 'tok2'
     model_instance.trans_info = 'info2'
-    model_instance.trans_type = 'AUTH'
+    model_instance.trans_type = '2'
     expect(model_instance.amount).to eq(200)
     expect(model_instance.avs_postcode_policy).to eq('2')
     expect(model_instance.cardholder_agreement).to eq('N')
@@ -56,15 +56,15 @@ RSpec.describe CityPayApiClient::ChargeRequest do
     expect(model_instance.csc_policy).to eq('2')
     expect(model_instance.currency).to eq('USD')
     expect(model_instance.duplicate_policy).to eq('2')
-    expect(model_instance.identifier).to eq('ID2')
-    expect(model_instance.initiation).to eq('phone')
+    expect(model_instance.identifier).to eq('IDNT2')
+    expect(model_instance.initiation).to eq('M')
     expect(model_instance.match_avsa).to eq('2')
     expect(model_instance.merchantid).to eq(2000)
     expect(model_instance.tag).to eq(['t2'])
     expect(model_instance.threedsecure).to eq(new_3ds)
     expect(model_instance.token).to eq('tok2')
     expect(model_instance.trans_info).to eq('info2')
-    expect(model_instance.trans_type).to eq('AUTH')
+    expect(model_instance.trans_type).to eq('2')
   end
 
   it 'serializes and deserializes via JSON' do

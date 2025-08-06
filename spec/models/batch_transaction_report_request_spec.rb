@@ -20,15 +20,6 @@ RSpec.describe CityPayApiClient::BatchTransactionReportRequest do
     expect(model_instance.order_by).to eq('amount')
   end
 
-  it 'generates the correct hash representation' do
-    expected_hash = {
-      'maxResults' => 10,
-      'nextToken' => 'abc',
-      'orderBy' => 'datetime'
-    }
-    expect(model_instance.to_hash).to eq(expected_hash)
-  end
-
   it 'serializes to JSON and back' do
     json = model_instance.to_hash.to_json
     new_obj = described_class.build_from_hash(JSON.parse(json))

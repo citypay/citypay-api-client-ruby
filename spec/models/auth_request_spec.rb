@@ -10,7 +10,20 @@ require 'citypay_api_client/models/mcc6012'
 require 'citypay_api_client/models/three_d_secure'
 
 RSpec.describe CityPayApiClient::AuthRequest do
-  let(:fake_airline) { CityPayApiClient::AirlineAdvice.new(ticket_no: 'T123', transaction_type: 'TKT') }
+  let(:fake_airline) { CityPayApiClient::AirlineAdvice.new(
+    carrier_name: 'TestAir',
+    conjunction_ticket_indicator: true,
+    eticket_indicator: true,
+    no_air_segments: 2,
+    number_in_party: 1,
+    original_ticket_no: '12345678901234',
+    passenger_name: 'John Passenger',
+    ticket_issue_city: 'London',
+    ticket_issue_date: Date.new(2021,6,1),
+    ticket_issue_name: 'Agent',
+    ticket_no: '99999999999999',
+    transaction_type: 'TKT'
+  ) }
   let(:fake_contact) { CityPayApiClient::ContactDetails.new(firstname: 'Jane') }
   let(:fake_event) do
     CityPayApiClient::EventDataModel.new(

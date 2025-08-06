@@ -11,7 +11,7 @@ RSpec.describe CityPayApiClient::AirlineAdvice do
       class_service_code: 'E',
       departure_date: Date.new(2021,7,1),
       departure_location_code: 'SFO',
-      flight_number: 'AA100',
+      flight_number: 'AA1',
       segment_fare: 20000,
       stop_over_indicator: 'O'
     )
@@ -23,7 +23,7 @@ RSpec.describe CityPayApiClient::AirlineAdvice do
       class_service_code: 'B',
       departure_date: Date.new(2021,7,2),
       departure_location_code: 'LHR',
-      flight_number: 'BA200',
+      flight_number: 'BA2',
       segment_fare: 15000,
       stop_over_indicator: 'X'
     )

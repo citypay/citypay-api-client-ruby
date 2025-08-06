@@ -18,7 +18,7 @@ RSpec.describe CityPayApiClient::DirectPostRequest do
       duplicate_policy: '1',
       expmonth: 12,
       expyear: 2099,
-      identifier: 'ID1',
+      identifier: 'IDNT1',
       mac: 'mac1',
       match_avsa: '1',
       name_on_card: 'Test',
@@ -29,7 +29,7 @@ RSpec.describe CityPayApiClient::DirectPostRequest do
       tag: ['t1'],
       threedsecure: three_ds,
       trans_info: 'info',
-      trans_type: 'SALE'
+      trans_type: '1'
     }
   end
   let(:model_instance) { described_class.new(fake_data) }
@@ -52,7 +52,7 @@ RSpec.describe CityPayApiClient::DirectPostRequest do
     model_instance.duplicate_policy = '2'
     model_instance.expmonth = 11
     model_instance.expyear = 2100
-    model_instance.identifier = 'ID2'
+    model_instance.identifier = 'IDNT2'
     model_instance.mac = 'mac2'
     model_instance.match_avsa = '2'
     model_instance.name_on_card = 'Changed'
@@ -63,7 +63,7 @@ RSpec.describe CityPayApiClient::DirectPostRequest do
     model_instance.tag = ['t2']
     model_instance.threedsecure = new_3ds
     model_instance.trans_info = 'info2'
-    model_instance.trans_type = 'AUTH'
+    model_instance.trans_type = '2'
     expect(model_instance.amount).to eq(200)
     expect(model_instance.avs_postcode_policy).to eq('2')
     expect(model_instance.bill_to).to eq(new_contact)
@@ -74,7 +74,7 @@ RSpec.describe CityPayApiClient::DirectPostRequest do
     expect(model_instance.duplicate_policy).to eq('2')
     expect(model_instance.expmonth).to eq(11)
     expect(model_instance.expyear).to eq(2100)
-    expect(model_instance.identifier).to eq('ID2')
+    expect(model_instance.identifier).to eq('IDNT2')
     expect(model_instance.mac).to eq('mac2')
     expect(model_instance.match_avsa).to eq('2')
     expect(model_instance.name_on_card).to eq('Changed')
@@ -85,7 +85,7 @@ RSpec.describe CityPayApiClient::DirectPostRequest do
     expect(model_instance.tag).to eq(['t2'])
     expect(model_instance.threedsecure).to eq(new_3ds)
     expect(model_instance.trans_info).to eq('info2')
-    expect(model_instance.trans_type).to eq('AUTH')
+    expect(model_instance.trans_type).to eq('2')
   end
 
   it 'serializes and deserializes via JSON' do

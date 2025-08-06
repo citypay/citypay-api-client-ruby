@@ -3,7 +3,7 @@ require 'citypay_api_client/models/check_batch_status_response'
 require 'citypay_api_client/models/batch'
 
 RSpec.describe CityPayApiClient::CheckBatchStatusResponse do
-  let(:fake_batch) { CityPayApiClient::Batch.new(batch_date: '2021-01-01', batch_id: 1, batch_status: 'A') }
+  let(:fake_batch) { CityPayApiClient::Batch.new(batch_date: Date.new(2021, 01, 01), batch_id: 1, batch_status: 'A') }
   let(:fake_data) { { batches: [fake_batch] } }
   let(:model_instance) { described_class.new(fake_data) }
 

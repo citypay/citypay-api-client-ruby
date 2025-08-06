@@ -7,11 +7,11 @@ require 'citypay_api_client/models/batch_transaction_result_model'
 RSpec.describe CityPayApiClient::BatchReportResponseModel do
   let(:trans) do
     CityPayApiClient::BatchTransactionResultModel.new(
-      account_id: 'ACC',
+      account_id: 'ACCNT',
       amount: 500,
       authcode: 'A1',
       datetime: Time.utc(2022,1,1,0,0,0),
-      identifier: 'ID',
+      identifier: 'IDNT',
       maskedpan: '411111******1111',
       merchantid: 1,
       message: 'OK',
@@ -29,7 +29,7 @@ RSpec.describe CityPayApiClient::BatchReportResponseModel do
       batch_date: Date.new(2022,1,1),
       batch_id: 1,
       batch_status: 'Open',
-      client_account_id: 'ACC',
+      client_account_id: 'ACCNT',
       transactions: [trans]
     }
   end
@@ -45,13 +45,13 @@ RSpec.describe CityPayApiClient::BatchReportResponseModel do
     model_instance.batch_date = Date.new(2022,2,2)
     model_instance.batch_id = 2
     model_instance.batch_status = 'Closed'
-    model_instance.client_account_id = 'ACC2'
+    model_instance.client_account_id = 'ACCNT2'
     model_instance.transactions = [trans]
     expect(model_instance.amount).to eq(700)
     expect(model_instance.batch_date).to eq(Date.new(2022,2,2))
     expect(model_instance.batch_id).to eq(2)
     expect(model_instance.batch_status).to eq('Closed')
-    expect(model_instance.client_account_id).to eq('ACC2')
+    expect(model_instance.client_account_id).to eq('ACCNT2')
     expect(model_instance.transactions).to eq([trans])
   end
 

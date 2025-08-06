@@ -6,11 +6,11 @@ RSpec.describe CityPayApiClient::BatchTransactionResultModel do
   let(:fake_time) { Time.utc(2022,1,1,0,0,0) }
   let(:fake_data) do
     {
-      account_id: 'ACC',
+      account_id: 'ACCNT',
       amount: 1000,
       authcode: 'A1',
       datetime: fake_time,
-      identifier: 'ID',
+      identifier: 'IDNT',
       maskedpan: '411111******1111',
       merchantid: 1,
       message: 'OK',
@@ -25,16 +25,16 @@ RSpec.describe CityPayApiClient::BatchTransactionResultModel do
   let(:model_instance) { described_class.new(fake_data) }
 
   it 'initializes correctly' do
-    expect(model_instance.account_id).to eq('ACC')
+    expect(model_instance.account_id).to eq('ACCNT')
     expect(model_instance.amount).to eq(1000)
   end
 
   it 'modifies and retrieves each attribute' do
-    model_instance.account_id = 'ACC2'
+    model_instance.account_id = 'ACCNT2'
     model_instance.amount = 2000
     model_instance.authcode = 'B2'
     model_instance.datetime = fake_time + 60
-    model_instance.identifier = 'ID2'
+    model_instance.identifier = 'IDNT2'
     model_instance.maskedpan = '400000******0002'
     model_instance.merchantid = 2
     model_instance.message = 'FAIL'
@@ -44,11 +44,11 @@ RSpec.describe CityPayApiClient::BatchTransactionResultModel do
     model_instance.scheme_id = 'SID2'
     model_instance.scheme_logo = 'logo2'
     model_instance.transno = 2
-    expect(model_instance.account_id).to eq('ACC2')
+    expect(model_instance.account_id).to eq('ACCNT2')
     expect(model_instance.amount).to eq(2000)
     expect(model_instance.authcode).to eq('B2')
     expect(model_instance.datetime).to eq(fake_time + 60)
-    expect(model_instance.identifier).to eq('ID2')
+    expect(model_instance.identifier).to eq('IDNT2')
     expect(model_instance.maskedpan).to eq('400000******0002')
     expect(model_instance.merchantid).to eq(2)
     expect(model_instance.message).to eq('FAIL')

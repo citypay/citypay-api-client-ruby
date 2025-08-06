@@ -5,7 +5,7 @@ require 'citypay_api_client/models/paylink_error_code'
 
 RSpec.describe CityPayApiClient::PaylinkTokenCreated do
   let(:attachment) { CityPayApiClient::PaylinkAttachmentResult.new(name: 'doc', result: 'OK', url: 'http://u') }
-  let(:error) { CityPayApiClient::PaylinkErrorCode.new(code: 1, msg: 'oops') }
+  let(:error) { CityPayApiClient::PaylinkErrorCode.new(code: "1", msg: 'oops') }
   let(:fake_data) do
     {
       attachments: attachment,
@@ -44,7 +44,7 @@ RSpec.describe CityPayApiClient::PaylinkTokenCreated do
   end
 
   it 'mutates and retrieves attributes' do
-    new_error = CityPayApiClient::PaylinkErrorCode.new(code: 2, msg: 'err')
+    new_error = CityPayApiClient::PaylinkErrorCode.new(code: "2", msg: 'err')
     new_attachment = CityPayApiClient::PaylinkAttachmentResult.new(name: 'img', result: 'UP', url: 'http://n')
     model.attachments = new_attachment
     model.bps = 'off'

@@ -8,7 +8,7 @@ RSpec.describe CityPayApiClient::DomainKeyResponse do
     {
       date_created: fake_time,
       domain: ['example.com'],
-      domain_key: 'key1',
+      domain_key: '0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF',
       live: false,
       merchantid: 1
     }
@@ -16,7 +16,7 @@ RSpec.describe CityPayApiClient::DomainKeyResponse do
   let(:model_instance) { described_class.new(fake_data) }
 
   it 'constructs with provided attributes' do
-    expect(model_instance.domain_key).to eq('key1')
+    expect(model_instance.domain_key).to eq('0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF')
     expect(model_instance.domain).to eq(['example.com'])
   end
 
@@ -24,12 +24,12 @@ RSpec.describe CityPayApiClient::DomainKeyResponse do
     new_time = Time.utc(2022, 2, 2, 12, 0, 0)
     model_instance.date_created = new_time
     model_instance.domain = ['test.com']
-    model_instance.domain_key = 'key2'
+    model_instance.domain_key = 'FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210'
     model_instance.live = true
     model_instance.merchantid = 2
     expect(model_instance.date_created).to eq(new_time)
     expect(model_instance.domain).to eq(['test.com'])
-    expect(model_instance.domain_key).to eq('key2')
+    expect(model_instance.domain_key).to eq('FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210FEDCBA9876543210')
     expect(model_instance.live).to eq(true)
     expect(model_instance.merchantid).to eq(2)
   end

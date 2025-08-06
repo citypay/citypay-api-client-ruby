@@ -13,7 +13,7 @@ RSpec.describe CityPayApiClient::BatchTransactionReportResponse do
       batchno: 'B',
       currency: 'GBP',
       datetime: Time.utc(2022,1,1,0,0,0),
-      identifier: 'ID',
+      identifier: 'IDNT',
       maskedpan: '411111******1111',
       merchantid: 1,
       result: 'A',

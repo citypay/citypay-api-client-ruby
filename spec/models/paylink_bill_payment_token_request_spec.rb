@@ -19,7 +19,7 @@ RSpec.describe CityPayApiClient::PaylinkBillPaymentTokenRequest do
 
   let(:email_path) { CityPayApiClient::PaylinkEmailNotificationPath.new(to: 'a@example.com') }
   let(:sms_path) { CityPayApiClient::PaylinkSMSNotificationPath.new(to: '0712345678', template: 'tmpl') }
-  let(:token_request) { CityPayApiClient::PaylinkTokenRequestModel.new(amount: 1000, currency: 'GBP', identifier: 'ID1', merchantid: 1) }
+  let(:token_request) { CityPayApiClient::PaylinkTokenRequestModel.new(amount: 1000, currency: 'GBP', identifier: 'IDNT1', merchantid: 1) }
 
   let(:fake_data) do
     {
@@ -50,7 +50,7 @@ RSpec.describe CityPayApiClient::PaylinkBillPaymentTokenRequest do
     new_attachment = CityPayApiClient::PaylinkAttachmentRequest.new(filename: 'new.txt', mime_type: 'text/plain', name: 'n', data: 'bmV3')
     new_email = CityPayApiClient::PaylinkEmailNotificationPath.new(to: 'b@example.com')
     new_sms = CityPayApiClient::PaylinkSMSNotificationPath.new(to: '0700000000', template: 'alt')
-    new_request = CityPayApiClient::PaylinkTokenRequestModel.new(amount: 2000, currency: 'USD', identifier: 'ID2', merchantid: 2)
+    new_request = CityPayApiClient::PaylinkTokenRequestModel.new(amount: 2000, currency: 'USD', identifier: 'IDNT2', merchantid: 2)
     model.addressee = 'NewCust'
     model.attachments = [new_attachment]
     model.descriptor = 'Updated'
