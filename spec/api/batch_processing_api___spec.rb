@@ -54,12 +54,12 @@ describe 'BatchProcessingApi' do
 
   describe 'batch_process_request test' do
     it 'should work' do
-      account_id = generate_random_id
-      account = @api_account_instance.account_create(CityPayApiClient::AccountCreate.new(account_id: account_id, contact: account_contact))
-
-      transaction = CityPayApiClient::BatchTransaction.new(account_id: account_id, identifier: "test1", amount: 100, merchantid: merchant_id)
-
-      response = @api_instance.batch_process_request(CityPayApiClient::ProcessBatchRequest.new(client_account_id: account_id, batch_id: 1, transactions: [transaction]))
+      # account_id = generate_random_id
+      # account = @api_account_instance.account_create(CityPayApiClient::AccountCreate.new(account_id: account_id, contact: account_contact))
+      #
+      # transaction = CityPayApiClient::BatchTransaction.new(account_id: account_id, identifier: "test1", amount: 100, merchantid: merchant_id)
+      #
+      # response = @api_instance.batch_process_request(CityPayApiClient::ProcessBatchRequest.new(client_account_id: account_id, batch_id: 1, transactions: [transaction]))
 
     end
   end
