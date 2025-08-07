@@ -8,10 +8,10 @@ All URIs are relative to *https://api.citypay.com*
 | [**bin_range_lookup_request**](AuthorisationAndPaymentApi.md#bin_range_lookup_request) | **POST** /v6/bin | Bin Lookup |
 | [**c_res_request**](AuthorisationAndPaymentApi.md#c_res_request) | **POST** /v6/cres | CRes |
 | [**capture_request**](AuthorisationAndPaymentApi.md#capture_request) | **POST** /v6/capture | Capture |
-| [**create_payment_intent**](AuthorisationAndPaymentApi.md#create_payment_intent) | **POST** /v6/intent/create | Create a Payment Intent |
-| [**pa_res_request**](AuthorisationAndPaymentApi.md#pa_res_request) | **POST** /v6/pares | PaRes |
+| [**card_tokenisation_request**](AuthorisationAndPaymentApi.md#card_tokenisation_request) | **POST** /v6/tokenise | Card Tokenisation Request |
 | [**refund_request**](AuthorisationAndPaymentApi.md#refund_request) | **POST** /v6/refund | Refund |
-| [**retrieval_request**](AuthorisationAndPaymentApi.md#retrieval_request) | **POST** /v6/retrieve | Retrieval |
+| [**retrieval_request**](AuthorisationAndPaymentApi.md#retrieval_request) | **POST** /v6/retrieve | Transaction Retrieval |
+| [**verification_request**](AuthorisationAndPaymentApi.md#verification_request) | **POST** /v6/verify | Verification |
 | [**void_request**](AuthorisationAndPaymentApi.md#void_request) | **POST** /v6/void | Void |
 
 
@@ -37,7 +37,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
-auth_request = CityPayApiClient::AuthRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344}) # AuthRequest | 
+auth_request = CityPayApiClient::AuthRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344}) # AuthRequest | 
 
 begin
   # Authorisation
@@ -299,84 +299,13 @@ end
 - **Accept**: application/json, text/xml
 
 
-## create_payment_intent
+## card_tokenisation_request
 
-> <PaymentIntentReference> create_payment_intent(payment_intent)
+> <CardTokenisationResponse> card_tokenisation_request(card_tokenisation_request)
 
-Create a Payment Intent
+Card Tokenisation Request
 
-This endpoint initiates the creation of a payment intent, which is a precursor to processing a payment. A payment intent captures the details of a prospective payment transaction, including the payment amount, currency, and associated billing and shipping information. 
-
-### Examples
-
-```ruby
-require 'time'
-require 'citypay_api_client'
-# setup authorization
-CityPayApiClient.configure do |config|
-  # Configure API key authorization: cp-api-key
-  config.api_key['cp-api-key'] = 'YOUR API KEY'
-  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
-  # config.api_key_prefix['cp-api-key'] = 'Bearer'
-end
-
-api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
-payment_intent = CityPayApiClient::PaymentIntent.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95'}) # PaymentIntent | 
-
-begin
-  # Create a Payment Intent
-  result = api_instance.create_payment_intent(payment_intent)
-  p result
-rescue CityPayApiClient::ApiError => e
-  puts "Error when calling AuthorisationAndPaymentApi->create_payment_intent: #{e}"
-end
-```
-
-#### Using the create_payment_intent_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<PaymentIntentReference>, Integer, Hash)> create_payment_intent_with_http_info(payment_intent)
-
-```ruby
-begin
-  # Create a Payment Intent
-  data, status_code, headers = api_instance.create_payment_intent_with_http_info(payment_intent)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <PaymentIntentReference>
-rescue CityPayApiClient::ApiError => e
-  puts "Error when calling AuthorisationAndPaymentApi->create_payment_intent_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **payment_intent** | [**PaymentIntent**](PaymentIntent.md) |  |  |
-
-### Return type
-
-[**PaymentIntentReference**](PaymentIntentReference.md)
-
-### Authorization
-
-[cp-api-key](../README.md#cp-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: application/json, text/xml
-- **Accept**: application/json, text/xml
-
-
-## pa_res_request
-
-> <AuthResponse> pa_res_request(pa_res_auth_request)
-
-PaRes
-
-The Payer Authentication Response (PaRes) is an operation after the result of authentication   being performed. The request uses an encoded packet of authentication data to  notify us of the completion of the liability shift. Once this value has been unpacked and its signature is checked, our systems will proceed to authorisation processing.    Any call to the PaRes operation will require a previous authorisation request and cannot be called  on its own without a previous [authentication required](#authenticationrequired)  being obtained. 
+Performs a tokenisation request for card details.
 
 ### Examples
 
@@ -385,6 +314,11 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
+  # Configure API key authorization: cp-domain-key
+  config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
+
   # Configure API key authorization: cp-api-key
   config.api_key['cp-api-key'] = 'YOUR API KEY'
   # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
@@ -392,32 +326,32 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
-pa_res_auth_request = CityPayApiClient::PaResAuthRequest.new({md: 'md_example', pares: 'v66ycfSp8jNlvy7PkHbx44NEt3vox90+vZ/7Ll05Vid/jPfQn8adw+4D/vRDUGT19kndW97Hfirb...'}) # PaResAuthRequest | 
+card_tokenisation_request = CityPayApiClient::CardTokenisationRequest.new # CardTokenisationRequest | 
 
 begin
-  # PaRes
-  result = api_instance.pa_res_request(pa_res_auth_request)
+  # Card Tokenisation Request
+  result = api_instance.card_tokenisation_request(card_tokenisation_request)
   p result
 rescue CityPayApiClient::ApiError => e
-  puts "Error when calling AuthorisationAndPaymentApi->pa_res_request: #{e}"
+  puts "Error when calling AuthorisationAndPaymentApi->card_tokenisation_request: #{e}"
 end
 ```
 
-#### Using the pa_res_request_with_http_info variant
+#### Using the card_tokenisation_request_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<AuthResponse>, Integer, Hash)> pa_res_request_with_http_info(pa_res_auth_request)
+> <Array(<CardTokenisationResponse>, Integer, Hash)> card_tokenisation_request_with_http_info(card_tokenisation_request)
 
 ```ruby
 begin
-  # PaRes
-  data, status_code, headers = api_instance.pa_res_request_with_http_info(pa_res_auth_request)
+  # Card Tokenisation Request
+  data, status_code, headers = api_instance.card_tokenisation_request_with_http_info(card_tokenisation_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <AuthResponse>
+  p data # => <CardTokenisationResponse>
 rescue CityPayApiClient::ApiError => e
-  puts "Error when calling AuthorisationAndPaymentApi->pa_res_request_with_http_info: #{e}"
+  puts "Error when calling AuthorisationAndPaymentApi->card_tokenisation_request_with_http_info: #{e}"
 end
 ```
 
@@ -425,15 +359,15 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **pa_res_auth_request** | [**PaResAuthRequest**](PaResAuthRequest.md) |  |  |
+| **card_tokenisation_request** | [**CardTokenisationRequest**](CardTokenisationRequest.md) |  |  |
 
 ### Return type
 
-[**AuthResponse**](AuthResponse.md)
+[**CardTokenisationResponse**](CardTokenisationResponse.md)
 
 ### Authorization
 
-[cp-api-key](../README.md#cp-api-key)
+[cp-domain-key](../README.md#cp-domain-key), [cp-api-key](../README.md#cp-api-key)
 
 ### HTTP request headers
 
@@ -516,7 +450,7 @@ end
 
 > <AuthReferences> retrieval_request(retrieve_request)
 
-Retrieval
+Transaction Retrieval
 
 A retrieval request which allows an integration to obtain the result of a transaction processed in the last 90 days. The request allows for retrieval based on the identifier or transaction  number.   The process may return multiple results in particular where a transaction was processed multiple times against the same identifier. This can happen if errors were first received. The API therefore returns up to the first 5 transactions in the latest date time order.  It is not intended for this operation to be a replacement for reporting and only allows for base transaction information to be returned. 
 
@@ -537,7 +471,7 @@ api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
 retrieve_request = CityPayApiClient::RetrieveRequest.new({merchantid: 11223344}) # RetrieveRequest | 
 
 begin
-  # Retrieval
+  # Transaction Retrieval
   result = api_instance.retrieval_request(retrieve_request)
   p result
 rescue CityPayApiClient::ApiError => e
@@ -553,7 +487,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Retrieval
+  # Transaction Retrieval
   data, status_code, headers = api_instance.retrieval_request_with_http_info(retrieve_request)
   p status_code # => 2xx
   p headers # => { ... }
@@ -572,6 +506,77 @@ end
 ### Return type
 
 [**AuthReferences**](AuthReferences.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
+
+
+## verification_request
+
+> <Decision> verification_request(verification_request)
+
+Verification
+
+Performs a request for verification for a card payment request.
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
+end
+
+api_instance = CityPayApiClient::AuthorisationAndPaymentApi.new
+verification_request = CityPayApiClient::VerificationRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', merchantid: 11223344}) # VerificationRequest | 
+
+begin
+  # Verification
+  result = api_instance.verification_request(verification_request)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling AuthorisationAndPaymentApi->verification_request: #{e}"
+end
+```
+
+#### Using the verification_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Decision>, Integer, Hash)> verification_request_with_http_info(verification_request)
+
+```ruby
+begin
+  # Verification
+  data, status_code, headers = api_instance.verification_request_with_http_info(verification_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Decision>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling AuthorisationAndPaymentApi->verification_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **verification_request** | [**VerificationRequest**](VerificationRequest.md) |  |  |
+
+### Return type
+
+[**Decision**](Decision.md)
 
 ### Authorization
 

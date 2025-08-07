@@ -16,7 +16,7 @@ require 'citypay_api_client'
 instance = CityPayApiClient::Exists.new(
   active: true,
   exists: true,
-  last_modified: 2020-01-02T18:32:28Z
+  last_modified: 2025-01-02T18:32:28Z
 )
 ```
 

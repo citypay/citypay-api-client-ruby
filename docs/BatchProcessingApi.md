@@ -31,7 +31,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2020'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 19995})]}) # ProcessBatchRequest | 
+process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2025'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 19995})]}) # ProcessBatchRequest | 
 
 begin
   # Batch Process Request
