@@ -27,8 +27,8 @@ require 'citypay_api_client'
 instance = CityPayApiClient::RemittedClientData.new(
   batches: null,
   clientid: PC12345,
-  date: Thu Jan 02 00:00:00 UTC 2020,
-  date_created: 2020-01-02T18:32:28Z,
+  date: Thu Jan 02 00:00:00 UTC 2025,
+  date_created: 2025-01-02T18:32:28Z,
   net_amount: 11874500,
   processed_amount: 11874500,
   processed_count: 11874500,

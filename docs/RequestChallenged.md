@@ -16,7 +16,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::RequestChallenged.new(
-  acs_url: https://acs.cardissuer.com/3dsv1,
+  acs_url: https://acs.cardissuer.com/3dsv2,
   creq: null,
   merchantid: 11223344,
   threedserver_trans_id: null,

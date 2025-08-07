@@ -116,7 +116,7 @@ end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
 accountid = 'accountid_example' # String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
-register_card = CityPayApiClient::RegisterCard.new({cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027}) # RegisterCard | 
+register_card = CityPayApiClient::RegisterCard.new({cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2028}) # RegisterCard | 
 
 begin
   # Card Registration

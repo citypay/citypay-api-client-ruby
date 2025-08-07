@@ -178,7 +178,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Auth Request
@@ -254,7 +254,7 @@ CityPayApiClient.configure do |config|
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Tokenise Request

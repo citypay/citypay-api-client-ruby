@@ -14,7 +14,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::PaylinkStateEvent.new(
-  datetime: 2024-04-22T13:29:14Z,
+  datetime: 2025-07-30T15:54:29Z,
   message: message on this state,
   state: FormInput
 )

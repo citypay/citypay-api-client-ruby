@@ -25,17 +25,17 @@ require 'citypay_api_client'
 
 instance = CityPayApiClient::ThreeDSecure.new(
   accept_headers: text/html,application/xhtml+xml,application/xml;q&#x3D;0.9,image/webp,image/apng,*/*;q&#x3D;0.8,application/signed-exchange;v&#x3D;b3;q&#x3D;0.9,
-  browser_color_depth: null,
-  browser_ip: null,
-  browser_java_enabled: null,
-  browser_language: null,
-  browser_screen_height: null,
-  browser_screen_width: null,
-  browser_tz: null,
+  browser_color_depth: 24,
+  browser_ip: 203.0.113.45,
+  browser_java_enabled: false,
+  browser_language: en-GB,
+  browser_screen_height: 1080,
+  browser_screen_width: 1920,
+  browser_tz: -60,
   cp_bx: FjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAx...,
   downgrade1: null,
   merchant_termurl: https://mysite.com/acs/return,
-  tds_policy: null,
+  tds_policy: 0,
   user_agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36
 )
 ```

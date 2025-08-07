@@ -9,6 +9,7 @@ All URIs are relative to *https://api.citypay.com*
 | [**domain_key_gen_request**](OperationalFunctionsApi.md#domain_key_gen_request) | **POST** /dk/gen | Domain Key Generation Request |
 | [**list_merchants_request**](OperationalFunctionsApi.md#list_merchants_request) | **GET** /v6/merchants/{clientid} | List Merchants Request |
 | [**ping_request**](OperationalFunctionsApi.md#ping_request) | **POST** /v6/ping | Ping Request |
+| [**register_temp_key**](OperationalFunctionsApi.md#register_temp_key) | **POST** /v6/permissions/register-temp-ip | Register Temp Key |
 
 
 ## acl_check_request
@@ -369,4 +370,75 @@ end
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded, text/xml
 - **Accept**: application/x-www-form-urlencoded, application/json, text/xml
+
+
+## register_temp_key
+
+> <Acknowledgement> register_temp_key(register_ip_model)
+
+Register Temp Key
+
+Registers a temporary licence key.
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
+end
+
+api_instance = CityPayApiClient::OperationalFunctionsApi.new
+register_ip_model = CityPayApiClient::RegisterIpModel.new # RegisterIpModel | 
+
+begin
+  # Register Temp Key
+  result = api_instance.register_temp_key(register_ip_model)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling OperationalFunctionsApi->register_temp_key: #{e}"
+end
+```
+
+#### Using the register_temp_key_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Acknowledgement>, Integer, Hash)> register_temp_key_with_http_info(register_ip_model)
+
+```ruby
+begin
+  # Register Temp Key
+  data, status_code, headers = api_instance.register_temp_key_with_http_info(register_ip_model)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Acknowledgement>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling OperationalFunctionsApi->register_temp_key_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **register_ip_model** | [**RegisterIpModel**](RegisterIpModel.md) |  |  |
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
+- **Accept**: application/json, text/xml
 

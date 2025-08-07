@@ -19,13 +19,13 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::PaylinkCartItemModel.new(
-  amount: null,
+  amount: 1200,
   brand: null,
-  category: null,
-  count: null,
-  label: null,
+  category: Fiction,
+  count: 1,
+  label: Percy Hotter,
   max: null,
-  sku: null,
+  sku: AO12345678,
   variant: null
 )
 ```
