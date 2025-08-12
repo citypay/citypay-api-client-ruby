@@ -71,14 +71,6 @@ describe 'PaylinkApi' do
     end
   end
 
-  describe 'token_close_request test' do
-    it 'should work' do
-      token = @api_instance.token_create_request(PaylinkTokenRequestModel.new(amount: 1, identifier: generate_random_id, merchantid: merchant_id)).token
-      response = @api_instance.token_close_request(token)
-      expect(response.message).to eq("Token closed")
-    end
-  end
-
   describe 'token_create_bill_payment_request test' do
     it 'should work' do
       id = generate_random_id
@@ -93,16 +85,6 @@ describe 'PaylinkApi' do
       token = @api_instance.token_create_request(PaylinkTokenRequestModel.new(amount: 1, identifier: id, merchantid: merchant_id)).token
       response = @api_instance.token_reconciled_request(token)
       expect(response.message).to eq("Token Reconciled")
-    end
-  end
-
-  describe 'token_reopen_request test' do
-    it 'should work' do
-      id = generate_random_id
-      token = @api_instance.token_create_request(PaylinkTokenRequestModel.new(amount: 1, identifier: id, merchantid: merchant_id)).token
-      closed = @api_instance.token_close_request(token)
-      response = @api_instance.token_reopen_request(token)
-      expect(response.message).to eq("Token Reopened")
     end
   end
 

@@ -8,7 +8,7 @@ RSpec.describe CityPayApiClient::PaylinkTokenCreated do
   let(:error) { CityPayApiClient::PaylinkErrorCode.new(code: "1", msg: 'oops') }
   let(:fake_data) do
     {
-      attachments: attachment,
+      attachments: [attachment],
       bps: 'on',
       date_created: Time.utc(2022, 1, 1, 0, 0, 0),
       errors: [error],
@@ -27,7 +27,7 @@ RSpec.describe CityPayApiClient::PaylinkTokenCreated do
   let(:model) { described_class.new(fake_data) }
 
   it 'sets all fields from constructor' do
-    expect(model.attachments).to eq(attachment)
+    expect(model.attachments).to eq([attachment])
     expect(model.bps).to eq('on')
     expect(model.date_created).to eq(Time.utc(2022, 1, 1, 0, 0, 0))
     expect(model.errors).to eq([error])
@@ -46,7 +46,7 @@ RSpec.describe CityPayApiClient::PaylinkTokenCreated do
   it 'mutates and retrieves attributes' do
     new_error = CityPayApiClient::PaylinkErrorCode.new(code: "2", msg: 'err')
     new_attachment = CityPayApiClient::PaylinkAttachmentResult.new(name: 'img', result: 'UP', url: 'http://n')
-    model.attachments = new_attachment
+    model.attachments = [new_attachment]
     model.bps = 'off'
     new_date = Time.utc(2023, 2, 2, 0, 0, 0)
     model.date_created = new_date
@@ -62,7 +62,7 @@ RSpec.describe CityPayApiClient::PaylinkTokenCreated do
     model.url = 'http://pay2'
     model.usc = 'usc2'
 
-    expect(model.attachments).to eq(new_attachment)
+    expect(model.attachments).to eq([new_attachment])
     expect(model.bps).to eq('off')
     expect(model.date_created).to eq(new_date)
     expect(model.errors).to eq([new_error])
