@@ -16,7 +16,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::PaylinkTokenStatusChangeRequest.new(
-  after: 2024-04-22T13:29:14Z,
+  after: 2025-07-30T15:54:29Z,
   max_results: 50,
   merchantid: 11223344,
   next_token: n34liuwn435tUAGFNg34yn...,

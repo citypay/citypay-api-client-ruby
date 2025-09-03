@@ -4,10 +4,11 @@ All URIs are relative to *https://api.citypay.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
+| [**paylink_token_close_request**](PaylinkApi.md#paylink_token_close_request) | **PUT** /paylink/{token}/close | Close Paylink Token |
 | [**token_adjustment_request**](PaylinkApi.md#token_adjustment_request) | **POST** /paylink/{token}/adjustment | Paylink Token Adjustment |
+| [**token_attachment_status**](PaylinkApi.md#token_attachment_status) | **GET** /paylink/{token}/attachment-status/{attachment} | Checks an attachment status |
 | [**token_cancel_request**](PaylinkApi.md#token_cancel_request) | **PUT** /paylink/{token}/cancel | Cancel a Paylink Token |
 | [**token_changes_request**](PaylinkApi.md#token_changes_request) | **POST** /paylink/token/changes | Paylink Token Audit |
-| [**token_close_request**](PaylinkApi.md#token_close_request) | **PUT** /paylink/{token}/close | Close Paylink Token |
 | [**token_create_bill_payment_request**](PaylinkApi.md#token_create_bill_payment_request) | **POST** /paylink/bill-payment | Create Bill Payment Paylink Token |
 | [**token_create_request**](PaylinkApi.md#token_create_request) | **POST** /paylink/create | Create Paylink Token |
 | [**token_purge_attachments_request**](PaylinkApi.md#token_purge_attachments_request) | **PUT** /paylink/{token}/purge-attachments | Purges any attachments for a Paylink Token |
@@ -15,6 +16,77 @@ All URIs are relative to *https://api.citypay.com*
 | [**token_reopen_request**](PaylinkApi.md#token_reopen_request) | **PUT** /paylink/{token}/reopen | Reopen Paylink Token |
 | [**token_resend_notification_request**](PaylinkApi.md#token_resend_notification_request) | **POST** /paylink/{token}/resend-notification | Resend a notification for Paylink Token |
 | [**token_status_request**](PaylinkApi.md#token_status_request) | **GET** /paylink/{token}/status | Paylink Token Status |
+
+
+## paylink_token_close_request
+
+> <Acknowledgement> paylink_token_close_request(token)
+
+Close Paylink Token
+
+Closes a paylink token that was previously created.
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
+end
+
+api_instance = CityPayApiClient::PaylinkApi.new
+token = 'token_example' # String | The token returned by the create token process.
+
+begin
+  # Close Paylink Token
+  result = api_instance.paylink_token_close_request(token)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->paylink_token_close_request: #{e}"
+end
+```
+
+#### Using the paylink_token_close_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Acknowledgement>, Integer, Hash)> paylink_token_close_request_with_http_info(token)
+
+```ruby
+begin
+  # Close Paylink Token
+  data, status_code, headers = api_instance.paylink_token_close_request_with_http_info(token)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Acknowledgement>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->paylink_token_close_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **token** | **String** | The token returned by the create token process. |  |
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
 
 
 ## token_adjustment_request
@@ -36,7 +108,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -91,6 +166,82 @@ end
 - **Accept**: application/json, text/xml
 
 
+## token_attachment_status
+
+> <Acknowledgement> token_attachment_status(token, attachment)
+
+Checks an attachment status
+
+The `TokenAttachmentStatus` processes a request to check the status of a Paylink BPS attachment, 
+verifying its successful upload and returning metadata such as the MD5 hash, upload time, 
+and content type to ensure file integrity and correctness.
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
+end
+
+api_instance = CityPayApiClient::PaylinkApi.new
+token = 'token_example' # String | The token returned by the create token process.
+attachment = 'attachment_example' # String | The attachemnt name requested.
+
+begin
+  # Checks an attachment status
+  result = api_instance.token_attachment_status(token, attachment)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->token_attachment_status: #{e}"
+end
+```
+
+#### Using the token_attachment_status_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<Acknowledgement>, Integer, Hash)> token_attachment_status_with_http_info(token, attachment)
+
+```ruby
+begin
+  # Checks an attachment status
+  data, status_code, headers = api_instance.token_attachment_status_with_http_info(token, attachment)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <Acknowledgement>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling PaylinkApi->token_attachment_status_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **token** | **String** | The token returned by the create token process. |  |
+| **attachment** | **String** | The attachemnt name requested. |  |
+
+### Return type
+
+[**Acknowledgement**](Acknowledgement.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
 ## token_cancel_request
 
 > <Acknowledgement> token_cancel_request(token)
@@ -106,7 +257,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -174,11 +328,14 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
-paylink_token_status_change_request = CityPayApiClient::PaylinkTokenStatusChangeRequest.new({after: Time.parse('2024-04-22T13:29:14Z'), merchantid: 11223344}) # PaylinkTokenStatusChangeRequest | 
+paylink_token_status_change_request = CityPayApiClient::PaylinkTokenStatusChangeRequest.new({after: Time.parse('2025-07-30T15:54:29Z'), merchantid: 11223344}) # PaylinkTokenStatusChangeRequest | 
 
 begin
   # Paylink Token Audit
@@ -224,76 +381,6 @@ end
 ### HTTP request headers
 
 - **Content-Type**: application/json, text/xml
-- **Accept**: application/json, text/xml
-
-
-## token_close_request
-
-> <Acknowledgement> token_close_request(token)
-
-Close Paylink Token
-
-Marks a Paylink Token as closed. This closes the Token for any future action and the Token will not appear in any status
-request calls.
-
-
-### Examples
-
-```ruby
-require 'time'
-require 'citypay_api_client'
-# setup authorization
-CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
-end
-
-api_instance = CityPayApiClient::PaylinkApi.new
-token = 'token_example' # String | The token returned by the create token process.
-
-begin
-  # Close Paylink Token
-  result = api_instance.token_close_request(token)
-  p result
-rescue CityPayApiClient::ApiError => e
-  puts "Error when calling PaylinkApi->token_close_request: #{e}"
-end
-```
-
-#### Using the token_close_request_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<Acknowledgement>, Integer, Hash)> token_close_request_with_http_info(token)
-
-```ruby
-begin
-  # Close Paylink Token
-  data, status_code, headers = api_instance.token_close_request_with_http_info(token)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <Acknowledgement>
-rescue CityPayApiClient::ApiError => e
-  puts "Error when calling PaylinkApi->token_close_request_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **token** | **String** | The token returned by the create token process. |  |
-
-### Return type
-
-[**Acknowledgement**](Acknowledgement.md)
-
-### Authorization
-
-[cp-api-key](../README.md#cp-api-key)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/json, text/xml
 
 
@@ -482,7 +569,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -550,7 +640,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -618,7 +711,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -686,7 +782,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -754,7 +853,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -822,7 +924,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new
@@ -892,7 +997,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::PaylinkApi.new

@@ -105,17 +105,20 @@ describe 'IntegrationTests' do
       expect(response.creq).to_not be_nil
       expect(response.threedserver_trans_id).to_not be_nil
 
-      content = {
-        :threeDSSessionData => response.threedserver_trans_id,
-        :creq => response.creq
-      }
+      # Send the CReq to the simulator to receive a CRes using form-urlencoded as per PHP fix
+      form_body = URI.encode_www_form(
+        "threeDSSessionData" => response.threedserver_trans_id,
+        "creq" => response.creq,
+        "transStatus" => "Y",
+        "reason" => "01"
+      )
 
-      request = Typhoeus::Request.new("https://sandbox.citypay.com/3dsv2/acs",
-                                       method: :post,
-                                       headers: {
-                                         "Content-Type" => "application/json"
-                                       },
-                                       body: content.to_json)
+      request = Typhoeus::Request.new(
+        "https://sandbox.citypay.com/3dsv2/gen-rreq",
+        method: :post,
+        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+        body: form_body
+      )
       res = request.run
       c_res = res.response_body
       object = JSON.parse(c_res)

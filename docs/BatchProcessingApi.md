@@ -28,11 +28,14 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
-process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2020'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 19995})]}) # ProcessBatchRequest | 
+process_batch_request = CityPayApiClient::ProcessBatchRequest.new({batch_date: Date.parse('Thu Jan 02 00:00:00 UTC 2025'), batch_id: 35, transactions: [CityPayApiClient::BatchTransaction.new({account_id: 'aaabbb-cccddd-eee', amount: 19995})]}) # ProcessBatchRequest | 
 
 begin
   # Batch Process Request
@@ -96,7 +99,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new
@@ -164,7 +170,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::BatchProcessingApi.new

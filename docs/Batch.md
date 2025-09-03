@@ -14,7 +14,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::Batch.new(
-  batch_date: Thu Jan 02 00:00:00 UTC 2020,
+  batch_date: Thu Jan 02 00:00:00 UTC 2025,
   batch_id: 35,
   batch_status: COMPLETE
 )

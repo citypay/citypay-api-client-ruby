@@ -16,7 +16,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::DomainKeyResponse.new(
-  date_created: 2020-01-02T18:32:28Z,
+  date_created: 2025-01-02T18:32:28Z,
   domain: null,
   domain_key: 3MEcU8cEf...QMeebACxcQVejmT1Wi,
   live: true,

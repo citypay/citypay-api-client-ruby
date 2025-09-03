@@ -28,7 +28,7 @@ instance = CityPayApiClient::BatchTransactionResultModel.new(
   account_id: aaabbb-cccddd-eee,
   amount: 19995,
   authcode: 001245A,
-  datetime: 2020-01-02T18:32:28Z,
+  datetime: 2025-01-02T18:32:28Z,
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   maskedpan: 4***********0002,
   merchantid: 11223344,

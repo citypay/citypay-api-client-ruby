@@ -12,7 +12,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::AccountStatus.new(
-  status: null
+  status: ACTIVE
 )
 ```
 

@@ -33,7 +33,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -115,12 +118,15 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
 accountid = 'accountid_example' # String | The account id that refers to the customer's account no. This value will have been provided when setting up the card holder account.
-register_card = CityPayApiClient::RegisterCard.new({cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027}) # RegisterCard | 
+register_card = CityPayApiClient::RegisterCard.new({cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2028}) # RegisterCard | 
 
 begin
   # Card Registration
@@ -192,7 +198,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -264,7 +273,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -334,7 +346,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -404,7 +419,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -473,7 +491,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -547,7 +568,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -621,7 +645,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new
@@ -714,7 +741,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::CardHolderAccountApi.new

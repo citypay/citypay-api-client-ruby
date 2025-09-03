@@ -9,6 +9,7 @@ All URIs are relative to *https://api.citypay.com*
 | [**merchant_batch_request**](ReportingApi.md#merchant_batch_request) | **GET** /v6/merchant-batch/{merchantid}/{batch_no} | Merchant Batch Request |
 | [**remittance_range_report**](ReportingApi.md#remittance_range_report) | **POST** /v6/remittance/report/{clientid} | Remittance Report Request |
 | [**remittance_report_request**](ReportingApi.md#remittance_report_request) | **GET** /v6/remittance/report/{clientid}/{date} | Remittance Date Report Request |
+| [**transaction_report_request**](ReportingApi.md#transaction_report_request) | **POST** /v6/transactions | Transaction Report Request |
 
 
 ## batched_transaction_report_request
@@ -26,7 +27,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::ReportingApi.new
@@ -101,7 +105,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::ReportingApi.new
@@ -169,7 +176,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::ReportingApi.new
@@ -244,7 +254,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::ReportingApi.new
@@ -322,7 +335,10 @@ require 'time'
 require 'citypay_api_client'
 # setup authorization
 CityPayApiClient.configure do |config|
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::ReportingApi.new
@@ -374,5 +390,78 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json, text/xml
+
+
+## transaction_report_request
+
+> <BatchTransactionReportResponse> transaction_report_request(transaction_report_request)
+
+Transaction Report Request
+
+Retrieve a paginated report of transaction activity within a specified time range. Supports filters by transaction type, 
+result state, merchant ID, and allows field selection or predefined response modes for optimal data handling.
+
+
+### Examples
+
+```ruby
+require 'time'
+require 'citypay_api_client'
+# setup authorization
+CityPayApiClient.configure do |config|
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
+end
+
+api_instance = CityPayApiClient::ReportingApi.new
+transaction_report_request = CityPayApiClient::TransactionReportRequest.new({from: Time.parse('2025-01-02T18:32:28Z'), merchantid: 11223344, _until: Time.parse('2025-01-03T18:32:28Z')}) # TransactionReportRequest | 
+
+begin
+  # Transaction Report Request
+  result = api_instance.transaction_report_request(transaction_report_request)
+  p result
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling ReportingApi->transaction_report_request: #{e}"
+end
+```
+
+#### Using the transaction_report_request_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BatchTransactionReportResponse>, Integer, Hash)> transaction_report_request_with_http_info(transaction_report_request)
+
+```ruby
+begin
+  # Transaction Report Request
+  data, status_code, headers = api_instance.transaction_report_request_with_http_info(transaction_report_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BatchTransactionReportResponse>
+rescue CityPayApiClient::ApiError => e
+  puts "Error when calling ReportingApi->transaction_report_request_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **transaction_report_request** | [**TransactionReportRequest**](TransactionReportRequest.md) |  |  |
+
+### Return type
+
+[**BatchTransactionReportResponse**](BatchTransactionReportResponse.md)
+
+### Authorization
+
+[cp-api-key](../README.md#cp-api-key)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/xml
 - **Accept**: application/json, text/xml
 
