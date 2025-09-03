@@ -18,7 +18,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::MerchantBatchResponse.new(
-  batch_closed: 2024-04-22T13:29:14Z,
+  batch_closed: 2025-07-30T15:54:29Z,
   batch_no: null,
   batch_status: null,
   batch_status_code: null,

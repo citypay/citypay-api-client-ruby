@@ -17,7 +17,7 @@
 require 'citypay_api_client'
 
 instance = CityPayApiClient::RemittanceData.new(
-  date_created: 2020-01-02T18:32:28Z,
+  date_created: 2025-01-02T18:32:28Z,
   net_amount: 11874500,
   refund_amount: 11874500,
   refund_count: 11874500,

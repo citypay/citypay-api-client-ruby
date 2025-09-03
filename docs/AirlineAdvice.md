@@ -39,7 +39,7 @@ instance = CityPayApiClient::AirlineAdvice.new(
   segment3: null,
   segment4: null,
   ticket_issue_city: London,
-  ticket_issue_date: Sat Aug 01 00:00:00 UTC 2020,
+  ticket_issue_date: Fri Aug 01 00:00:00 UTC 2025,
   ticket_issue_name: Issue Name,
   ticket_no: A112233,
   transaction_type: TKT

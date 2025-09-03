@@ -175,12 +175,17 @@ require 'citypay_api_client'
 CityPayApiClient.configure do |config|
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
 
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Auth Request
@@ -247,12 +252,17 @@ require 'citypay_api_client'
 CityPayApiClient.configure do |config|
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
 
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new
-direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, cardnumber: '4000 0000 0000 0002', expmonth: 9, expyear: 2027, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
+direct_post_request = CityPayApiClient::DirectPostRequest.new({amount: 19995, identifier: '95b857a1-5955-4b86-963c-5a6dbfc4fb95', mac: '3896FBC43674AF59478DAF7F546FA4D4CB89981A936E6AAE997E43B55DF6C39D'}) # DirectPostRequest | 
 
 begin
   # Direct Post Tokenise Request
@@ -320,8 +330,13 @@ require 'citypay_api_client'
 CityPayApiClient.configure do |config|
   # Configure API key authorization: cp-domain-key
   config.api_key['cp-domain-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-domain-key'] = 'Bearer'
 
-  config.api_key['cp-api-key'] = CityPayApiClient::ApiKey.new(client_id: 'YourClientId', licence_key: 'YourLicenceKey').generate
+  # Configure API key authorization: cp-api-key
+  config.api_key['cp-api-key'] = 'YOUR API KEY'
+  # Uncomment the following line to set a prefix for the API key, e.g. 'Bearer' (defaults to nil)
+  # config.api_key_prefix['cp-api-key'] = 'Bearer'
 end
 
 api_instance = CityPayApiClient::DirectPostApi.new

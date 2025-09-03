@@ -20,7 +20,7 @@ instance = CityPayApiClient::RefundRequest.new(
   identifier: 95b857a1-5955-4b86-963c-5a6dbfc4fb95,
   merchantid: 11223344,
   refund_ref: 8322,
-  trans_info: null
+  trans_info: info-example-value
 )
 ```
 

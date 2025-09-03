@@ -22,7 +22,7 @@ instance = CityPayApiClient::AirlineSegment.new(
   arrival_location_code: SOU,
   carrier_code: ZZ,
   class_service_code: CC,
-  departure_date: Sat Aug 01 00:00:00 UTC 2020,
+  departure_date: Fri Aug 01 00:00:00 UTC 2025,
   departure_location_code: JER,
   flight_number: 772,
   segment_fare: 7500,

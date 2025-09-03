@@ -19,7 +19,7 @@ require 'date'
 describe 'RetrieveRequest' do
   before do
     # run before each test
-    @instance = CityPayApiClient::RetrieveRequest.new
+    @instance = CityPayApiClient::RetrieveRequest.new(merchantid: 1, identifier: "test", transno: 123)
   end
 
   after do
@@ -33,19 +33,19 @@ describe 'RetrieveRequest' do
   end
   describe 'test attribute "identifier"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.identifier).to eq "test"
     end
   end
 
   describe 'test attribute "merchantid"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.merchantid).to eq 1
     end
   end
 
   describe 'test attribute "transno"' do
     it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+      expect(@instance.transno).to eq 123
     end
   end
 

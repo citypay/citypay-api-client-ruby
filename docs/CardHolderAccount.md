@@ -23,11 +23,11 @@ instance = CityPayApiClient::CardHolderAccount.new(
   account_id: aaabbb-cccddd-eee,
   cards: null,
   contact: null,
-  date_created: 2020-01-02T18:32:28Z,
+  date_created: 2025-01-02T18:32:28Z,
   default_card_id: null,
   default_card_index: null,
-  last_modified: 2020-01-02T18:32:28Z,
-  status: null,
+  last_modified: 2025-01-02T18:32:28Z,
+  status: ACTIVE,
   unique_id: null
 )
 ```

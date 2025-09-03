@@ -6,6 +6,10 @@ describe 'ApiKey' do
     @instance = CityPayApiClient::ApiKey.new(client_id: "PC2", licence_key: "7G79TG62BAJTK669")
   end
 
+  it 'exposes the client_id attribute' do
+    expect(@instance.client_id).to eq('PC2')
+  end
+
   describe 'test generation' do
     it 'should generate a new api key based on algorithm' do
       expect(@instance).to be_instance_of(CityPayApiClient::ApiKey)
@@ -75,4 +79,12 @@ describe 'ApiKey' do
   end
 
 
+  describe 'attribute setters' do
+    it 'sets nonce and datetime via methods' do
+      @instance.nonce = '0123456789abcdef0123456789abcdef'
+      @instance.datetime = DateTime.new(2022, 1, 1, 0, 0, 0, 0)
+      expect(@instance.instance_variable_get(:@nonce).length).to eq(16)
+      expect(@instance.instance_variable_get(:@datetime).year).to eq(2022)
+    end
+  end
 end
