@@ -4,6 +4,8 @@ require 'date'
 require 'securerandom'
 require 'typhoeus'
 require 'base64'
+require 'uri'
+
 require_relative '../lib/citypay_api_client/utils/digest_utils'
 
 describe 'IntegrationTests' do
