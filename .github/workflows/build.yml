@@ -2,9 +2,9 @@ name: Ruby RSpec Tests
 
 on:
   push:
-    branches: [ '*' ]
+    branches: ['*']
   pull_request:
-    branches: [ '*' ]
+    branches: ['*']
   release:
     types: [created]
 
@@ -17,44 +17,62 @@ jobs:
       CP_MERCHANT_ID: ${{ secrets.CP_MERCHANT_ID }}
     strategy:
       matrix:
-        ruby-version: [2.7, 3.0, 3.3]
+        ruby-version: ['2.7', '3.0', '3.3']
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-      - uses: actions/cache@v3
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ matrix.ruby-version }}-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-${{ matrix.ruby-version }}-
-      - run: bundle install --path vendor/bundle
-      - run: bundle exec rspec
-      - run: gem build citypay_api_client.gemspec
-      - run: gem install ./citypay_api_client-1.1.4.gem
-
-
-  build-and-publish:
-    runs-on: ubuntu-latest  # The type of runner that the job will run on
-    if: github.event_name == 'release' && github.event.action == 'created'
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'  # Specify the Ruby version
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true  # handles caching
+
+      - name: Ensure modern RubyGems on 2.7
+        if: startsWith(matrix.ruby-version, '2.7')
+        run: |
+          echo "Ruby: $(ruby -v)"
+          echo "RubyGems before: $(gem -v)"
+          gem update --system 3.3.22
+          gem install bundler
+          echo "RubyGems after: $(gem -v)"
+
+      - name: (Optional) Pin ffi on 2.7
+        if: startsWith(matrix.ruby-version, '2.7')
+        run: gem install ffi -v 1.17.2
+
+      - name: Install gems
+        run: bundle install
+
+      - name: Run specs
+        run: bundle exec rspec
+
+      - name: Build gem
+        run: gem build citypay_api_client.gemspec
+
+      - name: Install built gem
+        run: gem install ./citypay_api_client-1.1.4.gem
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'created'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
 
       - name: Install dependencies
-        run: gem install bundler && bundle install
+        run: bundle install
 
       - name: Build gem
         run: gem build *.gemspec
 
       - name: Push gem to RubyGems.org
-        run: gem push *.gem --key github
         env:
           GEM_HOST_API_KEY: ${{ secrets.RUBYGEMS_APIKEY }}
+        run: gem push *.gem
